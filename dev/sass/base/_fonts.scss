@@ -1,0 +1,10 @@
+//Noyh Black
+@include font-face("noyh-black", "/assets/fonts/noyh/noyh-black-webfont", bolder, $file-formats: eot woff2 woff ttf svg);
+//Noyh Bold
+@include font-face("noyh-bold", "/assets/fonts/noyh/noyh-bold-webfont", bold, $file-formats: eot woff2 woff ttf svg);
+//Noyh Regular
+@include font-face("noyh-regular", "/assets/fonts/noyh/noyh-regular-webfont", normal, $file-formats: eot woff2 woff ttf svg);
+//Noyh Light
+@include font-face("noyh-light", "/assets/fonts/noyh/noyh-light-webfont", lighter, $file-formats: eot woff2 woff ttf svg);
+//Noyh Italic
+@include font-face("noyh-italic", "/assets/fonts/noyh/noyh-italic-webfont", normal, italic, $file-formats: eot woff2 woff ttf svg);

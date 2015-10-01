@@ -1,0 +1,58 @@
+// Typography
+$base-font-family    : 'noyh-regular',$helvetica;
+$black-font-family   : 'noyh-black',$helvetica;
+$bold-font-family    : 'noyh-bold',$helvetica;
+$light-font-family   : 'noyh-light',$helvetica;
+$italic-font-family  : 'noyh-italic',$helvetica;
+
+// Font Sizes
+$small-font-size         : modular-scale(-1);
+$base-font-size          : modular-scale(1);
+$small-heading-font-size : modular-scale(2);
+$large-heading-font-size : modular-scale(3);
+$huge-font-size          : modular-scale(4);
+
+// Line height
+$base-line-height    : 1.5;
+$heading-line-height : 1.2;
+
+// Other Sizes
+$base-border-radius : 3px;
+$base-spacing       : $base-line-height * 1em;
+$small-spacing      : $base-spacing / 2;
+$base-z-index       : 0;
+
+// Grey-Scale Colors
+$black       : hsla(222, 11%, 18%, 1);  //#2A2D34
+$dark-gray   : hsla(0, 0%, 20%, 1);     //#333333
+$medium-gray : hsla(0, 0%, 60%, 1);     //#999999
+$light-gray  : hsla(0, 0%, 87%, 1);     //#DDDDDD
+$white       : hsla(240, 100%, 98%, 1); //#F7F7FF
+
+//Color Pallet
+$green : hsla(159, 51%, 39%, 1); //#319673
+$beige : hsla(50, 38%, 82%, 1);  //#E2DCBE
+$navy  : hsla(236, 10%, 28%, 1); //#40414F
+$gray  : hsla(0, 4%, 34%, 1);    //#5A5353
+$red   : hsla(6, 70%, 56%, 1);   //#DD5141
+$blue  : hsla(200, 63%, 48%, 1); //#2E95C9
+
+// Font Colors
+$base-font-color : $black;
+$action-color    : $blue;
+
+// Border
+$base-border-color : $light-gray;
+$base-border       : 1px solid $base-border-color;
+
+// Background Colors
+$base-background-color      : #fff;
+$secondary-background-color : tint($base-border-color, 75%);
+
+// Forms
+$form-box-shadow        : inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus  : $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+
+// Animations
+$base-duration : 150ms;
+$base-timing   : ease;
