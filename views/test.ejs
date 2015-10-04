@@ -1,0 +1,13 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+
+  <% for(var i=0; i<data.fixtures.length; i++) { %>
+
+    <h3><%= data.fixtures[i].homeTeamName %></h3>
+    <h4><%= data.fixtures[i].result.goalsHomeTeam %></h4>
+    <br>
+    <h3><%= data.fixtures[i].awayTeamName %></h3>
+    <h4><%= data.fixtures[i].result.goalsAwayTeam %></h4>
+    <hr>
+  <% } %>
+<% include partials/footer.ejs %>

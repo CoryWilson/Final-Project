@@ -24,7 +24,9 @@
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.3",
-    "serve-favicon": "~2.2.1"
+    "request": "^2.64.0",
+    "serve-favicon": "~2.2.1",
+    "xml2js": "^0.4.12"
   },
   "devDependencies": {
     "bower": "^1.4.1",

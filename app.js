@@ -46,7 +46,7 @@ app.disable('etag');
 app.use(session({
   secret:'Khaleesi4Lyfe',
   resave: true,
-  saveUnitialized: `true`
+  saveUnitialized: 'true'
 })); //session secret
 app.use(passport.initialize());
 app.use(passport.session());//persistent login sessions
