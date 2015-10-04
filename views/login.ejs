@@ -1,0 +1,13 @@
+<% include partials/head.ejs %>
+<% include partials/header.ejs %>
+  <% if(message > 0){ %>
+    <span><%= message %></span>
+  <% } %>
+  <form action="/login" method="post" class="register">
+    <input type="text" name="email" placeholder="Email" required autofocus />
+    <input type="text" name="password" placeholder="password" required />
+    <button type="submit">Login</button>
+  </form>
+  <hr>
+  <span>Need an account? <a href="/register">Register</a></span>
+<% include partials/footer.ejs %>

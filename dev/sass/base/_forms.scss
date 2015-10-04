@@ -1,3 +1,11 @@
+form.login,
+form.register {
+  @include outer-container;
+  margin: 30px auto 30px auto;
+  width: 95%;
+  max-width: 95%;
+}
+
 fieldset {
   background-color: $secondary-background-color;
   border: $base-border;

@@ -39,7 +39,6 @@ gulp.task('bower', function(){
 /* Scripts */
 var customOpts = {
   entries: [
-    config.bowerDir+'/jquery-2.1.4.min/index.js',
     config.jsPath+'/main.js'
   ],
   debug: true
@@ -92,6 +91,13 @@ gulp.task('nodemon', function (cb) {
     });
 });
 
+/* Startup the app server */
+gulp.task('mongod', function(){
+  childProcess.exec('mongod', function(err,stdout,stderr){
+    console.log(stdout);
+  });
+});
+
 
 /* Styles */
 gulp.task('styles', function(){
@@ -137,6 +143,6 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./public/*.html',reload);
 });
 
-gulp.task('default', ['browser-sync']);
+gulp.task('default', ['mongod','browser-sync']);
 
 gulp.task('assets', ['fonts','images','styles','scripts']);
