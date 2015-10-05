@@ -1,14 +1,8 @@
 <% include partials/head.ejs %>
 <% include partials/header.ejs %>
 
-
-  <h1>Hello! <%= user.local.email %></h1>
-
   <div class="cards">
     <div class="card">
-      <div class="card-image">
-        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt="">
-      </div>
       <div class="card-header">
         <h2><%= nflData.home_team.market %> <%= nflData.home_team.name %></h2>
         vs.
@@ -23,9 +17,6 @@
     </div>
 
     <div class="card">
-      <div class="card-image">
-        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-4.png" alt="">
-      </div>
       <div class="card-header">
         <h2><%= eplData.fixtures[9].homeTeamName %></h2>
         vs.
@@ -40,9 +31,6 @@
     </div>
 
     <div class="card">
-      <div class="card-image">
-        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains-3.png" alt="">
-      </div>
       <div class="card-header">
         <h2><%= clData.fixtures[13].homeTeamName %></h2>
         vs.

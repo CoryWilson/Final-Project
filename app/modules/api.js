@@ -18,6 +18,35 @@ exports.NFLGameAPI = function(week,away,home,callback){
   });
 };
 
+//Football-Data EPL API Call
+exports.EPLGameAPI = function(callback){
+  request({
+    url: 'http://api.football-data.org/alpha/soccerseasons/398/fixtures/?matchday=8',
+    headers: {
+      'X-Auth-Token' : 'c162cb6d7e56493d934b712f58e282f4'
+    }
+  }, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var data = JSON.parse(body);
+      callback(data);
+    }
+  });
+};
+
+exports.CLGameAPI = function(callback){
+  request({
+    url: 'http://api.football-data.org/alpha/soccerseasons/405/fixtures/?matchday=2',
+    headers: {
+      'X-Auth-Token' : 'c162cb6d7e56493d934b712f58e282f4'
+    }
+  }, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var data = JSON.parse(body);
+      callback(data);
+    }
+  });
+};
+
 /*
 //StatsFC EPL API Call
 exports.EPLGameAPI = function(callback){
@@ -48,32 +77,3 @@ exports.EPLGameAPI = function(callback){
   });
 };
 */
-
-//Football-Data EPL API Call
-exports.EPLGameAPI = function(callback){
-  request({
-    url: 'http://api.football-data.org/alpha/soccerseasons/398/fixtures/?matchday=8',
-    headers: {
-      'X-Auth-Token' : 'c162cb6d7e56493d934b712f58e282f4'
-    }
-  }, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var data = JSON.parse(body);
-      callback(data);
-    }
-  });
-};
-
-exports.CLGameAPI = function(callback){
-  request({
-    url: 'http://api.football-data.org/alpha/soccerseasons/405/fixtures/?matchday=2',
-    headers: {
-      'X-Auth-Token' : 'c162cb6d7e56493d934b712f58e282f4'
-    }
-  }, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var data = JSON.parse(body);
-      callback(data);
-    }
-  });
-};

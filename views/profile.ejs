@@ -1,7 +1,18 @@
 <% include partials/head.ejs %>
 <% include partials/header.ejs %>
-  <p>
-    <%= user.local.email %> <br>
-    <%= user.local.password %>
-  </p>
+  <div class="grid-items-lines">
+    <h1>User Profile</h1>
+    <a href="javascript:void(0)" class="grid-item">
+      <h1>Username</h1>
+      <p><%= user.local.username %> </p>
+    </a>
+    <a href="javascript:void(0)" class="grid-item">
+      <h1>Email</h1>
+      <p>  <%= user.local.email %></p>
+    </a>
+    <a href="javascript:void(0)" class="grid-item">
+      <h1>League</h1>
+      <p><%= user.local.league %></p>
+    </a>
+  </div>
 <% include partials/footer.ejs %>
