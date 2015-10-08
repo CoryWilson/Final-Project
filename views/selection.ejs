@@ -1,0 +1,66 @@
+<% include partials/head.ejs %>
+
+  <ul class="accordion-tabs-minimal">
+    <li class="tab-header-and-content">
+      <a href="#" class="tab-link is-active">NFL</a>
+      <div class="tab-content">
+        <% for(var i=0; i<nflData.games.length; i++) { %>
+        <div class="game">
+          <div class="homeTeam">
+            <h2>Home</h2>
+            <h3><%= nflData.games[i].home %></h3>
+          </div>
+          <div class="vs">
+            <h1>VS</h1>
+          </div>
+          <div class="awayTeam">
+            <h2>Away</h2>
+            <h3><%= nflData.games[i].away %></h3>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </li>
+    <li class="tab-header-and-content">
+      <a href="#" class="tab-link">Premier League</a>
+        <div class="tab-content">
+        <% for(var i=0; i<eplData.fixtures.length; i++) { %>
+          <div class="game">
+            <div class="homeTeam">
+              <h2>Home</h2>
+              <h3><%= eplData.fixtures[i].homeTeamName %></h3>
+            </div>
+            <div class="vs">
+              <h1>VS</h1>
+            </div>
+            <div class="awayTeam">
+              <h2>Away</h2>
+              <h3><%= eplData.fixtures[i].awayTeamName %></h3>
+            </div>
+          </div>
+        <% } %>
+        </div>
+    </li>
+    <li class="tab-header-and-content">
+      <a href="#" class="tab-link">Champions League</a>
+      <div class="tab-content">
+        <% for(var i=0; i<clData.fixtures.length; i++) { %>
+          <div class="game">
+            <div class="homeTeam">
+              <h2>Home</h2>
+              <h3><%= clData.fixtures[i].homeTeamName %></h3>
+            </div>
+            <div class="vs">
+              <h1>VS</h1>
+            </div>
+            <div class="awayTeam">
+              <h2>Away</h2>
+              <h3><%= clData.fixtures[i].awayTeamName %></h3>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </li>
+  </ul>
+
+<% include partials/footer.ejs %>

@@ -4,10 +4,14 @@ var mongoose = require('mongoose');
 
 var showdownSchema = mongoose.Schema({
 
-  league : {
-    players  : [
+  league         : {
+
+    commissioner : String,
+    
+    players      : [
       {
-        name : String
+        name     : String,
+        position : Number
       }
     ]
   }

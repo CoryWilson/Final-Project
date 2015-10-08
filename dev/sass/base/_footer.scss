@@ -24,7 +24,7 @@
 //   }
 // }
 
-.footer-2 {
+.footer {
   $base-spacing: 1.5em !default;
   $action-color: #477DCA !default;
   $medium-screen: em(640) !default;
@@ -39,6 +39,10 @@
   width: 100%;
   display: inline-block;
   margin-bottom: 0;
+
+  .footer-wrapper {
+    @include outer-container;
+  }
 
   .footer-logo {
     margin-right: 1em;

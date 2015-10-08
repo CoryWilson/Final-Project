@@ -1,0 +1,19 @@
+.standings {
+  @include outer-container;
+  width: 95%;
+}
+.user {
+  @include outer-container;
+  margin: 15px auto;
+}
+
+.name {
+  @include span-columns(7);
+}
+.position,
+.win,
+.tie,
+.loss,
+.total {
+  @include span-columns(1);
+}

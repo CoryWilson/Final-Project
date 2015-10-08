@@ -1,5 +1,5 @@
 <% include partials/head.ejs %>
-<% include partials/header.ejs %>
+
   <% if(message > 0){ %>
     <span><%= message %></span>
   <% } %>
@@ -9,5 +9,9 @@
     <button type="submit">Register</button>
   </form>
   <hr>
+  <span>Login or Register with:</span>
+  <span><a href="/auth/facebook">Facebook</a></span>
+  <br>
   <span>Already have an account? <a href="/login">Login</a></span>
+  
 <% include partials/footer.ejs %>

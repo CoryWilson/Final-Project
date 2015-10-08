@@ -29,7 +29,6 @@ require('./app/config/passport')(passport); // pass passport for configuration
 
 app.use(express.static(path.join(__dirname, 'public')));//static file handling
 
-
 //Set up express application
 //Uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -51,12 +50,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());//persistent login sessions
 app.use(flash());//store flash messags in session
-
+app.use(function (req, res, next) {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+});
 //Routes
 var routes = require('./app/routes/routes')(app,passport); //loads routes and passes in the express app with passport
 //app.use('/', routes)(app,passport); //routes
 require('./app/routes/routes.js')(app,passport);
-
 
 //Catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -90,5 +91,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 module.exports = app;

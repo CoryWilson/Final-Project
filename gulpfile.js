@@ -26,7 +26,7 @@ var config = {
   fontPath : './assets/fonts',
   imgPath  : './assets/images',
 	bowerDir : './bower_components',
-  routesPath : './routes',
+  routesPath : './app/routes',
   viewsPath  : './views'
 };
 
@@ -39,7 +39,8 @@ gulp.task('bower', function(){
 /* Scripts */
 var customOpts = {
   entries: [
-    config.jsPath+'/main.js'
+    config.jsPath+'/main.js',
+    config.jsPath+'/selection.js'
   ],
   debug: true
 };
@@ -114,7 +115,7 @@ gulp.task('styles', function(){
 
 /* Images */
 gulp.task('images', function(){
-  gulp.src(config.imgPath+'/*.*')
+  gulp.src(config.imgPath+'/*/*.*')
   .pipe(gulp.dest('./public/assets/images'));
 });
 
@@ -138,7 +139,7 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch(config.sassPath+'/**/**/*.scss',['styles']);
   gulp.watch(config.jsPath+'/*.js',['script-watch']);
   gulp.watch(config.imgPath+'/*.*',['image-watch']);
-  gulp.watch('./routes/*.js',reload);
+  gulp.watch('./app/*/*',reload);
   gulp.watch('./app.js',reload);
   gulp.watch('./public/*.html',reload);
 });

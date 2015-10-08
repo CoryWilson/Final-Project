@@ -4,6 +4,14 @@ var api  = require('../modules/api.js');
 
 var request = require('request');
 
+/* Football Data League Season Numbers */
+var bundesliga      = 394;
+var ligue1          = 396;
+var premierLeague   = 398;
+var laLiga          = 399;
+var serieA          = 401;
+var championsLeague = 405;
+
 module.exports = function(app, passport){
 
   //Home
@@ -13,10 +21,14 @@ module.exports = function(app, passport){
     });
   });
 
+  //===================================================
+  // Register & Login Routes
+  //===================================================
+
   //Register Routes
   app.route('/register')
   //GET
-  .get(function(req, res){
+  .get( function(req, res){
     res.render('register', {
       title  : 'Register',
       message: req.flash('registerMessage')
@@ -32,7 +44,7 @@ module.exports = function(app, passport){
   //Login Routes
   app.route('/login')
   //GET
-  .get(function(req, res){
+  .get( function(req, res){
     res.render('login', {
       title  : 'Login',
       message: req.flash('loginMessage')
@@ -40,16 +52,60 @@ module.exports = function(app, passport){
   })
   //POST
   .post(passport.authenticate('local-login', {
-    successRedirect : '/',
+    successRedirect : '/profile',
     failureRedirect : '/login',
     failureFlash    : true
   }));
+
+  //Facebook Routes
+  app.get('/auth/facebook',
+    passport.authorize('facebook',{scope:'public_profile,email'}));
+
+  app.get('/auth/facebook/callback',
+    passport.authorize('facebook',{
+      successRedirect : '/profile',
+      failureRedirect : '/register'
+    })
+  );
 
   //Profile
   app.get('/profile', userAuthenticated, function(req,res){
     res.render('profile', {
       title: 'Profile',
       user : req.user
+    });
+  });
+
+  //Logout
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
+
+  //===================================================
+  // End Register & Login Routes
+  //===================================================
+
+  app.get('/standings', function(req,res){
+    res.render('standings', {
+      title : 'Standings'
+    });
+  });
+
+  //Commisioner Selection
+  //isCommisioner function
+  app.get('/selection', function(req, res){
+    api.NFLScheduleAPI('5',function(nflData){
+      api.SoccerScheduleAPI(premierLeague, '9', function(eplData){
+        api.SoccerScheduleAPI(championsLeague, '3', function(clData){
+          res.render('selection', {
+            title   : 'Selection',
+            nflData : nflData,
+            eplData : eplData,
+            clData  : clData
+          });
+        });
+      });
     });
   });
 
@@ -79,7 +135,7 @@ module.exports = function(app, passport){
   });
 
   app.get('/test', function(req,res){
-    api.EPLGameAPI(function(data){
+    api.SoccerScheduleAPI(bundesliga,'8',function(data){
       res.render('test',{
         title : 'Test',
         data  : data
@@ -87,11 +143,6 @@ module.exports = function(app, passport){
     });
   });
 
-  //Logout
-  app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
 };
 
 function userAuthenticated(req, res, next) {
@@ -103,8 +154,4 @@ function userAuthenticated(req, res, next) {
         // if they aren't redirect them to the home page
         res.redirect('/');
     }
-}
-function attachAuthStatus(req,res,next){
-  res.locals.isAuthenticated = req.isAuthenticated();
-  next();
 }
