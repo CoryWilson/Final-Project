@@ -3,14 +3,7 @@ var User = require('../models/user.js');
 var api  = require('../modules/api.js');
 
 var request = require('request');
-
-/* Football Data League Season Numbers */
-var bundesliga      = 394;
-var ligue1          = 396;
-var premierLeague   = 398;
-var laLiga          = 399;
-var serieA          = 401;
-var championsLeague = 405;
+var soccerLeagues = require('../config/soccerLeagues.js');
 
 module.exports = function(app, passport){
 
@@ -135,7 +128,7 @@ module.exports = function(app, passport){
   });
 
   app.get('/test', function(req,res){
-    api.SoccerScheduleAPI(bundesliga,'8',function(data){
+    api.SoccerScheduleAPI(soccerLeagues.laLiga,'8',function(data){
       res.render('test',{
         title : 'Test',
         data  : data

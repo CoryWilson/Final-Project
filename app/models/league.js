@@ -6,10 +6,9 @@ var showdownSchema = mongoose.Schema({
 
   league         : {
 
-    commissioner : String,
-    
     players      : [
       {
+        _id      : String,
         name     : String,
         position : Number
       }
