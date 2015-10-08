@@ -30,7 +30,6 @@ var config = {
   viewsPath  : './views'
 };
 
-
 /* Bower */
 gulp.task('bower', function(){
   return bower()
