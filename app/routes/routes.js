@@ -1,13 +1,11 @@
 //File Name: ./app/routes/routes.js
+
 var User      = require('../models/user.js');
 var users     = require('../controllers/users.server.controller.js');
 var Api       = require('../modules/api.js');
-//var League    = require('../models/league.js');
-var Standings = require('../modules/Standings.js');
-var Showdowns  = require('../modules/showdown.js');
+
 
 var request = require('request');
-var soccerLeagues = require('../config/soccerLeagues.js');
 
 module.exports = function(app, passport){
 

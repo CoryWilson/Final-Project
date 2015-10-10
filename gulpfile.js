@@ -25,9 +25,9 @@ var config = {
   jsPath          : './dev/js',
   fontPath        : './assets/fonts',
   imgPath         : './assets/images',
-	bowerDir        : './bower_components',
-  routesPath      : './app/routes',
   controllersPath : './app/controllers',
+  modelsPath      : './app/models',
+  routesPath      : './app/routes',
   viewsPath       : './app/views'
 };
 
@@ -72,10 +72,10 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
 
     // nodemon our expressjs server
-    script: 'bin/www',
+    script: 'server.js',
 
     // watch core server file(s) that require server restart on change
-    watch: ['bin/www']
+    watch: ['server.js']
   })
     .on('start', function onStart() {
       // ensure start only got called once

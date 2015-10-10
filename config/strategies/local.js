@@ -1,37 +1,17 @@
-//File Name: ./app/config/passport.js
+//File Name: ./config/strategies/local.js
 
-var LocalStrategy    = require('passport-local').Strategy;
-// var FacebookStrategy = require('passport-facebook').Strategy;
-// var TwitterStrategy  = require('passport-twitter').Strategy;
-// var GoogleStrategy   = require('passport-google').Strategy;
-// var JWTStrategy      = require('passport-jwt').Strategy;
-// var LinkedinStrategy = require('passport-linkedin').Strategy;
+var passport      = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    User          = require('mongoose').model('User');
 
-//User Model
-var User = require('../models/user');
+module.exports = function(){
 
-//Auth Variables
-var configAuth = require('./auth.js');
-
-//Create Passport module
-module.exports = function(passport) {
-
-  // used to serialize the user for the session
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-  // used to deserialize the user
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
-  });
 
   /***** Local Register *****/
   passport.use('local-register', new LocalStrategy({
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true // allows us to pass back the entire request to the callback
+  usernameField : 'email',
+  passwordField : 'password',
+  passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
 
@@ -88,11 +68,5 @@ module.exports = function(passport) {
       return done(null, user);
     });
   }));
-
-  /***** Facebook *****/
-
-  /***** Twitter *****/
-
-  /***** Google *****/
 
 };

@@ -1,9 +1,10 @@
-//File Name: ./app/models/user.js
+//File Name: ./app/models/user.server.model.js
 
 var mongoose = require('mongoose'),
-    bcrypt   = require('bcrypt-nodejs');
+    bcrypt   = require('bcrypt-nodejs'),
+    Schema   = mongoose.Schema;
 
-var userSchema = mongoose.Schema({
+var userSchema = new Schema({
 
   local          : {
     email        : String,
@@ -20,12 +21,6 @@ var userSchema = mongoose.Schema({
     token        : String,
     displayName  : String,
     username     : String
-  },
-  google         : {
-    id           : String,
-    token        : String,
-    email        : String,
-    name         : String
   },
   preferences    : {
     username     : String,

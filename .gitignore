@@ -2,5 +2,4 @@ node_modules
 bower_components
 assets
 public
-app/config/auth.js
-app/config/apiKeys.js
+config/apiKeys.js
