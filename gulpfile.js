@@ -21,19 +21,19 @@ var gulp         = require('gulp'),
     watchify     = require('watchify');
 
 var config = {
-  sassPath : './dev/sass',
-  jsPath   : './dev/js',
-  fontPath : './assets/fonts',
-  imgPath  : './assets/images',
-	bowerDir : './bower_components',
-  routesPath : './app/routes',
-  viewsPath  : './views'
+  sassPath        : './dev/sass',
+  jsPath          : './dev/js',
+  fontPath        : './assets/fonts',
+  imgPath         : './assets/images',
+	bowerDir        : './bower_components',
+  routesPath      : './app/routes',
+  controllersPath : './app/controllers',
+  viewsPath       : './app/views'
 };
 
 /* Bower */
 gulp.task('bower', function(){
-  return bower()
-    .pipe(gulp.dest('./public/assets/bower_components/'));
+  return bower();
 });
 
 /* Scripts */
@@ -144,6 +144,6 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./public/*.html',reload);
 });
 
-gulp.task('default', ['mongod','browser-sync']);
+gulp.task('default', ['bower', 'mongod','browser-sync']);
 
-gulp.task('assets', ['fonts','images','styles','scripts']);
+gulp.task('assets', ['bower','fonts','images','styles','scripts']);

@@ -19,7 +19,7 @@ var favicon      = require('serve-favicon'),
 var db           = require('./app/config/db');
 
 //View Engine Setup
-app.set('views', path.join(__dirname, 'views')); //views directory
+app.set('views', path.join(__dirname, './app/views')); //views directory
 app.set('view engine', 'ejs'); //set up ejs templating
 
 /***** Configuration *****/

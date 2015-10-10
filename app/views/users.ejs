@@ -1,0 +1,10 @@
+<% include partials/head.ejs %>
+
+  <% for(i=0;i<data.length;i++) { %>
+    <%= data[i].local.email %>
+  <% } %>
+
+  <%= data %>
+
+
+<% include partials/footer.ejs %>

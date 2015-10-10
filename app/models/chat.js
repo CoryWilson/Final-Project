@@ -13,7 +13,7 @@ var chatModel = mongoose.model('chat',chatSchema);
 
 exports.saveMessage = function(user,content){
 
-  var saveMessage = new messageModel({
+  var saveMessage = new chatModel({
     user    : user,
     content : content
   });

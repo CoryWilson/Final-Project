@@ -1,20 +1,23 @@
-//File Name: ./app/models/league.js
+//File Name: ./app/models/standings.js
 
 var mongoose = require('mongoose');
 
-var showdownSchema = mongoose.Schema({
+var leagueSchema = mongoose.Schema({
 
-  league         : {
-
-    players      : [
-      {
-        _id      : String,
-        name     : String,
-        position : Number
-      }
-    ]
+  league : String,
+  users  : {
+    type : mongoose.Schema.Types.ObjectId,
+    ref  : 'User'
   }
 
 });
 
 module.exports = mongoose.model('League', leagueSchema);
+
+var League = mongoose.model('League', leagueSchema);
+
+League.find({})
+  .populate('users')
+  .exec(function(err,data){
+    console.log(JSON.stringify(data));
+  });
