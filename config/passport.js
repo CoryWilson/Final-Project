@@ -1,7 +1,8 @@
 //File Name: ./config/passport.js
 
-var passport = require('passport'),
-	  mongoose = require('mongoose');
+var passport 	 = require('passport'),
+	  mongoose 	 = require('mongoose'),
+		configAuth = require('./auth');
 
 module.exports = function() {
 	var User = mongoose.model('User');
@@ -17,6 +18,6 @@ module.exports = function() {
 	});
 
 	require('./strategies/local.js')();
-	//require('./strategies/facebook.js')();
-	//require('./strategies/twitter.js')();
+	require('./strategies/facebook.js')();
+	require('./strategies/twitter.js')();
 };

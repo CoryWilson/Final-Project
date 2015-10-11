@@ -17,9 +17,48 @@ exports.renderRegister = function(req, res, next) {
 	});
 };
 
+exports.renderAddLocal = function(req, res, next) {
+	res.render('connect-local', {
+		title: 'Add Local Login',
+		messages: req.flash('registerMessage')
+	});
+};
+
+exports.unlinkLocal = function(req, res) {
+	var user            = req.user;
+	user.local.email    = undefined;
+	user.local.password = undefined;
+	user.save(function(err) {
+		res.redirect('/profile');
+	});
+};
+
+exports.unlinkFacebook = function(req, res) {
+	var user            = req.user;
+	user.facebook.token = undefined;
+	user.save(function(err) {
+		res.redirect('/profile');
+	});
+};
+
+exports.unlinkTwitter = function(req, res) {
+	var user           = req.user;
+	user.twitter.token = undefined;
+	user.save(function(err) {
+		res.redirect('/profile');
+	});
+};
+
 exports.logout = function(req, res) {
 	req.logout();
 	res.redirect('/');
+};
+
+exports.profile = function(req, res) {
+	res.render('profile', {
+		title: 'Profile',
+		user: req.user
+	});
 };
 
 
@@ -73,7 +112,7 @@ exports.delete = function(req, res, next) {
 		}
 	});
 };
-
+*/
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({
@@ -82,4 +121,3 @@ exports.requiresLogin = function(req, res, next) {
 	}
 	next();
 };
-*/
