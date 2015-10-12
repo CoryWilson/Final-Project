@@ -1,6 +1,4 @@
 node_modules
 assets
 public
-config/apiKeys.js
-config/auth.js
 .bowerrc
