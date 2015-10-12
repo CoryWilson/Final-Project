@@ -31,7 +31,12 @@ var userSchema = new Schema({
       pick       : String,
       points     : Number
     }]
-  }]
+  }],
+  commissioner   : {
+  	type: Boolean,
+  	default: false
+  }
+  
 });
 
 userSchema.methods.generateHash = function(password){

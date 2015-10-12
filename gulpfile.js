@@ -62,7 +62,18 @@ function bundle() {
     .pipe(gulp.dest('./public/assets/js'));
 }
 
-gulp.task('script-watch', ['scripts'], reload);
+gulp.task('ng-scripts', function(){
+  gulp.src(config.jsPath+'/angularApp/**/**/*.js')
+  .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(rename(function(path){
+      path.extname = ".min.js";
+    }))
+  .pipe(sourcemaps.write('../../../maps/js/angularApp'))
+  .pipe(gulp.dest('./public/assets/js/angularApp'));
+});
+
+gulp.task('script-watch', ['scripts','ng-scripts'], reload);
 
 /* Nodemon */
 var BROWSER_SYNC_RELOAD_DELAY = 500;
@@ -115,7 +126,7 @@ gulp.task('styles', function(){
 
 /* Images */
 gulp.task('images', function(){
-  gulp.src(config.imgPath+'/*/*.*')
+  gulp.src(config.imgPath+'/**/*.*')
   .pipe(gulp.dest('./public/assets/images'));
 });
 
@@ -146,4 +157,4 @@ gulp.task('browser-sync', ['nodemon'], function(){
 
 gulp.task('default', ['bower', 'mongod','browser-sync']);
 
-gulp.task('assets', ['bower','fonts','images','styles','scripts']);
+gulp.task('assets', ['bower','fonts','images','styles','scripts','ng-scripts']);

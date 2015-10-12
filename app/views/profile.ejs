@@ -1,45 +1,40 @@
 <% include partials/head.ejs %>
 
-  <div class="local">
+  <div class="profile cards">
+    <h1><%= user.preferences.username %>'s Profile</h1>
+    <br>
+    <a href="/editProfile">Edit Profile</a>
     <% if (user.local.email) { %>
-					<p>
-						<strong>id</strong>: <%= user._id %><br>
-						<strong>email</strong>: <%= user.local.email %><br>
-						<strong>password</strong>: <%= user.local.password %>
-					</p>
-
-					<a href="/unlink/local" class="btn btn-default">Unlink Local Login</a>
-		<% } else { %>
-					<a href="/connect/local" class="btn btn-default">Connect Local</a>
-		<% } %>
-  </div>
-  <div class="facebook">
+      <div class="local card">
+        <strong>email</strong>: <%= user.local.email %><br>
+      </div>
+  	<% } else { %>
+      <div class="local card">
+  		  <a href="/connect/local" class="btn btn-default">Connect Local</a>
+      </div>
+  	<% } %>
     <% if (user.facebook.token) { %>
-					<p>
-						<strong>id</strong>: <%= user.facebook.id %><br>
-						<strong>token</strong>: <%= user.facebook.token %><br>
-						<strong>email</strong>: <%= user.facebook.email %><br>
-						<strong>name</strong>: <%= user.facebook.name %><br>
-					</p>
-
-					<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-				<% } else { %>
-					<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-				<% } %>
-  </div>
-  <div class="twitter">
+      <div class="facebook card">
+				<strong>email</strong>: <%= user.facebook.email %><br>
+				<strong>name</strong>: <%= user.facebook.name %><br>
+      </div>
+		<% } else { %>
+      <div class="facebook card">
+			  <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+      </div>
+    <% } %>
     <% if (user.twitter.token) { %>
-					<p>
-						<strong>id</strong>: <%= user.twitter.id %><br>
-						<strong>token</strong>: <%= user.twitter.token %><br>
-						<strong>display name</strong>: <%= user.twitter.displayName %><br>
-						<strong>username</strong>: <%= user.twitter.username %>
-					</p>
+      <div class="twitter card">
+				<strong>display name</strong>: <%= user.twitter.displayName %><br>
+				<strong>username</strong>: <%= user.twitter.username %>
+      </div>
+		<% } else { %>
+      <div class="twitter card">
+			  <a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
+      </div>
+		<% } %>
 
-					<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
-				<% } else { %>
-					<a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
-				<% } %>
   </div>
+
 
 <% include partials/footer.ejs %>

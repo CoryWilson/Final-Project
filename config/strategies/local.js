@@ -28,9 +28,9 @@ module.exports = function(){
           }
           //  If we're logged in, we're connecting a new local account.
           if(req.user) {
-            var user            = req.user;
-            user.local.email    = email;
-            user.local.password = user.generateHash(password);
+            var user                  = req.user;
+            user.local.email          = email;
+            user.local.password       = user.generateHash(password);
             user.save(function(err) {
               if (err)
                 throw err;
@@ -41,8 +41,9 @@ module.exports = function(){
             // create the user
             var newUser = new User();
             // set the user's local credentials
-            newUser.local.email    = email;
-            newUser.local.password = newUser.generateHash(password);
+            newUser.preferences.username = req.body.username;
+            newUser.local.email          = email;
+            newUser.local.password       = newUser.generateHash(password);
             // save the user
             newUser.save(function(err) {
               console.log('New User: ',newUser.local.email);

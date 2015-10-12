@@ -1,24 +1,30 @@
 {
   "name": "showdown-sports-final-project",
   "version": "0.0.1",
-  "description": "Showdown Sports web application created for final project",
-  "main": "app.js",
-  "moduleType": [],
+  "homepage": "https://github.com/CoryWilson/Final-Project",
   "authors": [
     "Cory Wilson"
   ],
+  "description": "Showdown Sports web application created for final project",
+  "main": "bower.json",
+  "moduleType": [
+    "node"
+  ],
   "license": "MIT",
-  "homepage": "",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "public/assets/vendor",
     "test",
     "tests"
   ],
   "dependencies": {
     "jquery-2.1.4.min": "http://code.jquery.com/jquery-2.1.4.min.js",
-    "Ionicons": "ionicons#~2.0.1"
+    "Ionicons": "ionicons#~2.0.1",
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-resource": "~1.4.7"
   }
 }

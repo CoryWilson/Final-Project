@@ -5,7 +5,13 @@ var users    = require('../controllers/users.server.controller.js'),
 
 module.exports = function(app,passport) {
 
-    app.get('/profile',users.profile);
+    app.get('/profile', users.profile);
+
+    app.get('/editProfile', users.edit);
+
+    app.post('/updateProfile', users.update);
+
+    app.get('/profileJSON', users.profileInfo);
 
     app.get('/logout', users.logout);
 

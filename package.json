@@ -16,6 +16,7 @@
     "express": "~4.12.4",
     "express-session": "^1.11.3",
     "github": "^0.2.4",
+    "gridfs-stream": "^1.1.1",
     "mongoose": "^4.1.9",
     "morgan": "~1.5.3",
     "passport": "^0.3.0",
@@ -52,7 +53,6 @@
     "watchify": "^3.3.1"
   },
   "description": "Showdown Sports web application created for final project",
-  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CoryWilson/Final-Project.git"

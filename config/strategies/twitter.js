@@ -44,10 +44,11 @@ module.exports = function(){
               console.log(profile);
               var newUser                 = new User();
               // set all of the user data that we need
-              newUser.twitter.id          = profile.id;
-              newUser.twitter.token       = token;
-              newUser.twitter.username    = profile.username;
-              newUser.twitter.displayName = profile.displayName;
+              newUser.preferences.username = profile.username;
+              newUser.twitter.id           = profile.id;
+              newUser.twitter.token        = token;
+              newUser.twitter.username     = profile.username;
+              newUser.twitter.displayName  = profile.displayName;
               // save our user into the database
               newUser.save(function(err) {
                 if (err)

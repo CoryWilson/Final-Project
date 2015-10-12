@@ -1,0 +1,35 @@
+<% include partials/head.ejs %>
+
+  <h1><%= user.preferences.username %>'s Profile</h1>
+  <div class="profile cards">
+    <form class="" action="/updateProfile" method="post">
+      <div class="preferences card">
+        <h3>Preferences</h3>
+        <input type="text" name="username" value="<%= user.preferences.username %>"/>
+      </div>
+      <% if (user.local.email) { %>
+        <div class="local card">
+          <h3>Local</h3>
+          <a href="/unlink/local" class="btn btn-default">Unlink Local Login</a>
+        </div>
+      <% } %>
+      <% if (user.facebook.token) { %>
+        <div class="facebook card">
+          <h3>Facebook</h3>
+          <a href="/unlink/facebook" class="btn btn-primary">Unlink Facebook</a>
+        </div>
+      <% } %>
+      <% if (user.twitter.token) { %>
+        <div class="twitter card">
+          <h3>Twitter</h3>
+          <a href="/unlink/twitter" class="btn btn-info">Unlink Twitter</a>
+        </div>
+      <% } %>
+      <button type="submit" name="button">
+        Update User Account
+      </button>
+    </form>
+  </div>
+
+
+<% include partials/footer.ejs %>

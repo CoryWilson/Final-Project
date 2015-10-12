@@ -61,7 +61,44 @@ exports.profile = function(req, res) {
 	});
 };
 
+exports.profileInfo = function(req, res){
+	res.json(req.user);
+};
 
+exports.edit = function(req, res){
+	res.render('edit-profile', {
+		title: 'Edit Profile',
+		user: req.user
+	});
+};
+
+exports.update = function(req, res, next) {
+
+	var user = req.user;
+	user.preferences.username = req.body.username;
+
+	user.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: getErrorMessage(err)
+			});
+		} else {
+			console.log(user);
+			res.redirect('/profile');
+		}
+	});
+
+	/*User.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
+		if (err) {
+			return next(err);
+		} else {
+			console.log(user);
+			req.user = user;
+			console.log(user);
+			res.redirect('/profile');
+		}
+	});*/
+};
 
 /*
 exports.list = function(req, res, next) {
@@ -120,4 +157,14 @@ exports.requiresLogin = function(req, res, next) {
 		});
 	}
 	next();
+};
+
+exports.isCommissioner = function(req, res, next) {
+	if (req.user.commissioner === true) { //commisioner id
+		next();
+	} else {
+		return res.status(403).send({
+			message: 'User is not commissioner'
+		});
+	}
 };

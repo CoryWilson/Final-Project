@@ -16,9 +16,9 @@ body {
   $hero-background-bottom: $medium-gray;
   $hero-color: $white;
   $gradient-angle: 10deg;
-  $hero-image: '../../assets/images/football-crowd.jpg';
+  $hero-image: '../../assets/images/stock/stands.jpeg';
 
-  @include background(linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+  @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
   background-color: #324766;
   background-position: center;
   background-repeat: no-repeat;
