@@ -41,9 +41,10 @@ module.exports = function(){
             // create the user
             var newUser = new User();
             // set the user's local credentials
-            newUser.preferences.username = req.body.username;
-            newUser.local.email          = email;
-            newUser.local.password       = newUser.generateHash(password);
+            newUser.username       = req.body.username;
+            newUser.league         = req.body.league;
+            newUser.local.email    = email;
+            newUser.local.password = newUser.generateHash(password);
             // save the user
             newUser.save(function(err) {
               console.log('New User: ',newUser.local.email);

@@ -1,38 +1,59 @@
 <% include partials/head.ejs %>
-
+  <h1><%= user.username %>'s Profile</h1>
+  <a href="/editProfile">Edit Profile</a>
   <div class="profile cards">
-    <h1><%= user.preferences.username %>'s Profile</h1>
-    <br>
-    <a href="/editProfile">Edit Profile</a>
+    <div class="preferences card">
+      <h3>League</h3>
+      <%= user.league %>
+    </div>
+    <div class="local card">
     <% if (user.local.email) { %>
-      <div class="local card">
+        <h3>Local Login</h3>
         <strong>email</strong>: <%= user.local.email %><br>
-      </div>
   	<% } else { %>
-      <div class="local card">
   		  <a href="/connect/local" class="btn btn-default">Connect Local</a>
-      </div>
   	<% } %>
     <% if (user.facebook.token) { %>
-      <div class="facebook card">
+        <h3>Facebook</h3>
 				<strong>email</strong>: <%= user.facebook.email %><br>
 				<strong>name</strong>: <%= user.facebook.name %><br>
-      </div>
 		<% } else { %>
-      <div class="facebook card">
 			  <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-      </div>
     <% } %>
     <% if (user.twitter.token) { %>
-      <div class="twitter card">
+        <h3>Twitter</h3>
 				<strong>display name</strong>: <%= user.twitter.displayName %><br>
 				<strong>username</strong>: <%= user.twitter.username %>
-      </div>
 		<% } else { %>
-      <div class="twitter card">
 			  <a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
-      </div>
 		<% } %>
+  </div>
+
+      <div class="results card">
+        <table class="tables">
+          <h3>Recent Results</h3>
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Name</th>
+              <th>Wins</th>
+              <th>Ties</th>
+              <th>Losses</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><%= user.username %></td>
+              <td><%= user.results.wins %></td>
+              <td><%= user.results.ties %></td>
+              <td><%= user.results.losses %></td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
   </div>
 

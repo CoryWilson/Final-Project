@@ -6,7 +6,7 @@ var User 	 	 = require('mongoose').model('User'),
 exports.renderLogin = function(req, res, next) {
 	res.render('login', {
 		title: 'Login',
-		message: req.flash('loginMessage')
+		messages: req.flash('loginMessage')
 	});
 };
 
@@ -75,7 +75,8 @@ exports.edit = function(req, res){
 exports.update = function(req, res, next) {
 
 	var user = req.user;
-	user.preferences.username = req.body.username;
+	user.username = req.body.username;
+	user.league		= req.body.league;
 
 	user.save(function(err) {
 		if (err) {

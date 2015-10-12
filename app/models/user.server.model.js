@@ -22,9 +22,19 @@ var userSchema = new Schema({
     displayName  : String,
     username     : String
   },
-  preferences    : {
-    username     : String,
-    avatar       : String
+  results        : {
+    wins         : {
+      type: Number,
+      default: 0
+    },
+    ties         : {
+      type: Number,
+      default: 0
+    },
+    losses       : {
+      type: Number,
+      default: 0
+    }
   },
   showdowns      : [{
     games        : [{
@@ -32,11 +42,14 @@ var userSchema = new Schema({
       points     : Number
     }]
   }],
+  league         : String,
+  username       : String,
+  avatar         : String,
   commissioner   : {
   	type: Boolean,
   	default: false
   }
-  
+
 });
 
 userSchema.methods.generateHash = function(password){

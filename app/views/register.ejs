@@ -2,15 +2,21 @@
 
   <form action="/register" method="post" class="register">
     <input type="text" name="username" placeholder="Username" required autofocus />
+    <input type="text" name="league" placeholder="League" required />
     <input type="email" name="email" placeholder="Email" required />
     <input type="password" name="password" placeholder="Password" required />
     <button type="submit">Register</button>
   </form>
-  <hr>
-  <span>Login or Register with:<a href="/auth/facebook">Facebook</a></span>
-  <hr>
-  <span>Login or Register with:<a href="/auth/twitter">Twitter</a></span>
-  <hr>
-  <span>Already have an account? <a href="/login">Login</a></span>
+  <div class="cards">
+    <div class="facebook card">
+      Login or Register with:<a href="/auth/facebook">Facebook</a>
+    </div>
+    <div class="twitter card">
+      Login or Register with:<a href="/auth/twitter">Twitter</a>
+    </div>
+    <div class="local card">
+      Already have an account? <a href="/login">Login</a>
+    </div>
+  </div>
 
 <% include partials/footer.ejs %>
