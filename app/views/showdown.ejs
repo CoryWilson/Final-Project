@@ -1,5 +1,7 @@
-<% include head.ejs %>
+<% include partials/head.ejs %>
 
+  <% for(i=0;i<matchups.length;i++){ %>
+    <%= matchups %>
+  <% } %>
 
-
-<% include footer.ejs %>
+<% include partials/footer.ejs %>

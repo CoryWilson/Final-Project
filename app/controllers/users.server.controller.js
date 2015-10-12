@@ -3,6 +3,16 @@
 var User 	 	 = require('mongoose').model('User'),
 		passport = require('passport');
 
+exports.list = function(req, res, next) {
+	User.find({}, function(err, users) {
+		if (err) {
+			return next(err);
+		} else {
+			res.json(users);
+		}
+	});
+};
+
 exports.renderLogin = function(req, res, next) {
 	res.render('login', {
 		title: 'Login',

@@ -41,6 +41,7 @@ module.exports = function(){
   require('../app/routes/index.server.routes.js')(app,passport);
   require('../app/routes/showdownSelections.server.routes.js')(app,passport);
   require('../app/routes/standings.server.routes.js')(app,passport);
+  require('../app/routes/showdowns.server.routes.js')(app,passport);
   require('../app/routes/users.server.routes.js')(app,passport);
 
   //use public folder to display static files

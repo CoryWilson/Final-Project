@@ -9,6 +9,7 @@ module.exports = function() {
   require('../app/models/user.server.model');
   require('../app/models/showdownSelection.server.model');
   require('../app/models/standings.server.model');
+  require('../app/models/showdown.server.model');
 
   return db;
 };
