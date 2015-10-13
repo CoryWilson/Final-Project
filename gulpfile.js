@@ -40,7 +40,8 @@ gulp.task('bower', function(){
 var customOpts = {
   entries: [
     config.jsPath+'/main.js',
-    config.jsPath+'/selection.js'
+    config.jsPath+'/selection.js',
+    config.jsPath+'/remove-fb-hash.js'
   ],
   debug: true
 };
@@ -144,7 +145,8 @@ gulp.task('browser-sync', ['nodemon'], function(){
     files   : ['./public/**/*.*'],
     proxy   : 'http://localhost:3000',
     port    : 4000,
-    browser : ['google-chrome']
+    browser : ['google-chrome'],
+    open    : false
   });
 
   gulp.watch(config.sassPath+'/**/**/*.scss',['styles']);
