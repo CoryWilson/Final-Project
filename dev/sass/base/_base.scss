@@ -132,3 +132,12 @@ body {
     max-width: 100%;
   }
 }
+
+.commissioner-panel {
+  @include outer-container;
+  width: 95%;
+  margin: 30px auto;
+  h1 {
+    text-align: center;
+  }
+}

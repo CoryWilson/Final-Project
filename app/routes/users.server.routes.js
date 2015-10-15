@@ -1,27 +1,29 @@
 //File Name: ./app/routes/users.server.routes.js
 
-var users    = require('../controllers/users.server.controller.js'),
+var usersController    = require('../controllers/users.server.controller.js'),
     passport = require('passport');
 
 module.exports = function(app,passport) {
 
-    app.get('/profile', users.profile);
+    app.get('/profile', usersController.profile);
 
-    app.get('/editProfile', users.edit);
+    app.get('/editProfile', usersController.edit);
 
-    app.post('/updateProfile', users.update);
+    app.post('/updateProfile', usersController.update);
 
-    app.get('/profileJSON', users.profileInfo);
+    app.get('/profileInfo', usersController.findUserById);
 
-    app.get('/logout', users.logout);
+    app.get('/logout', usersController.logout);
 
   //------------------------------------------
   // User Authenticate routes
   //------------------------------------------
 
+  app.get('/register-login', usersController.renderRegisterLogin);
+
   //Local Register Route
   app.route('/register')
-		.get(users.renderRegister)
+		//.get(usersController.renderRegister)
 		.post(passport.authenticate('local-register', {
       successRedirect : '/',
       failureRedirect : '/register',
@@ -30,7 +32,7 @@ module.exports = function(app,passport) {
 
   //Local Login Route
 	app.route('/login')
-  	.get(users.renderLogin)
+  	//.get(usersController.renderLogin)
   	.post(passport.authenticate('local-login', {
   		successRedirect: '/',
   		failureRedirect: '/login',
@@ -67,7 +69,7 @@ module.exports = function(app,passport) {
 
   //Local Authorize Routes
   app.route('/connect/local')
-    .get(users.renderAddLocal)
+    .get(usersController.renderAddLocal)
     .post(passport.authenticate('local-register', {
       successRedirect : '/', // redirect to the secure profile section
       failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
@@ -103,12 +105,12 @@ module.exports = function(app,passport) {
   //------------------------------------------
 
   //Unlink Local
-  app.get('/unlink/local', users.unlinkLocal);
+  app.get('/unlink/local', usersController.unlinkLocal);
 
 	//Unlink Facebook
-	app.get('/unlink/facebook', users.unlinkFacebook);
+	app.get('/unlink/facebook', usersController.unlinkFacebook);
 
   //Unlink Twitter
-	app.get('/unlink/twitter', users.unlinkTwitter);
+	app.get('/unlink/twitter', usersController.unlinkTwitter);
 
 };

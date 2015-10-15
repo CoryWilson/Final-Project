@@ -1,0 +1,40 @@
+<% include partials/head.ejs %>
+
+
+  <div class="registration-tabs">
+    <div class="tab-header-and-content">
+      <a href="#" class="tab-link is-active">Register</a>
+      <form action="register" method="post" class="register tab-content">
+        <input type="text" name="username" placeholder="Username" required autofocus />
+        <input type="text" name="league" placeholder="League" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+    <div class="tab-header-and-content">
+      <a href="#" class="tab-link">Login</a>
+      <form action="login" method="post" class="login tab-content">
+        <input type="email" name="email" placeholder="Email" required autofocus />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <div class="tab-header-and-content">
+      <a href="#" class="tab-link">Social Options</a>
+      <div class="tab-content">
+        <div class="facebook card">
+          <a href="/auth/facebook">
+            <img src="assets/vendor/ionicons/src/social-facebook.svg" alt="" />
+          </a>
+        </div>
+        <div class="twitter card">
+          <a href="/auth/twitter">
+            <img src="assets/vendor/ionicons/src/social-twitter.svg" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% include partials/footer.ejs %>

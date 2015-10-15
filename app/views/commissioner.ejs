@@ -1,0 +1,62 @@
+<% include partials/head.ejs %>
+    <div class="commissioner-panel" ng-controller="WeeksController">
+      <h1><%= user.league %> Commissioner Panel</h1>
+
+      <form class="" ng-submit="createWeek()">
+
+        <div data-ng-init="getSoccer()">
+          <h2>Premier League Matches</h2>
+
+          <label for="weekNum">Select Week: </label>
+          <select name="weekNum"
+                  ng-model="weekNum">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <%# <div ng-repeat="(key,value) in soccerCall.fixtures">
+            <input type="text" ng-model="soccerCall.fixtures[key]">
+          </div>%>
+
+
+          <%# <ul ng-repeat="(key,value) in inputs">
+            <li>{{key}} : {{outputs[key]}}</li>
+          </ul>%>
+
+          <select ng-model="games" multiple>
+            <option value="{{soccerCall.fixtures[key]}}" ng-repeat="(key,value) in soccerCall.fixtures">{{soccerCall.fixtures[key].homeTeamName}} vs. {{soccerCall.fixtures[key].awayTeamName}}</option>
+          </select>
+
+          <%# <div ng-repeat="match in soccerCall.fixtures">
+            <div class="">
+              {{match.homeTeamName}}
+              {{match.awayTeamName}}
+            </div>
+            <hr>
+          </div>%>
+
+
+
+          <button type="submit" name="button">
+          Submit Week</button>
+        </div>
+
+      </form>
+    </div>
+
+
+  <script type="text/javascript" src="assets/vendor/angular/angular.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/app/users/users.client.module.js"></script>
+  <script type="text/javascript" src="assets/js/app/users/services/authentication.client.service.js"></script>
+
+  <script type="text/javascript" src="assets/js/app/weeks/weeks.client.module.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/services/weeks.client.service.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/services/soccer.client.service.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/controllers/weeks.client.controller.js"></script>
+
+  <script type="text/javascript" src="assets/js/app/app.js"></script>
+
+<% include partials/footer.ejs %>

@@ -3,7 +3,7 @@
 var request      = require('request');
 var parseString  = require('xml2js').parseString;
 
-var configAPI    = require('../config/apiKeys.js');
+var configAPI    = require('../../config/apiKeys.js');
 
 /***** Game Stats API Calls *****/
 
@@ -67,8 +67,8 @@ exports.SoccerScheduleAPI = function(league,week,callback){
     headers: {
       'X-Auth-Token' : configAPI.footballData.key
     }
-  }, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
+  }, function(error, res, body) {
+    if (!error && res.statusCode == 200) {
       var data = JSON.parse(body);
       callback(data);
     }
