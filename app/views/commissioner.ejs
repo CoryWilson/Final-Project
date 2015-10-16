@@ -1,5 +1,5 @@
 <% include partials/head.ejs %>
-    <div class="commissioner-panel" ng-controller="WeeksController" data-ng-init="findUser()">
+    <div ng-controller="WeeksController" data-ng-init="findUser()" class="commissioner-panel">
       <h1>{{user.league}}Commissioner Panel</h1>
       <h2>Commissioner: {{user.username}}</h2>
 
@@ -31,12 +31,12 @@
 
           <label for="games">Select EPL Games:</label>
           <select ng-model="games"
-          ng-options="match for match in soccerCall.fixtures" multiple>
+          ng-options="match as match.homeTeamName+' vs. '+match.awayTeamName for match in soccerCall.fixtures" multiple>
           </select>
 
           <label for="games">Select NFL Games:</label>
           <select ng-model="games"
-          ng-options="game for game in nflCall.games" multiple>
+          ng-options="game as game.away+' vs. '+game.home for game in nflCall.games" multiple>
           </select>
 
           <button type="submit" name="button">
@@ -53,7 +53,8 @@
 
 
   <script type="text/javascript" src="assets/vendor/angular/angular.js"></script>
-  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular/angular-route.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.js"></script>
 
   <script type="text/javascript" src="assets/js/app/users/users.client.module.js"></script>
   <script type="text/javascript" src="assets/js/app/users/services/authentication.client.service.js"></script>
