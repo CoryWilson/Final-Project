@@ -40,7 +40,8 @@ gulp.task('bower', function(){
 var customOpts = {
   entries: [
     config.jsPath+'/main.js',
-    config.jsPath+'/selection.js'
+    config.jsPath+'/selection.js',
+    config.jsPath+'/remove-fb-hash.js'
   ],
   debug: true
 };
@@ -63,14 +64,14 @@ function bundle() {
 }
 
 gulp.task('ng-scripts', function(){
-  gulp.src(config.jsPath+'/angularApp/**/**/*.js')
+  gulp.src(config.jsPath+'/app/**/**/*.js')
   .pipe(sourcemaps.init())
-    .pipe(uglify())
-    .pipe(rename(function(path){
-      path.extname = ".min.js";
-    }))
+    //.pipe(uglify())
+    // .pipe(rename(function(path){
+    //   path.extname = ".min.js";
+    // }))
   .pipe(sourcemaps.write('../../../maps/js/angularApp'))
-  .pipe(gulp.dest('./public/assets/js/angularApp'));
+  .pipe(gulp.dest('./public/assets/js/app'));
 });
 
 gulp.task('script-watch', ['scripts','ng-scripts'], reload);
@@ -121,7 +122,7 @@ gulp.task('styles', function(){
   .pipe(sourcemaps.write('../../../maps/css'))
   .pipe(gulp.dest('./public/assets/css'))
   .pipe(browserSync.stream())
-  .pipe(notify('Styles Done Bruh'));
+  .pipe(notify('Wubalubadubdub! Styles Done!'));
 });
 
 /* Images */
@@ -144,7 +145,8 @@ gulp.task('browser-sync', ['nodemon'], function(){
     files   : ['./public/**/*.*'],
     proxy   : 'http://localhost:3000',
     port    : 4000,
-    browser : ['google-chrome']
+    browser : ['google-chrome'],
+    open    : false
   });
 
   gulp.watch(config.sassPath+'/**/**/*.scss',['styles']);
@@ -155,6 +157,6 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./public/*.html',reload);
 });
 
-gulp.task('default', ['bower', 'mongod','browser-sync']);
+gulp.task('default', ['bower','ng-scripts', 'mongod','browser-sync']);
 
 gulp.task('assets', ['bower','fonts','images','styles','scripts','ng-scripts']);

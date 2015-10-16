@@ -1,0 +1,69 @@
+<% include partials/head.ejs %>
+    <div class="commissioner-panel" ng-controller="WeeksController" data-ng-init="findUser()">
+      <h1>{{user.league}}Commissioner Panel</h1>
+      <h2>Commissioner: {{user.username}}</h2>
+
+      <form class="" ng-submit="createWeek()">
+
+        <div data-ng-init="getAPIs()">
+          <h2>Premier League Matches</h2>
+
+          <label for="weekNum">Select Week: </label>
+          <select name="weekNum"
+                  ng-model="weekNum">
+            <option value="">Select Week</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+
+          <%# <select ng-model="games" multiple>
+            <option value="{{soccerCall.fixtures[key]}}" ng-repeat="(key,value) in soccerCall.fixtures">{{soccerCall.fixtures[key].homeTeamName}} vs. {{soccerCall.fixtures[key].awayTeamName}}</option>
+            <option value="{{nflCall.games[key]}}" ng-repeat="(key,value) in nflCall.games">{{nflCall.games[key].home}} vs. {{nflCall.games[key].away}}</option>
+          </select>%>
+
+          <label for="games">Select EPL Games:</label>
+          <select ng-model="games"
+          ng-options="match for match in soccerCall.fixtures" multiple>
+          </select>
+
+          <label for="games">Select NFL Games:</label>
+          <select ng-model="games"
+          ng-options="game for game in nflCall.games" multiple>
+          </select>
+
+          <button type="submit" name="button">
+          Submit Week</button>
+        </div>
+
+        <div ng-bind="weeks">
+          <span>Week: {{weeks.weekNum}}</span> <br>
+          <span>Games:</span>
+        </div>
+
+      </form>
+    </div>
+
+
+  <script type="text/javascript" src="assets/vendor/angular/angular.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/app/users/users.client.module.js"></script>
+  <script type="text/javascript" src="assets/js/app/users/services/authentication.client.service.js"></script>
+
+  <script type="text/javascript" src="assets/js/app/weeks/weeks.client.module.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/services/weeks.client.service.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/services/soccer.client.service.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/services/nfl.client.service.js"></script>
+  <script type="text/javascript" src="assets/js/app/weeks/controllers/weeks.client.controller.js"></script>
+
+  <script type="text/javascript" src="assets/js/app/app.js"></script>
+
+<% include partials/footer.ejs %>

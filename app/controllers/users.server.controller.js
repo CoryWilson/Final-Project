@@ -13,6 +13,14 @@ exports.list = function(req, res, next) {
 	});
 };
 
+exports.renderRegisterLogin = function(req,res,next){
+	res.render('register-login', {
+		title				 		: 'Register or Login',
+		loginMessage 		: req.flash('loginMessage'),
+		registerMessage : req.flash('registerMessage')
+	});
+};
+
 exports.renderLogin = function(req, res, next) {
 	res.render('login', {
 		title: 'Login',
@@ -72,7 +80,21 @@ exports.profile = function(req, res) {
 };
 
 exports.profileInfo = function(req, res){
+	console.log(res);
 	res.json(req.user);
+};
+
+exports.findUserById = function(req, res){
+	User.findById(
+		req.user._id,
+		function(err,result){
+			if(err){
+				return(err);
+			} else {
+				res.json(result);
+			}
+		}
+	);
 };
 
 exports.edit = function(req, res){
@@ -98,69 +120,8 @@ exports.update = function(req, res, next) {
 			res.redirect('/profile');
 		}
 	});
-
-	/*User.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
-		if (err) {
-			return next(err);
-		} else {
-			console.log(user);
-			req.user = user;
-			console.log(user);
-			res.redirect('/profile');
-		}
-	});*/
 };
 
-/*
-exports.list = function(req, res, next) {
-	User.find({}, function(err, users) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(users);
-		}
-	});
-};
-
-exports.read = function(req, res) {
-	res.json(req.user);
-};
-
-exports.userByID = function(req, res, next, id) {
-	User.findOne({
-			_id: id
-		},
-		function(err, user) {
-			if (err) {
-				return next(err);
-			} else {
-				req.user = user;
-				next();
-			}
-		}
-	);
-};
-
-exports.update = function(req, res, next) {
-	User.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(user);
-		}
-	});
-};
-
-exports.delete = function(req, res, next) {
-	req.user.remove(function(err) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(req.user);
-		}
-	});
-};
-*/
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({
@@ -170,12 +131,9 @@ exports.requiresLogin = function(req, res, next) {
 	next();
 };
 
-exports.isCommissioner = function(req, res, next) {
-	if (req.user.commissioner === true) { //commisioner id
-		next();
-	} else {
-		return res.status(403).send({
-			message: 'User is not commissioner'
-		});
+exports.commissionerStatus = function(req, res, next) {
+	if (!req.user.commissioner) { //commisioner id
+		return res.redirct('/');
 	}
+	next();
 };

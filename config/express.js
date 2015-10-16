@@ -29,7 +29,7 @@ module.exports = function(){
   app.use(passport.initialize());
   app.use(passport.session());//login sessions
 
-  app.use(function (req, res, next) {
+  app.use(function(req, res, next) {
       res.locals.isAuthenticated = req.isAuthenticated();
       next();
   });
@@ -39,7 +39,7 @@ module.exports = function(){
 
   //require routes
   require('../app/routes/index.server.routes.js')(app,passport);
-  require('../app/routes/showdownSelections.server.routes.js')(app,passport);
+  require('../app/routes/weeks.server.routes.js')(app,passport);
   require('../app/routes/standings.server.routes.js')(app,passport);
   require('../app/routes/showdowns.server.routes.js')(app,passport);
   require('../app/routes/users.server.routes.js')(app,passport);
