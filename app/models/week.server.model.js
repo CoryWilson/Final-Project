@@ -9,12 +9,7 @@ var weekSchema = new Schema ({
     ref: 'User'
   },
   weekNum : Number,
-  games   : [
-    // homeTeamName : String,
-    // awayTeamName : String,
-    // status       : String,
-    // date         : String
-  ]
+  games   : []
 });
 
 module.exports = mongoose.model('Week', weekSchema);

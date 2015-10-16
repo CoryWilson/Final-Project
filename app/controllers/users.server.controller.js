@@ -80,6 +80,7 @@ exports.profile = function(req, res) {
 };
 
 exports.profileInfo = function(req, res){
+	console.log(res);
 	res.json(req.user);
 };
 
