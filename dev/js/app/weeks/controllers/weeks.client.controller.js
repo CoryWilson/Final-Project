@@ -1,49 +1,49 @@
 angular.module('weeks')
   .controller('WeeksController',
-    ['Weeks', 'SoccerAPI', 'NflAPI', 'Authentication', '$scope', '$resource', '$location', function(Weeks, SoccerAPI, NflAPI, Authentication, $scope, $resource, $location){
+    ['$scope', '$routeParams', '$location', 'Weeks', 'SoccerAPI', 'NflAPI', 'Authentication', function($scope, $routeParams, $location, Weeks, SoccerAPI, NflAPI, Authentication){
 
       $scope.findUser = function(){
         $scope.user = Authentication.get();
       };
 
-      $scope.find = function(){
-        $scope.weeks = Weeks.query();
-      };
-
-      // $scope.findWeek = function(){
-      //   $scope.week = Weeks.get({
-      //     weekNum: $routeParams.weekNum
-      //   });
-      // };
-
       $scope.getAPIs = function (){
         $scope.soccerCall = SoccerAPI.query();
-        // console.log($scope.soccerCall);
         $scope.nflCall = NflAPI.query();
-        //console.log($scope.nflCall);
       };
 
-      $scope.createWeek = function(){
+      $scope.create = function(){
 
         var week = new Weeks({
           weekNum: this.weekNum,
           games: this.games
         });
 
-        //week.weekNum = $scope.weekNum;
-        week.$save(function(result){
-          $location.path('/commissioner/weeks/'+result.weekNum);
-        },  function(errorRes) {
+        week.$save(function(response){
+         $location.path('weeks/'+response._id);
+        }, function(errorRes) {
           $scope.error = errorRes.data.message;
         });
+
+        //week.weekNum = $scope.weekNum;
         //   $scope.weeks = [];
         //   $scope.weeks.push(result);
         // });
+
       };
 
-      $scope.updateWeek = function(){
+      $scope.find = function(){
+        $scope.weeks = Weeks.query();
+      };
+
+      $scope.findWeek = function(){
+        $scope.week = Weeks.get({
+          weekId: $routeParams.weekId
+        });
+      };
+
+      $scope.update = function(){
         $scope.week.$update(function(){
-          $location.path('commissioner/weeks/'+$scope.week.weekNum);
+          $location.path('weeks/'+$scope.week._id);
         }, function(errorRes){
           $scope.error = errorRes.data.message;
         });

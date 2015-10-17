@@ -1,0 +1,13 @@
+<section data-ng-controller="WeeksController" data-ng-init="findUser()">
+
+  <div data-ng-init="findWeek()">
+    <h1 data-ng-bind="week.title" ng-class="week.completed?'completed':''"></h1>
+		<a href="/#!/weeks/{{week._id}}/edit">edit</a>
+		<a href="#" data-ng-click="delete();">delete</a>
+		<small>
+		<em data-ng-bind="week.created | date:'mediumDate'"></em>
+		</small>
+		<p data-ng-bind="week"></p>
+  </div>
+
+</section>

@@ -131,9 +131,11 @@ exports.requiresLogin = function(req, res, next) {
 	next();
 };
 
-exports.commissionerStatus = function(req, res, next) {
-	if (!req.user.commissioner) { //commisioner id
-		return res.redirct('/');
+exports.commissionerStatus = function(req, res, next){
+  if (!req.user.commissioner) {
+		return res.status(403).send({
+			message: 'User is not the commissioner'
+		});
 	}
 	next();
 };

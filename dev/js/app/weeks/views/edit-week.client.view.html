@@ -1,13 +1,14 @@
 <section data-ng-controller="WeeksController" data-ng-init="findUser()">
-  <h1>{{user.league}}Commissioner Panel</h1>
-  <hr>
-  <h2>Commissioner: {{user.username}}</h2>
-  <h3>Create New Week</h3>
-  <form class="" ng-submit="create()" novalidate>
-    <div data-ng-init="getAPIs()">
+
+  <div data-ng-init="findWeek()">
+		<h1>Edit Week</h1>
+		<form data-ng-submit="update()" novalidate>
+
+    <p data-ng-bind="week.weekNum"></p>
+
       <label for="weekNum">Select Week: </label>
       <select name="weekNum"
-              ng-model="weekNum">
+              data-ng-model="week.weekNum">
         <option value="">Select Week</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -21,22 +22,17 @@
         <option value="10">10</option>
       </select>
 
-      <label for="games">Select EPL Games:</label>
-      <select ng-model="games"
-      ng-options="match as match.homeTeamName+' vs. '+match.awayTeamName for match in soccerCall.fixtures" multiple>
-      </select>
-
-      <label for="games">Select NFL Games:</label>
-      <select ng-model="games"
-      ng-options="game as game.away+' vs. '+game.home for game in nflCall.games" multiple>
+      <label for="games">Select Games:</label>
+      <select data-ng-model="week.games"
+      ng-options="game as game.awayTeamName+' vs. '+game.homeTeamName for game in week.games" multiple>
       </select>
 
       <button type="submit" name="button">
-      Submit Week</button>
+      Update Week</button>
       <div data-ng-show="error">
         <strong data-ng-bind="error"></strong>
       </div>
-    </div>
-  </form>
+		</form>
+	</div>
 
 </section>

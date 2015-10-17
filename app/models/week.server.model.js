@@ -8,7 +8,7 @@ var weekSchema = new Schema ({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  weekNum : Number,
+  weekNum : String,
   games   : []
 });
 

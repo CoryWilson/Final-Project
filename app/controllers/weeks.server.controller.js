@@ -1,66 +1,85 @@
 var Week = require('mongoose').model('Week');
-var Api  = require('../modules/api');
-var soccerLeagues = require('../../config/soccerLeagues');
-var configAPI    = require('../../config/apiKeys.js');
-var request      = require('request');
 
-exports.list = function(req, res){
-  Week.find({},
-    function(err, results){
-      if(err){
-        return next(err);
-      } else {
-        res.json(results);
-      }
+var getErrorMessage = function(err){
+  if(err.errors){
+    for(var errName in err.errors){
+      if(err.errors[errName].message) return err.errors[errName].message;
     }
-  );
+  } else {
+    return 'Unknown server error';
+  }
 };
 
 exports.create = function(req, res){
   var week = new Week(req.body);
   week.creator = req.user;
-  week.save(function(err,result){
-    res.json(result);
+  week.save(function(err){
+    if(err){
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(week);
+    }
   });
 };
 
-exports.commissionerPanel = function(req, res){
-  Api.SoccerScheduleAPI(soccerLeagues.premierLeague,'5', function(soccerData){
-    res.render('commissioner',{
-      title: 'Commissioner Panel',
-      user : req.user,
-      soccerData : soccerData
-    });
-  });
-};
-
-exports.weekByNum = function(req, res, next, weekNum){
-  Week.find({
-      weekNum: weekNum
-    },
-    function(err, result){
-      if(err) {
-        return next(err);
+exports.list = function(req, res){
+  Week.find({},
+    function(err, weeks){
+      if(err){
+        return res.status(400).send({
+        message: getErrorMessage(err)
+      });
       } else {
-        res.json(result);
+        res.json(weeks);
       }
     }
   );
 };
 
-exports.SoccerScheduleAPI = function(req, res){
+exports.read = function(req, res){
+  res.json(req.week);
+};
 
-  request({
-    url: 'http://api.football-data.org/alpha/soccerseasons/398/fixtures/?matchday=8',
-    headers: {
-      'X-Auth-Token' : 'c162cb6d7e56493d934b712f58e282f4'
-    }
-  }, function(err, result) {
+exports.weekById = function(req, res, next, id){
+  Week.findById(id)
+    .exec(function(err, week){
+      if(err)
+        return next(err);
+      if(!week)
+        return next(new Error('Failed to load week '+id));
+
+        req.week = week;
+        next();
+    });
+};
+
+exports.update = function(req, res){
+  var week = req.week;
+  week.weekNum = req.body.weekNum;
+  week.games = req.body.games;
+
+  week.save(function(err){
     if(err){
-      return next(err);
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
     } else {
-      res.json(result);
+      res.json(week);
     }
   });
+};
 
+exports.delete = function(req, res){
+  var week = req.week;
+  week.remove(function(err){
+    if(err){
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(week);
+    }
+  });
 };

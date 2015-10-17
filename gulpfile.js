@@ -23,6 +23,7 @@ var gulp         = require('gulp'),
 var config = {
   sassPath        : './dev/sass',
   jsPath          : './dev/js',
+  ngViewPath      : './dev/js/app/**/views',
   fontPath        : './assets/fonts',
   imgPath         : './assets/images',
   controllersPath : './app/controllers',
@@ -70,11 +71,16 @@ gulp.task('ng-scripts', function(){
     // .pipe(rename(function(path){
     //   path.extname = ".min.js";
     // }))
-  .pipe(sourcemaps.write('../../../maps/js/angularApp'))
+  .pipe(sourcemaps.write('../../../../maps/js/angularApp'))
   .pipe(gulp.dest('./public/assets/js/app'));
 });
 
-gulp.task('script-watch', ['scripts','ng-scripts'], reload);
+gulp.task('ng-html',function(){
+  gulp.src(config.ngViewPath+'/*.html')
+  .pipe(gulp.dest('./public/assets/js/app/'));
+});
+
+gulp.task('script-watch', ['scripts','ng-scripts','ng-html'], reload);
 
 /* Nodemon */
 var BROWSER_SYNC_RELOAD_DELAY = 500;
@@ -157,6 +163,6 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./public/*.html',reload);
 });
 
-gulp.task('default', ['bower','ng-scripts', 'mongod','browser-sync']);
+gulp.task('default', ['bower','ng-scripts','ng-html', 'mongod','browser-sync']);
 
 gulp.task('assets', ['bower','fonts','images','styles','scripts','ng-scripts']);
