@@ -1,14 +1,19 @@
 //File Name: ./app/routes/showdowns.server.routes.js
 
-var showdowns    = require('../controllers/showdowns.server.controller.js'),
+var showdownsController    = require('../controllers/showdowns.server.controller.js'),
     passport     = require('passport');
 
 module.exports = function(app,passport) {
 
-    app.get('/matchups', showdowns.scheduling);
+    app.route('/createMatchups')
+       .get(showdownsController.createShowdownList);
+       //.post(showdowns.create);
 
-    app.get('/findCompetitor/:random_id', showdowns.findCompetitor);
+    app.route('/schedule')
+      .get(showdownsController.listShowdowns);
 
-    app.param('random_id',showdowns.findCompetitor);
+    app.get('/findCompetitor/:random_id', showdownsController.findCompetitor);
+
+    app.param('random_id',showdownsController.findCompetitor);
 
 };

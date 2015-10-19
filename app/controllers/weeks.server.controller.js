@@ -44,6 +44,7 @@ exports.read = function(req, res){
 
 exports.weekById = function(req, res, next, id){
   Week.findById(id)
+    .populate('creator','username')
     .exec(function(err, week){
       if(err)
         return next(err);
