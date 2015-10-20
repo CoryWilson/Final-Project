@@ -1,0 +1,17 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser()">
+
+  <form class="" ng-submit="createLeague()" novalidate>
+    <h3>Create League</h3>
+
+    <input type="text"
+           ng-model="name"/>
+
+      <button type="submit" name="button">
+      Create New League</button>
+      <div data-ng-show="error">
+        <strong data-ng-bind="error"></strong>
+      </div>
+    </div>
+  </form>
+
+</section>

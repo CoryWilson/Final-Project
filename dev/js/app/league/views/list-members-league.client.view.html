@@ -1,0 +1,15 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMembers();">
+	<div class="container">
+		<h1>{{league.name}} Members</h1>
+		<a data-ng-href="#!/league/{{league._id}}">
+			<button>{{league.name}} Home Page</button>
+		</a>
+		<hr>
+		<h2>Members</h2>
+		<ul>
+			<li data-ng-repeat="member in members">
+        <a data-ng-href="#!/league/{{league._id}}/members/{{member._id}}">{{member}}</a>
+			</li>
+		</ul>
+	</div>
+</section>

@@ -8,6 +8,7 @@ var config       = require('./config'),
     morgan       = require('morgan'),
     passport     = require('passport'),
     flash        = require('connect-flash'),
+    io           = require('socket.io'),
     session      = require('express-session');
 
 module.exports = function(){
@@ -39,6 +40,7 @@ module.exports = function(){
 
   //require routes
   require('../app/routes/index.server.routes.js')(app,passport);
+  require('../app/routes/league.server.routes.js')(app,passport);
   require('../app/routes/weeks.server.routes.js')(app,passport);
   require('../app/routes/standings.server.routes.js')(app,passport);
   require('../app/routes/showdowns.server.routes.js')(app,passport);

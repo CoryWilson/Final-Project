@@ -1,0 +1,12 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();">
+  <h1 data-ng-bind="league.name"></h1>
+  <h2>{{members.member[0]}}</h2>
+	<a href="/#!/league/{{league._id}}/members/{{member._id}}/edit">
+    <button>Edit Member</button>
+  </a>
+	<a href="#" data-ng-click="delete();">
+    <button>Delete Member</button>
+  </a>
+
+
+</section>

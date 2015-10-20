@@ -22,34 +22,37 @@ var userSchema = new Schema({
     displayName  : String,
     username     : String
   },
-  results        : {
-    wins         : {
-      type: Number,
-      default: 0
-    },
-    ties         : {
-      type: Number,
-      default: 0
-    },
-    losses       : {
-      type: Number,
-      default: 0
-    }
-  },
-  showdowns      : [{
-    games        : [{
-      pick       : String,
-      points     : Number
-    }]
-  }],
-  league         : String,
   username       : String,
   avatar         : String,
   commissioner   : {
-  	type: Boolean,
-  	default: false
+    type: Boolean,
+    default: false
   }
-
+  // league         : String,
+  // leagueName     : {
+  //   type: Schema.ObjectId,
+  //   ref: 'League'
+  // },
+  // results        : {
+  //   wins         : {
+  //     type : Number,
+  //     default : 0
+  //   },
+  //   ties         : {
+  //     type : Number,
+  //     default : 0
+  //   },
+  //   losses       : {
+  //     type : Number,
+  //     default : 0
+  //   }
+  // },
+  // showdowns      : [{
+  //   games        : [{
+  //     pick       : String,
+  //     points     : Number
+  //   }]
+  // }]
 });
 
 userSchema.methods.generateHash = function(password){

@@ -5,15 +5,22 @@ var showdownsController    = require('../controllers/showdowns.server.controller
 
 module.exports = function(app,passport) {
 
-    app.route('/createMatchups')
-       .get(showdownsController.createShowdownList);
-       //.post(showdowns.create);
+    app.route('/showdowns')
+       //.get(showdownsController.listShowdowns)
+       .get(showdownsController.showdownEJS)
+       .post(showdownsController.createShowdown);
 
-    app.route('/schedule')
-      .get(showdownsController.listShowdowns);
+    app.route('/showdowns/pairings')
+       .get(showdownsController.listPairings)
+       .post(showdownsController.createPairings);
 
-    app.get('/findCompetitor/:random_id', showdownsController.findCompetitor);
+    app.get('/showdowns/:showdownId/:opponentId', showdownsController.getShowdownInfo, showdownsController.getShowdownOpponent);
 
-    app.param('random_id',showdownsController.findCompetitor);
+    app.get('/showdowns/:opponentId', showdownsController.getShowdownOpponent);
+
+    app.get('/showdowns/opponents', showdownsController.getShowdownOpponents);
+
+    app.param('showdownId',showdownsController.getShowdownInfo);
+    app.param('opponentId',showdownsController.getShowdownOpponent);
 
 };

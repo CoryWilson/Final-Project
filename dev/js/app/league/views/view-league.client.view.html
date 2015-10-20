@@ -1,0 +1,19 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();">
+  <h1 data-ng-bind="league.name"></h1>
+  <a href="/#!/league/{{league._id}}/members/create">
+    <button>Add Members</button>
+  </a>
+  <a href="#!/league/{{league._id}}/members/">
+    <button>View Members</button>
+  </a>
+	<a href="#" data-ng-click="delete();">
+    <button>Delete League</button>
+  </a>
+  <hr>
+  <h3>Members</h3>
+  <ul>
+    <li ng-repeat="member in league.member">
+      <a href="/#!/league/{{league._id}}/members/{{member._id}}">{{member}}</a>
+    </li>
+  </ul>
+</section>

@@ -64,6 +64,8 @@ function bundle() {
     .pipe(gulp.dest('./public/assets/js'));
 }
 
+gulp.task('script-watch', ['scripts'], reload);
+
 gulp.task('ng-scripts', function(){
   gulp.src(config.jsPath+'/app/**/**/*.js')
   .pipe(sourcemaps.init())
@@ -75,12 +77,14 @@ gulp.task('ng-scripts', function(){
   .pipe(gulp.dest('./public/assets/js/app'));
 });
 
+gulp.task('ng-script-watch', ['ng-scripts'], reload);
+
 gulp.task('ng-html',function(){
   gulp.src(config.ngViewPath+'/*.html')
   .pipe(gulp.dest('./public/assets/js/app/'));
 });
 
-gulp.task('script-watch', ['scripts','ng-scripts','ng-html'], reload);
+gulp.task('ng-html-watch', ['ng-html'], reload);
 
 /* Nodemon */
 var BROWSER_SYNC_RELOAD_DELAY = 500;
@@ -157,6 +161,8 @@ gulp.task('browser-sync', ['nodemon'], function(){
 
   gulp.watch(config.sassPath+'/**/**/*.scss',['styles']);
   gulp.watch(config.jsPath+'/*.js',['script-watch']);
+  gulp.watch(config.jsPath+'/app/**/**/*.js', ['ng-script-watch']);
+  gulp.watch(config.ngViewPath+'/*.html',['ng-html-watch']);
   gulp.watch(config.imgPath+'/*.*',['image-watch']);
   gulp.watch('./app/*/*',reload);
   gulp.watch('./app.js',reload);

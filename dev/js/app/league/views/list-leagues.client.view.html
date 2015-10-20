@@ -1,0 +1,15 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser()">
+  <div data-ng-init="findLeagues()">
+		<h1>Available Leagues</h1>
+		<ul>
+			<li data-ng-repeat="league in leagues">
+				<a data-ng-href="#!/league/{{league._id}}" data-ng-bind="league.name"></a>
+			</li>
+		</ul>
+    <a href="#!/league/create">
+      <button>
+        Create New League
+      </button>
+    </a>
+	</div>
+</section>

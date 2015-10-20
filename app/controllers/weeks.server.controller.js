@@ -50,7 +50,6 @@ exports.weekById = function(req, res, next, id){
         return next(err);
       if(!week)
         return next(new Error('Failed to load week '+id));
-
         req.week = week;
         next();
     });

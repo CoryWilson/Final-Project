@@ -1,9 +1,10 @@
 //File Name: ./app/controllers/showdowns.server.controller.js
 
-var Showdown = require('mongoose').model('Showdown'),
-    User     = require('mongoose').model('User'),
-    robin    = require('roundrobin'),
-		passport = require('passport');
+var Showdown   = require('mongoose').model('Showdown'),
+    Pairings   = require('mongoose').model('Pairings'),
+    User       = require('mongoose').model('User'),
+    roundRobin = require('roundrobin'),
+		passport   = require('passport');
 
 
 var getErrorMessage = function(err){
@@ -16,74 +17,14 @@ var getErrorMessage = function(err){
   }
 };
 
-/*
-exports.league_ids = function(req, res){
-  User.distinct(
-    '_id',
-    {
-      league: req.user.league
-    },
-    function(err, ids){
-      res.json(ids);
-    }
-  );
-};
-*/
-
-exports.listShowdowns = function(req, res, next){
-  Showdown.find()
-    .populate('competitors','username')
-    .exec(function(err, showdowns){
-      if (err) {
-        return res.status(400).send({
-          message: getErrorMessage(err)
-        });
-      } else {
-      //  res.json(showdowns);
-        console.log(showdowns[0].weeks[0][0].competitors[0]);
-        res.render('showdown',{
-          title: 'Showdowns',
-          user: req.user,
-          showdowns: showdowns
-        });
-      }
-    });
-};
-
-exports.create = function(req, res){
-  var showdown = new Showdown(req.body);
-  week.creator = req.user;
-  week.save(function(err){
-    if(err){
-      return res.status(400).send({
-        message: getErrorMessage(err)
-      });
-    } else {
-      res.json(week);
-    }
+exports.showdownEJS = function(req, res){
+  res.render('showdown',{
+    title: 'Showdown',
+    user: req.user
   });
 };
 
-// exports.createShowdownList = function(req, res, next, groupings){
-//   //take users who are paired
-//   //create weekly matchups
-//   var roundRobin = scheduling();
-//
-//   var showdownList = new Showdown(req.body);
-//   showdownList.weeks = roundRobin;
-//   Showdown.save(function(err){
-//     if(err){
-//       return res.status(400).send({
-//         message: getErrorMessage(err)
-//       });
-//     } else {
-//       res.json(showdownList);
-//     }
-//   });
-// };
-
-
-exports.createShowdownList = function(req, res, next) {
+exports.createPairings = function(req, res, next){
   User.distinct(
     '_id',
     {
@@ -97,18 +38,17 @@ exports.createShowdownList = function(req, res, next) {
           if(err){
             return next(err);
           } else {
-            var roundRobin = robin(leagueArray.length,league_ids);
-            //res.json(roundRobin);
-            console.log(roundRobin);
-            var showdownList = new Showdown(req.user);
-            showdownList.weeks = roundRobin;
-            showdownList.save(function(err){
+            var pairings = roundRobin(leagueArray.length,league_ids);
+            var pairingsList = new Pairings(req.user);
+            pairingsList.league = req.user.league;
+            pairingsList.weeks = pairings;
+            pairingsList.save(function(err){
               if(err){
                 return res.status(400).send({
                   message: getErrorMessage(err)
                 });
               } else {
-                res.json(showdownList);
+                res.json(pairingsList);
               }
             });
           }
@@ -116,43 +56,108 @@ exports.createShowdownList = function(req, res, next) {
       );
     }
   );
+};
+
+exports.listPairings = function(req, res, next){
+  Pairings.find({
+    league: req.user.league
+  },
+    function(err, pairings){
+      if(err){
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(pairings);
+      }
+    }
+  );
+};
+
+exports.createShowdown = function(req, res, next){
+
+  var showdown = new Showdown(req.body);
+  showdown.save(function(err){
+    if(err){
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(showdown);
+    }
+  });
 
 };
 
-
-exports.findCompetitor = function(req, res, next, random_id) {
-	User.findOne({
-      league: req.user.league, //checks to make sure the other user is in your league
-			_id: random_id, //grabs user based off random _id
-		},
-		function(err, competitor) {
-			if (err) {
-				return next(err);
-			} else {
-			  res.json(competitor);
-			}
-		}
-	);
+exports.listShowdowns = function(req, res, next){
+  Showdown.find()
+    .populate('competitors','username')
+    .exec(function(err, showdowns){
+      if(err) {
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(showdowns);
+      }
+    });
 };
 
+exports.getShowdownInfo = function(req, res, next, showdownId){
 
-exports.shuffle = function(array) {
+  Showdown.findById(showdownId,
+    function(err, game) {
+      if(err) {
+          return next(err);
+      } else {
+        res.json(game);
+        //res.send(game);
+      }
+  });
 
-  var currentIndex = array.length, temporaryValue, randomIndex ;
+};
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+exports.getShowdownOpponent = function(req, res, next, opponentId){
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+  User.findById(opponentId,
+    function(err, opponent) {
+      if(err) {
+        return next(err);
+      } else {
+        res.json(opponent);
+      }
+  });
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+};
 
-  return array;
+exports.listPairings = function(req, res, next){
+  Pairings.find({
+    league: req.user.league
+  },
+    function(err, pairings){
+      if(err){
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(pairings);
+      }
+    }
+  );
+};
 
+exports.getShowdownOpponents = function(req, res, next){
+  Pairings.find({
+
+    },
+    function(err, opponents){
+      if(err){
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        res.json(opponents);
+      }
+    }
+  );
 };

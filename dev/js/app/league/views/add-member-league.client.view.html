@@ -1,0 +1,24 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findAllUsers();findLeague();">
+  <form class="" ng-submit="addMember()" novalidate>
+    <h1>Add Member to {{league.name}}</h1>
+
+    <a href="#!/league/{{league._id}}/">
+      <button>League Home Page</button>
+    </a>
+
+    <hr>
+
+    <label for="member">Select Member</label>
+    <select ng-model="member"
+    ng-options="user as user.username for user in users">
+    </select>
+
+    <button type="submit" name="button">
+    Add New Member</button>
+
+    <div data-ng-show="error">
+      <strong data-ng-bind="error"></strong>
+    </div>
+
+  </form>
+</section>

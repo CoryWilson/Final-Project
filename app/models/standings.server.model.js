@@ -6,26 +6,26 @@ var mongoose = require('mongoose'),
 var standingsSchema = new Schema({
 
   players       : [{
-    user_id    : {
-  		type: Schema.ObjectId,
-  		ref: 'User'
+    user        : {
+  		type : Schema.ObjectId,
+  		ref  : 'User'
     },
     results     : {
       wins      : {
-        type: Number,
-        default: 0
+        type : Number,
+        default : 0
       },
       ties      : {
-        type: Number,
-        default: 0
+        type : Number,
+        default : 0
       },
       losses    : {
-        type: Number,
-        default: 0
+        type : Number,
+        default : 0
       },
       points    : {
-        type: Number,
-        default: 0
+        type : Number,
+        default : 0
       }
     },
   }],

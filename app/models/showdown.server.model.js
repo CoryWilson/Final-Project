@@ -3,24 +3,23 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema;
 
-// var competitorSchema = new Schema({
-//   type: Schema.ObjectId,
-//   ref: 'User'
-// });
-//
-// var gameSchema = new Schema({
-//   gameInfo: {},
-//   pick: Boolean,
-//   value: Number
-// });
-//
-// var weekSchema = new Schema({
-//   competitors: [competitorSchema],
-//   games : [gameSchema]
-// });
+var gameSchema = new Schema({
+  gameInfo : {
+    homeTeamName  : String,
+    homeTeamScore : Number,
+    awayTeamName  : String,
+    awayTeamScore : Number,
+    location      : String,
+    status        : String,
+    date          : Date
+  },
+  pick  : String,
+  value : Number
+});
 
 var showdownSchema = new Schema({
-  weeks: []//weekSchema]
+  games : [gameSchema],
+  week  : Number
 });
 
 module.exports = mongoose.model('Showdown', showdownSchema);
