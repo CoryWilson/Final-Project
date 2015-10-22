@@ -28,31 +28,6 @@ var userSchema = new Schema({
     type: Boolean,
     default: false
   }
-  // league         : String,
-  // leagueName     : {
-  //   type: Schema.ObjectId,
-  //   ref: 'League'
-  // },
-  // results        : {
-  //   wins         : {
-  //     type : Number,
-  //     default : 0
-  //   },
-  //   ties         : {
-  //     type : Number,
-  //     default : 0
-  //   },
-  //   losses       : {
-  //     type : Number,
-  //     default : 0
-  //   }
-  // },
-  // showdowns      : [{
-  //   games        : [{
-  //     pick       : String,
-  //     points     : Number
-  //   }]
-  // }]
 });
 
 userSchema.methods.generateHash = function(password){

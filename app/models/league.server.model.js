@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
 
 
 memberSchema = new Schema({
-  type: Schema.Types.ObjectId
+  user_id: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
 });
 
 gameSchema = new Schema({
@@ -29,7 +32,7 @@ gameSchema = new Schema({
 
 resultsSchema = new Schema({
 
-    member : [
+    members : [
       memberSchema,
       {
         wins      : {
@@ -54,13 +57,13 @@ resultsSchema = new Schema({
 );
 
 leagueSchema = new Schema({
-  name : String,
-  member  : [memberSchema],
+  name      : String,
+  members   : [memberSchema],
   showdowns : [{
-    week  : Number,
-    games : [gameSchema]
+    week    : Number,
+    games   : [gameSchema]
   }],
-  results : [resultsSchema]
+  results   : [resultsSchema]
 });
 
 module.exports = mongoose.model('League', leagueSchema);

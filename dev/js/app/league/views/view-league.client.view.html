@@ -12,8 +12,8 @@
   <hr>
   <h3>Members</h3>
   <ul>
-    <li ng-repeat="member in league.member">
-      <a href="/#!/league/{{league._id}}/members/{{member._id}}">{{member}}</a>
+    <li ng-repeat="member in league.members">
+      <a href="/#!/league/{{league._id}}/members/{{member._id}}">{{member.user_id.username}}</a>
     </li>
   </ul>
 </section>

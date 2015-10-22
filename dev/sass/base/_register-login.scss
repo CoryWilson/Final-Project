@@ -6,7 +6,7 @@
   $dark-gray: #333 !default;
   $medium-screen: em(640) !default;
   $tab-link-color: $dark-gray;
-  $tab-border: 1px solid $base-border-color;
+  $tab-border: 3px solid $base-border-color;
   $tab-active-background: $base-background-color;
   $tab-inactive-color: $base-background-color;
   $tab-inactive-hover-color: silver;
@@ -14,9 +14,29 @@
 
   @include clearfix;
   @include outer-container;
-  margin: 0 auto;
+  background: $nl-blue;
+  width: 80%;
+  border: 3px solid $nl-black;
+  margin: 50px auto;
   line-height: 1.5;
   padding: 0;
+
+  button {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  ::-webkit-input-placeholder { color: tint($nl-black, 10%);}
+  :-moz-placeholder { color: tint($nl-black, 10%);}
+  ::-moz-placeholder {color: tint($nl-black, 10%);}
+  :-ms-input-placeholder {color: tint($nl-black, 10%);}
+
+  input[type=text],
+  input[type=email],
+  input[type=password]{
+    background: none;
+  }
 
   div.tab-header-and-content {
     list-style: none;
@@ -27,8 +47,6 @@
   }
 
   a.tab-link {
-    background-color: $tab-inactive-color;
-    border-top: $tab-border;
     color: $tab-link-color;
     display: block;
     padding: ($base-spacing / 2) $gutter;
@@ -40,7 +58,7 @@
     }
 
     &:hover {
-      color: $action-color;
+      color: $nl-white;
     }
 
     &:focus {
@@ -48,10 +66,10 @@
     }
 
     &.is-active {
-      border-bottom: 0;
+      background: $nl-black;
+      color: $nl-white;
 
       @include media($tab-mode) {
-        border: $tab-border;
         border-bottom-color: $tab-active-background;
         margin-bottom: -1px;
       }
@@ -69,9 +87,21 @@
     }
   }
 
+  .twitter,
+  .facebook {
+    display: block;
+    float: left;
+    width: 50%;
+  }
+
   .twitter img,
   .facebook img {
-    height: 50px;
+    display: block;
+    height: 250px;
+    margin: 0 auto;
+    &:hover {
+      opacity: .8;
+    }
   }
 
 }

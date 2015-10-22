@@ -14,10 +14,11 @@ angular.module('league')
 
       $scope.createLeague = function(){
         var league = new League.Overview({
+          leagueId: $routeParams.leagueId,
           name : this.name
         });
         league.$save(function(response){
-          $location.path('league/'+response.leagueId);
+          $location.path('league/'+$scope.league._id);
         }, function(errorRes){
           $scope.error = errorRes.data.message;
         });
@@ -33,9 +34,7 @@ angular.module('league')
         $scope.leagues = League.Overview.query();
       };
 
-      //Add Member to League
       $scope.addMember = function(){
-
 
         var member = new League.Member({
             leagueId : $scope.league._id,
@@ -44,7 +43,7 @@ angular.module('league')
 
         //pass league Id to save function
         member.$save(function(response){
-          $location.path('league/'+$scope.league._id+'/members/'+response._id);
+          $location.path('league/'+$scope.league._id+'/members/');
         }, function(errorRes){
           $scope.error = errorRes.data.message;
         });
@@ -60,11 +59,10 @@ angular.module('league')
 
       //Find specific Member
       $scope.findMember = function(){
-        $scope.members = League.Member.get({
+        $scope.member = League.Member.query({
           leagueId : $routeParams.leagueId,
           memberId : $routeParams.memberId
         });
-        $scope.memberId = memberId;
       };
 
   }]);

@@ -1,7 +1,7 @@
 <section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();">
-  <h1><a href="/#!/league/{{league._id}}/members/">{{league.name}}</a></h1>
-  <h2>{{member[0].user_id.username}}</h2>
-	<a href="/#!/league/{{league._id}}/members/{{member[0]._id}}/edit">
+  <h1 data-ng-bind="league.name"></h1>
+  <h2>{{members.member[0]}}</h2>
+	<a href="/#!/league/{{league._id}}/members/{{member._id}}/edit">
     <button>Edit Member</button>
   </a>
 	<a href="#" data-ng-click="delete();">

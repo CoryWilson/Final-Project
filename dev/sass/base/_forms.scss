@@ -29,9 +29,8 @@ label {
 #{$all-text-inputs},
 select[multiple=multiple] {
   background-color: $base-background-color;
-  border: $base-border;
-  border-radius: $base-border-radius;
-  box-shadow: $form-box-shadow;
+  border: none;
+  border-bottom: 3px solid $nl-black;
   box-sizing: border-box;
   font-family: $base-font-family;
   font-size: $base-font-size;
@@ -40,13 +39,17 @@ select[multiple=multiple] {
   transition: border-color $base-duration $base-timing;
   width: 100%;
 
+  ::-webkit-input-placeholder { color: $nl-black;}
+  :-moz-placeholder { color: $nl-black;}
+  ::-moz-placeholder {color: $nl-black;}
+  :-ms-input-placeholder {color: $nl-black;}
+
   &:hover {
-    border-color: shade($base-border-color, 20%);
+    border-color: shade($base-border-color, 5%);
   }
 
   &:focus {
     border-color: $action-color;
-    box-shadow: $form-box-shadow-focus;
     outline: none;
   }
 
@@ -54,9 +57,6 @@ select[multiple=multiple] {
     background-color: shade($base-background-color, 5%);
     cursor: not-allowed;
 
-    &:hover {
-      border: $base-border;
-    }
   }
 }
 

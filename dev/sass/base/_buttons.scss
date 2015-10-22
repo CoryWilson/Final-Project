@@ -1,9 +1,8 @@
 #{$all-buttons} {
   appearance: none;
-  background-color: $action-color;
-  border: 0;
-  border-radius: $base-border-radius;
-  color: #fff;
+  background-color: $nl-white;
+  border: 3px solid $nl-black;
+  color: $nl-black;
   cursor: pointer;
   display: inline-block;
   font-family: $base-font-family;
@@ -20,8 +19,8 @@
 
   &:hover,
   &:focus {
-    background-color: shade($action-color, 20%);
-    color: #fff;
+    background-color: $nl-yellow;
+    color: $nl-black;
   }
 
   &:disabled {
@@ -29,7 +28,7 @@
     opacity: 0.5;
 
     &:hover {
-      background-color: $action-color;
+      background-color: $nl-yellow;
     }
   }
 }

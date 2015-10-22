@@ -8,7 +8,7 @@
 		<h2>Members</h2>
 		<ul>
 			<li data-ng-repeat="member in members">
-        <a data-ng-href="#!/league/{{league._id}}/members/{{member._id}}">{{member}}</a>
+        <a data-ng-href="#!/league/{{league._id}}/members/{{member._id}}">{{member.user_id.username}}</a>
 			</li>
 		</ul>
 	</div>

@@ -24,13 +24,12 @@ module.exports = function(app) {
   app.param('leagueId',leagueController.getLeagueById);
   app.param('memberId',leagueController.getMemberById);
 
-//
-//   app.route('/league/showdowns')
-//      .get(leagueController.getShowdowns);
-//
-//   app.route('/league/showdowns/:weekNum')
-//      .get(leagueController.getShowdownWeekByNum);
-//
+  // app.route('/league/:leagueId/showdowns')
+  //    .get(leagueController.getShowdowns);
+
+  app.route('/league/:leagueId/showdowns/:weekNum')
+     .get(leagueController.readWeek);
+
 //   app.route('/league/showdowns/:weekNum/:showdownId')
 //      .get(leagueController.getShowdownById)
 //      .put(leagueController.updateShowdown);
@@ -40,5 +39,6 @@ module.exports = function(app) {
 //
 //   app.route('/league/results/:memberId')
 //      .get(leagueController.getResultsById);
+  app.param(':weekNum',leagueController.getWeekNum);
 //
 };
