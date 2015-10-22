@@ -14,7 +14,7 @@
 
   @include clearfix;
   @include outer-container;
-  background: $nl-blue;
+  background: $nl-white;
   width: 80%;
   border: 3px solid $nl-black;
   margin: 50px auto;
@@ -22,9 +22,12 @@
   padding: 0;
 
   button {
-    display: block;
-    margin: 0 auto;
-    width: 50%;
+    width: 100%;
+    @include media($tab-mode){
+      display: block;
+      margin: 0 auto;
+      width: 50%;
+    }
   }
 
   ::-webkit-input-placeholder { color: tint($nl-black, 10%);}
@@ -52,13 +55,15 @@
     padding: ($base-spacing / 2) $gutter;
     text-decoration: none;
 
+    border-top: 3px solid $nl-black;
+
     @include media($tab-mode) {
       @include inline-block;
       border-top: 0;
     }
 
     &:hover {
-      color: $nl-white;
+      color: $nl-yellow;
     }
 
     &:focus {
@@ -94,13 +99,12 @@
     width: 50%;
   }
 
-  .twitter img,
-  .facebook img {
-    display: block;
-    height: 250px;
-    margin: 0 auto;
+  i.icon {
+    font-size: 15em;
+    color: $nl-black;
+    text-align: center;
     &:hover {
-      opacity: .8;
+      color: $nl-yellow;
     }
   }
 

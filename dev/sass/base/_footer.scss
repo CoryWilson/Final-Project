@@ -5,7 +5,7 @@
   $large-screen: em(860) !default;
   $footer-background: $nl-white;//desaturate(darken($action-color, 20%), 30%);
   $footer-color: $nl-black;
-  $footer-link-color: transparentize($footer-color, 0.2);
+  $footer-link-color: $footer-color;
   $footer-disclaimer-color: transparentize($footer-color, 0.5);
 
   background: $footer-background;
@@ -23,16 +23,19 @@
     margin-right: 1em;
     margin-bottom: 1em;
 
+    img {
+      height: 1.6em;
+      background: $nl-red;
+    }
+
     @include media($large-screen) {
       float: left;
       margin-bottom: 0;
     }
   }
 
-  .footer-logo img {
-    height: 1.6em;
-    background: $nl-red;
-  }
+
+
 
   ul {
     line-height: 1.5em;
@@ -63,7 +66,7 @@
 
     &:focus,
     &:hover {
-      color: transparentize($footer-color, 0);
+      color: $nl-yellow;
     }
   }
 
@@ -96,6 +99,9 @@
         }
       }
 
+    span {
+      font-size: $base-font-size;
+    }
       img {
         height: 1.6em;
         opacity: 0.7;

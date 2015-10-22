@@ -1,12 +1,14 @@
-<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();">
-  <h1><a href="/#!/league/{{league._id}}/members/">{{league.name}}</a></h1>
-  <h2>{{member[0].user_id.username}}</h2>
-	<a href="/#!/league/{{league._id}}/members/{{member[0]._id}}/edit">
-    <button>Edit Member</button>
-  </a>
-	<a href="#" data-ng-click="delete();">
-    <button>Delete Member</button>
-  </a>
-
-
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();" class="league">
+  <div class="league__header">
+    <h1><a href="/#!/league/{{league._id}}/members/">{{league.name}}</a></h1>
+  </div>
+  <div class="league__content">
+    <h2>{{member[0].user_id.username}}</h2>
+  	<a href="/#!/league/{{league._id}}/members/{{member[0]._id}}/edit">
+      <button class="league__button">Edit Member</button>
+    </a>
+  	<a href="#" data-ng-click="delete();">
+      <button class="league__button league__button--delete">Delete Member</button>
+    </a>
+  </div>
 </section>

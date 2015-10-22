@@ -1,19 +1,35 @@
-<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();">
-  <h1 data-ng-bind="league.name"></h1>
-  <a href="/#!/league/{{league._id}}/members/create">
-    <button>Add Members</button>
-  </a>
-  <a href="#!/league/{{league._id}}/members/">
-    <button>View Members</button>
-  </a>
-	<a href="#" data-ng-click="delete();">
-    <button>Delete League</button>
-  </a>
-  <hr>
-  <h3>Members</h3>
-  <ul>
-    <li ng-repeat="member in league.members">
-      <a href="/#!/league/{{league._id}}/members/{{member._id}}">{{member.user_id.username}}</a>
-    </li>
-  </ul>
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();" class="league">
+  <div class="league__header">
+    <h1>{{league.name}}</h1>
+  </div>
+  <div class="league__content">
+    <a href="/#!/league/{{league._id}}/members/create">
+      <button class="league__button">Add Members</button>
+    </a>
+    <a href="#!/league/{{league._id}}/members/">
+      <button class="league__button">View Members</button>
+    </a>
+  	<a href="#" data-ng-click="delete();">
+      <button class="league__button league__button--delete">Delete League</button>
+    </a>
+    <hr>
+
+    <div class="league__list league__results--league-home">
+      <h3>Results</h3>
+      <ul>
+        <li ng-repeat="member in league.members">
+          Results go here...
+        </li>
+      </ul>
+    </div>
+    <div class="league__list league__list--league-home">
+      <h3>Members</h3>
+      <ul>
+        <li ng-repeat="member in league.members">
+          <a href="/#!/league/{{league._id}}/members/{{member._id}}">{{member.user_id.username}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </section>

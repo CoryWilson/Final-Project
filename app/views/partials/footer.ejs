@@ -1,25 +1,21 @@
     </div>
     <footer class="footer" role="contentinfo">
       <div class="footer-wrapper">
-        <div class="footer-logo">
-          <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
-        </div>
           <ul>
             <li><a href="/">Home</a></li>
             <% if(!isAuthenticated) {%>
-              <li><a href="/register">Register</a></li>
-              <li><a href="/login">Login</a></li>
+              <li><a href="/register-login">Register or Login</a></li>
             <% } else { %>
               <li><a href="/profile">Profile</a></li>
-              <li><a href="/showdown">Showdown</a></li>
-              <li><a href="/standings">Standings</a></li>
+              <li><a href="#!/showdown">Leagues</a></li>
+              <li><a href="#!/standings">Weeks</a></li>
               <li><a href="/logout">Logout</a></li>
             <% } %>
           </ul>
 
           <div class="footer-secondary-links">
             <ul>
-              <li><a href="javascript:void(0)">      <span>Showdown Sports | &copy; Cory Wilson 2015</span>
+              <li><a href="/"><span>Showdown Sports | &copy; Cory Wilson 2015</span>
               </a></li>
             </ul>
           </div>

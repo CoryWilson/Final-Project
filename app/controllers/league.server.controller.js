@@ -124,7 +124,6 @@ exports.updateMember = function(req,res,next){
       res.json(member); //return updated info
     }
   });
-
 };
 
 exports.deleteMember = function(req,res,next){
