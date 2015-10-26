@@ -24,6 +24,21 @@ angular.module('league')
   		}).
   		when('/league/:leagueId/members/:memberId/edit', {
   			templateUrl: 'assets/js/app/league/views/edit-member-league.client.view.html'
-  		});
+  		}).
+      when('/league/:leagueId/pairings/create', {
+			templateUrl: 'assets/js/app/league/views/create-showdowns-league.client.view.html'
+      }).
+      when('/league/:leagueId/showdowns/:weekNum', {
+			templateUrl: 'assets/js/app/league/views/list-showdowns-league.client.view.html'
+      }).
+      when('/league/:leagueId/showdowns/:weekNum/:showdownId', {
+			templateUrl: 'assets/js/app/league/views/view-showdown-league.client.view.html'
+      }).
+      when('/league/:leagueId/showdowns/1/1', {
+			templateUrl: 'assets/js/app/league/views/view-showdown-league.client.view.html'
+      }).
+      when('/league/:leagueId/standings/', {
+      templateUrl: 'assets/js/app/league/views/view-standings-league.client.view.html'
+      })
     }
 ]);

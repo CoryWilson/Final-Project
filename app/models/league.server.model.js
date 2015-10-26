@@ -3,38 +3,57 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema;
 
-
-memberSchema = new Schema({
-  user_id: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  }
-});
-
-gameSchema = new Schema({
-  gameInfo : {
-    homeTeamName  : String,
-    homeTeamScore : Number,
-    awayTeamName  : String,
-    awayTeamScore : Number,
-    location      : String,
-    status        : String,
-    date          : Date
-  },
-  member : [
-    memberSchema,
-    {
-      pick  : Boolean,
-      value : Number
+leagueSchema = new Schema({
+  name      : String,
+  members   : [{
+    user_id: {
+      type: Schema.ObjectId,
+      ref: 'User'
     }
-  ]
-});
-
-resultsSchema = new Schema({
-
-    members : [
-      memberSchema,
-      {
+  }],
+  pairings : [{
+    pairing : [{
+      week : Number,
+      user1 : {
+        type: Schema.ObjectId,
+        ref: 'User'
+      },
+      user2 : {
+        type: Schema.ObjectId,
+        ref: 'User'
+      }
+    }]
+  }],
+  showdowns : [{
+    week       : Number,
+    showdownId : Number,
+    games   : [{
+      gameInfo : {
+        homeTeamName  : String,
+        homeTeamScore : Number,
+        awayTeamName  : String,
+        awayTeamScore : Number,
+        location      : String,
+        status        : String,
+        date          : Date
+      },
+      user_id: {
+        type: Schema.ObjectId,
+        ref: 'User'
+      },
+      pick : {
+        team  : Boolean,
+        value : Number
+      }
+    }]
+  }],
+  standings : {
+    members : [{
+      user_id: {
+        type: Schema.ObjectId,
+        ref: 'User'
+      },
+      results : {
         wins      : {
           type : Number,
           default : 0
@@ -52,18 +71,8 @@ resultsSchema = new Schema({
           default : 0
         }
       }
-    ]
+    }]
   }
-);
-
-leagueSchema = new Schema({
-  name      : String,
-  members   : [memberSchema],
-  showdowns : [{
-    week    : Number,
-    games   : [gameSchema]
-  }],
-  results   : [resultsSchema]
 });
 
 module.exports = mongoose.model('League', leagueSchema);

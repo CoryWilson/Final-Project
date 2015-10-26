@@ -22,40 +22,33 @@ $base-spacing       : $base-line-height * 1em;
 $small-spacing      : $base-spacing / 2;
 $base-z-index       : 0;
 
-// Grey-Scale Colors
-$black       : hsla(222, 11%, 18%, 1);  //#2A2D34
-$dark-gray   : hsla(0, 0%, 20%, 1);     //#333333
-$medium-gray : hsla(0, 0%, 60%, 1);     //#999999
-$light-gray  : hsla(0, 0%, 87%, 1);     //#DDDDDD
-$white       : hsla(240, 100%, 98%, 1); //#F7F7FF
-
 //Color Pallet
-$green : hsla(159, 51%, 39%, 1); //#319673
-$beige : hsla(50, 38%, 82%, 1);  //#E2DCBE
-$navy  : hsla(236, 10%, 28%, 1); //#40414F
-$gray  : hsla(0, 4%, 34%, 1);    //#5A5353
-$red   : hsla(6, 70%, 56%, 1);   //#DD5141
-$blue  : hsla(200, 63%, 48%, 1); //#2E95C9
-
-//No-Li Inspired Colors
-$nl-blue: #14ABE3; //rgba(20, 171, 227, 100)
-$nl-white: #F5F4F3; //rgba(245, 244, 243, 100)
-$nl-black: #1B2021; //rgba(27, 32, 33, 100)
-$nl-red: #F1231E; //rgba(241, 35, 30, 100)
-$nl-yellow: #FFCC33; //rgba(255, 204, 51, 100)
+$blue: #14ABE3; //rgba(20, 171, 227, 100)
+$white: #F5F4F3; //rgba(245, 244, 243, 100)
+$black: #1B2021; //rgba(27, 32, 33, 100)
+$red: #F1231E; //rgba(241, 35, 30, 100)
+$yellow: #FFCC33; //rgba(255, 204, 51, 100)
+$gray-dark: #3C3C3C; //rgba(0, 0, 24, 100)
+$gray: tint($gray-dark, 50%);
+$gray-light: tint($gray-dark, 75%);
 
 // Font Colors
-$base-font-color : $nl-black;
-$action-color    : $nl-black;
+$base-font-color : $black;
+$action-color    : $black;
 
 // Border
-$base-border-color : $nl-black;
+$base-border-color : $black;
 $base-border       : 1px solid $base-border-color;
 
 // Background Colors
-$base-background-color      : $nl-white;
+$base-background-color      : $white;
 $secondary-background-color : tint($base-border-color, 75%);
 
 // Animations
 $base-duration : 150ms;
 $base-timing   : ease;
+
+// Screen Sizes
+$small-screen  : 640px;
+$medium-screen : 960px;
+// $large-screen  : 1020px;

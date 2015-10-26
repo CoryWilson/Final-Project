@@ -1,0 +1,53 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();findShowdown();" class="league">
+  <div class="league__header">
+    <h1>Week 1 Showdown</h1>
+    <div class="showdown__header">
+      <div class="showdown__header--user">
+        <img src="" alt="">
+        <h3>Signed-In User</h3>
+      </div>
+      <div class="showdown__header--user">
+        <img src="" alt="">
+        <h3>Other User</h3>
+      </div>
+    </div>
+  </div>
+  <div class="league__content">
+    <div class="showdown__picks">
+      <h2>Picks</h2>
+      <div class="showdown__picks--user1">
+        <!-- NG-Bind Picks -->
+        <span>Points</span><span>Team</span>
+      </div>
+      <div class="showdown__picks--user2">
+        <span>Points</span><span>Team</span>
+      </div>
+    </div>
+    <div class="showdown__games">
+      <h2>Games</h2>
+      <div class="showdown__games--game">
+        <h3>Game #</h3>
+        <div class="team1">
+          <h3>Team 1 Name</h3>
+        </div>
+        <div class="team2">
+          <h3>Team 2 Name</h3>
+        </div>
+        <div class="showdown__games--details">
+          <span>Location</span>
+          <span>Date</span>
+        </div>
+      </div>
+      <div class="showdown__games--points">
+        <input type="range" min="1" max="5">
+      </div>
+    </div>
+
+  	<a href="/#!/league/{{league._id}}/members/{{member[0]._id}}/edit">
+      <button class="league__button">Edit Member</button>
+    </a>
+  	<a href="#" data-ng-click="delete();">
+      <button class="league__button league__button--delete">Delete Member</button>
+    </a>
+  </div>
+</section>

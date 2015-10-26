@@ -4,12 +4,26 @@
     text-align: center;
   }
 }
-table {
+.tables__full,
+.tables__small {
   border-collapse: collapse;
   font-feature-settings: "kern", "liga", "tnum";
   margin: $small-spacing 0;
   table-layout: fixed;
   width: 100%;
+}
+
+.tables__full {
+  display: none;
+}
+
+@include media($medium-screen){
+  .tables__small {
+    display: none;
+  }
+  .tables__full {
+    display: block;
+  }
 }
 
 th {

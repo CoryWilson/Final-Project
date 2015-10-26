@@ -4,6 +4,8 @@ angular.module('league')
   .controller('LeagueController',
     ['$scope', '$routeParams', '$location', 'League', 'Authentication', 'Users', function($scope, $routeParams, $location, League, Authentication, Users){
 
+      //===== Users =====\\
+
       $scope.findUser = function(){
         $scope.user = Authentication.get();
       };
@@ -11,6 +13,8 @@ angular.module('league')
       $scope.findAllUsers = function(){
         $scope.users = Users.query();
       };
+
+      //===== League =====\\
 
       $scope.createLeague = function(){
         var league = new League.Overview({
@@ -33,6 +37,8 @@ angular.module('league')
       $scope.findLeagues = function(){
         $scope.leagues = League.Overview.query();
       };
+
+      //===== Members =====\
 
       $scope.addMember = function(){
 
@@ -62,6 +68,38 @@ angular.module('league')
         $scope.member = League.Member.query({
           leagueId : $routeParams.leagueId,
           memberId : $routeParams.memberId
+        });
+      };
+
+      //===== Showdowns =====\\
+
+      $scope.createShowdowns = function(){
+        var pairings = new League.Pairings({
+            leagueId : $scope.league._id,
+            weeks   : this.data.weeks
+        });
+
+        //pass league Id to save function
+        pairings.$save(function(response){
+          $location.path('league/'+$scope.league._id);
+        }, function(errorRes){
+          $scope.error = errorRes.data.message;
+        });
+      };
+
+      //Find showdowns in league
+      $scope.findShowdowns = function(){
+        $scope.showdowns = League.Showdowns.query({
+          leagueId : $routeParams.leagueId,
+          weekNum  : $routeParams.weekNum
+        });
+      };
+
+      $scope.findShowdown = function(){
+        $scope.showdown = League.Showdowns.query({
+          leagueId   : $routeParams.leagueId,
+          weekNum    : $routeParams.weekNum,
+          showdownId : $routeParams.showdownId
         });
       };
 

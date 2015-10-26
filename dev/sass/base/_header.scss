@@ -5,9 +5,9 @@ header.navigation {
   $dark-gray: #333 !default;
   $large-screen: em(860) !default;
   $navigation-padding: 1em;
-  $navigation-background: $nl-white;
-  $navigation-color: $nl-black;
-  $navigation-color-hover: $nl-yellow;
+  $navigation-background: $white;
+  $navigation-color: $black;
+  $navigation-color-hover: $yellow;
   $navigation-height: 60px;
   $navigation-nav-button-background: $action-color;
   $navigation-nav-button-background-hover: lighten($navigation-background, 10%);
@@ -20,7 +20,7 @@ header.navigation {
   $horizontal-bar-mode: $large-screen;
 
   background-color: $navigation-background;
-  border-bottom: 3px solid $nl-black;
+  border-bottom: 3px solid $black;
   min-height: $navigation-height;
   width: 100%;
   z-index: 999;
@@ -42,7 +42,7 @@ header.navigation {
     padding-right: 2em;
 
     h1 {
-      color: $nl-black;
+      color: $black;
       font-size: $small-heading-font-size;
       max-height: $navigation-height;
       padding: 0.2em 0;
@@ -51,7 +51,7 @@ header.navigation {
     img {
       max-height: $navigation-height;
       padding: 0.8em 0;
-      background: $nl-red;
+      background: $red;
     }
   }
 

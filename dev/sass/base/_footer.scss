@@ -3,20 +3,30 @@
   $action-color: #477DCA !default;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
-  $footer-background: $nl-white;//desaturate(darken($action-color, 20%), 30%);
-  $footer-color: $nl-black;
+  $footer-background: $white;//desaturate(darken($action-color, 20%), 30%);
+  $footer-color: $black;
   $footer-link-color: $footer-color;
   $footer-disclaimer-color: transparentize($footer-color, 0.5);
 
   background: $footer-background;
   padding: $base-spacing;
   width: 100%;
-  display: inline-block;
+  display: none;
   margin-bottom: 0;
-  border-top: 3px solid $nl-black;
+  border-top: 3px solid $black;
+
+
+  @include media($medium-screen) {
+    display: inline-block;
+  }
+
 
   .footer-wrapper {
     @include outer-container;
+    display: none;
+    @include media($medium-screen) {
+      display: block;
+    }
   }
 
   .footer-logo {
@@ -25,7 +35,7 @@
 
     img {
       height: 1.6em;
-      background: $nl-red;
+      background: $red;
     }
 
     @include media($large-screen) {
@@ -66,7 +76,7 @@
 
     &:focus,
     &:hover {
-      color: $nl-yellow;
+      color: $yellow;
     }
   }
 
@@ -114,4 +124,5 @@
       }
     }
   }
+
 }

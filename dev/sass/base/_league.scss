@@ -2,38 +2,38 @@
 
 .league {
   @include outer-container;
-  margin: 3em auto;
-  width: 95%;
-  background: $nl-white;
-  border-top: 3px solid $nl-black;
-  border-right: 3px solid $nl-black;
-  border-bottom: 3px solid $nl-black;
-  border-left: 3px solid $nl-black;
+  margin: 2.2em auto;
+  padding: 1em;
+  width: 98%;
+  background: $white;
+  border-top: 3px solid $black;
+  border-right: 3px solid $black;
+  border-bottom: 3px solid $black;
+  border-left: 3px solid $black;
 }
 
 .league__header {
-  padding: 1em;
   h1 {
+    font-size: $small-heading-font-size;
     text-align: center;
   }
 }
 
 .league__content {
-  margin: 1em;
   h3 {
     text-align: center;
   }
 }
 
 .league__list {
-  font-size: $small-heading-font-size;
+  font-size: $base-font-size;
   ul {
     li {
       margin: .5em 0;
       padding: 0;
       a {
         &:hover {
-          color: $nl-yellow;
+          color: $yellow;
         }
       }
     }
@@ -41,19 +41,20 @@
 }
 
 .league__results--league-home {
-  @include span-columns(1 of 2);
+  width: 100%;
 }
 .league__list--league-home {
-  @include span-columns(1 of 2);
+  width: 100%;
 }
 
 .league__button {
   display: block;
-  margin: 2em auto;
-  width: 60%;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
 }
 .league__button--delete {
   &:hover {
-    background: $nl-red;
+    background: $red;
   }
 }

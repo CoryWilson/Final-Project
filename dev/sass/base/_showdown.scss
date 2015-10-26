@@ -23,7 +23,7 @@
   @include flex-basis(15em);
   @include flex-grow(1);
   @include transition (all 0.2s ease-in-out);
-  background-color: $nl-white;
+  background-color: $white;
   border-radius: $base-border-radius;
   border: $card-border;
   box-shadow: 0 2px 4px darken($base-background-color, 10%);

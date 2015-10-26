@@ -11,29 +11,27 @@
   $tab-inactive-color: $base-background-color;
   $tab-inactive-hover-color: silver;
   $tab-mode: $medium-screen;
+  $full-mode: ;
 
   @include clearfix;
   @include outer-container;
-  background: $nl-white;
-  width: 80%;
-  border: 3px solid $nl-black;
-  margin: 50px auto;
+  background: $white;
+  width: 95%;
+  border: 3px solid $black;
+  margin: 5em auto;
   line-height: 1.5;
   padding: 0;
 
   button {
+    display: block;
+    margin: 0 auto;
     width: 100%;
-    @include media($tab-mode){
-      display: block;
-      margin: 0 auto;
-      width: 50%;
-    }
   }
 
-  ::-webkit-input-placeholder { color: tint($nl-black, 10%);}
-  :-moz-placeholder { color: tint($nl-black, 10%);}
-  ::-moz-placeholder {color: tint($nl-black, 10%);}
-  :-ms-input-placeholder {color: tint($nl-black, 10%);}
+  ::-webkit-input-placeholder { color: tint($black, 10%);}
+  :-moz-placeholder { color: tint($black, 10%);}
+  ::-moz-placeholder {color: tint($black, 10%);}
+  :-ms-input-placeholder {color: tint($black, 10%);}
 
   input[type=text],
   input[type=email],
@@ -43,7 +41,6 @@
 
   div.tab-header-and-content {
     list-style: none;
-
     @include media($tab-mode) {
       display: inline;
     }
@@ -54,8 +51,7 @@
     display: block;
     padding: ($base-spacing / 2) $gutter;
     text-decoration: none;
-
-    border-top: 3px solid $nl-black;
+    border-top: 3px solid $black;
 
     @include media($tab-mode) {
       @include inline-block;
@@ -63,7 +59,8 @@
     }
 
     &:hover {
-      color: $nl-yellow;
+      color: $black;
+      background: $yellow;
     }
 
     &:focus {
@@ -71,8 +68,8 @@
     }
 
     &.is-active {
-      background: $nl-black;
-      color: $nl-white;
+      background: $black;
+      color: $white;
 
       @include media($tab-mode) {
         border-bottom-color: $tab-active-background;
@@ -92,19 +89,12 @@
     }
   }
 
-  .twitter,
-  .facebook {
-    display: block;
-    float: left;
-    width: 50%;
-  }
 
-  i.icon {
-    font-size: 15em;
-    color: $nl-black;
-    text-align: center;
-    &:hover {
-      color: $nl-yellow;
+  .login__button--twitter,
+  .login__button--facebook {
+    margin: 1em auto;
+    i {
+      margin-left: .2em;
     }
   }
 

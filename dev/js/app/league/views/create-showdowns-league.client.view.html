@@ -1,0 +1,29 @@
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();" class="league">
+    <div class="league__header">
+      <h1>Create League Pairings</h1>
+    </div>
+    <div class="league__content">
+      <form class="" ng-submit="createShowdowns()" novalidate>
+        <label for="Weeks">Weeks</label>
+        <select name="weeks" ng-model="data.weeks">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+
+          <button type="submit" name="button" class="league__button">
+          Create League Pairings</button>
+          <div data-ng-show="error">
+            <strong data-ng-bind="error"></strong>
+          </div>
+        </div>
+      </form>
+    </div>
+</section>

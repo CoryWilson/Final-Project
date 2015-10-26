@@ -1,26 +1,49 @@
 <body>
-  <header class="navigation" role="banner">
-    <div class="navigation-wrapper">
-      <a href="/" class="logo">
+  <header role="banner">
+    <div class="header__logo">
+      <a href="/" class="nav-logo">
         <h1>Showdown Sports</h1>
-        <%# <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">%>
       </a>
-      <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
-        <i class="icon ion-navicon"></i>
-      </a>
-      <nav role="navigation">
-        <ul id="js-navigation-menu" class="navigation-menu show">
-          <li class="nav-link"><a href="/">Home</a></li>
-          <% if(!isAuthenticated) {%>
-            <li class="nav-link"><a href="/register-login">Register or Login</a></li>
-          <% } else { %>
-            <li class="nav-link"><a href="/profile">Profile</a></li>
-            <li class="nav-link"><a href="/#!/league">Leagues</a></li>
-            <li class="nav-link"><a href="/#!/weeks">Weeks</a></li>
-            <li class="nav-link"><a href="/logout">Logout</a></li>
-          <% } %>
-        </ul>
-      </nav>
     </div>
+    <nav role="navigation" class="nav-main">
+      <ul>
+        <% if(!isAuthenticated) {%>
+          <li>
+            <a href="/">
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="/register-login">
+              <span>Register/Login</span>
+            </a>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="/#!/league/">
+              <i class="icon ion-trophy"></i>
+              <span>Showdown</span>
+            </a></li>
+          <li>
+            <a href="/#!/league">
+              <i class="icon ion-ios-list"></i>
+              <span>League</span>
+            </a>
+          </li>
+          <li>
+            <a href="/profile">
+              <i class="icon ion-person"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="/logout">
+              <i class="icon ion-log-out"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
   </header>
   <div class="page-wrap">
