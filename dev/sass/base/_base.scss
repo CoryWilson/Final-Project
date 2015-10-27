@@ -25,8 +25,8 @@ body {
   $base-border-radius: 3px !default;
   $action-color: #477DCA !default;
   $large-screen: em(860) !default;
-  $hero-background-top: $dark-gray;
-  $hero-background-bottom: $medium-gray;
+  $hero-background-top: $gray-dark;
+  $hero-background-bottom: $gray;
   $hero-color: $white;
   $gradient-angle: 10deg;
   $hero-image: '../../assets/images/stock/stands.jpeg';
@@ -81,8 +81,8 @@ body {
 .bullets {
   $base-line-height: 1.5em !default;
   $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $base-font-color: $dark-gray !default;
+  $gray-dark: #333 !default;
+  $base-font-color: $gray-dark !default;
   $icon-bullet-size: 3.5em;
 
   @include outer-container;
