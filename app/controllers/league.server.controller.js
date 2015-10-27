@@ -2,6 +2,7 @@
 
 var League   = require('mongoose').model('League'),
     User     = require('mongoose').model('User'),
+    Pairings = require('mongoose').model('Pairings'),
     passport = require('passport');
 
 var getErrorMessage = function(err){
@@ -168,7 +169,7 @@ exports.createShowdowns = function(req, res, next){
                   //        ^^ if the first value is the same as name1,
                   //           get the last value, otherwise get the first
               var weekNum = i + 1;
-              league.pairings.push({pairing:[{week:weekNum,user1:member1,user2:member2}]}); //save pairing information into pairings array
+              league.pairings.push({week:weekNum,user1:member1,user2:member2}); //save pairing information into pairings array
             }
           }
         }
@@ -188,29 +189,32 @@ exports.createShowdowns = function(req, res, next){
 // /league/:leagueId/showdowns/1/1
 
 exports.readWeek = function(req, res, next){
-  res.json(req.league.showdowns.week);
+  console.log(req.league);
+  res.json(req.league);
 };
 
 exports.getShowdowns = function(req, res, next){
-  res.json(req.league.showdowns);
+  res.json(req.league);
 };
 
 exports.getWeekNum = function(req, res, next, weekNum){
-  console.log(weekNum);
-  League.find(
-      { '_id': req.league._id },
-      { 'showdowns': { $elemMatch: { 'week': weekNum } } }
-    )
-    .exec(function(err, week){
-      console.log(week);
+  League.aggregate([
+  	{$unwind: "$pairings"},
+  	{$match:
+  	   { $and: [
+  	     {"_id" : req.league._id} ,
+  	     {"pairings.week" : 1}
+  	  ]}
+  	},
+  	{$project: {"pairings": 1}}
+  ], function(err, results){
       if(err){
         return next(err);
-      } if(!week) {
-        return next(new Error('Failed to load member '+ week._id));
+      } if(!results) {
+        return next(new Error('Failed to load week '+ results._id));
       } else {
-        req.league = week;
+        req.league = results;
         next();
-
       }
     });
 };

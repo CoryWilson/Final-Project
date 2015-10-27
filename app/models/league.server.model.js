@@ -12,17 +12,15 @@ leagueSchema = new Schema({
     }
   }],
   pairings : [{
-    pairing : [{
-      week : Number,
-      user1 : {
-        type: Schema.ObjectId,
-        ref: 'User'
-      },
-      user2 : {
-        type: Schema.ObjectId,
-        ref: 'User'
-      }
-    }]
+    week : Number,
+    user1 : {
+      type: Schema.ObjectId,
+      ref: 'User'
+    },
+    user2 : {
+      type: Schema.ObjectId,
+      ref: 'User'
+    }
   }],
   showdowns : [{
     week       : Number,
