@@ -9,6 +9,9 @@
     <a href="#!/league/{{league._id}}/members/">
       <button class="league__button">View Members</button>
     </a>
+    <a href="#!/league/{{league._id}}/showdowns/:weekId/:showdownId">
+      <button class="league__button">View Showdowns</button>
+    </a>
     <a href="#!/league/{{league._id}}/pairings/create">
       <button class="league__button">Create Pairings</button>
     </a>
@@ -16,6 +19,17 @@
       <button class="league__button league__button--delete">Delete League</button>
     </a>
     <hr>
+    <h3>Showdowns</h3>
+    <ul>
+      <li ng-repeat="pairing in league.pairings">
+        <a href="#!/league/{{league._id}}/showdowns/{{pairing.week}}/{{pairing._id}}">
+        Week {{pairing.week}} <br>
+        P1: {{pairing.user1}} <br>
+        P2: {{pairing.user2}}
+        </a>
+        <hr>
+      </li>
+    </ul>
     <div class="league__list league__results--league-home">
       <h3>Standings</h3>
       <table class="tables__small">

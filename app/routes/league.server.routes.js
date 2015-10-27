@@ -40,17 +40,17 @@ module.exports = function(app,passport) {
   // app.route('/league/:leagueId/showdowns')
   //    .get(leagueController.getShowdowns);
 
-  app.post('/league/:leagueId/pairings',leagueController.createShowdowns);
+  app.post('/league/:leagueId/showdowns',leagueController.createShowdowns);
 
   app.route('/league/:leagueId/showdowns/:weekNum')
-     .get(leagueController.readWeek);
+     .get(leagueController.readWeeklyShowdowns);
 
   app.route('/league/:leagueId/showdowns/:weekNum/:showdownId')
     .get(leagueController.readShowdown)
     .put(leagueController.updateShowdown);
 
   app.param('weekNum',leagueController.getWeekNum);
-  app.param('showdownId',leagueController.getShowdownById);
+  app.param('showdownNum',leagueController.getShowdownByNum);
 
   //============================\\
   //===== League Standings =====\\

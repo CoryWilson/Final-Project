@@ -2,7 +2,6 @@
 
 var League   = require('mongoose').model('League'),
     User     = require('mongoose').model('User'),
-    Pairings = require('mongoose').model('Pairings'),
     passport = require('passport');
 
 var getErrorMessage = function(err){
@@ -146,30 +145,29 @@ exports.getMembers = function(req, res, next){
 //============================\\
 exports.createShowdowns = function(req, res, next){
 
-  League.findOne(
-    {'_id':req.league._id})
+  League.findOne({'_id':req.league._id}) //Find league by id
     .exec(function(err,league){
       if(err){
-        return next(err);
+        return next(err); //If you can't find the league return an error
       } else {
-        //league.members the members array
         for(i = 0; i < req.body.weeks; i++){ //loop through amount of weeks
           if (league.members.length % 2 !== 0) {
             alert("You must have an even number of members. You currently have " + league.members.length + " members.");
           } else {
-            var arr1 = league.members.slice(), // copy array
-                arr2 = league.members.slice(); // copy array again
+            var arr1 = league.members.slice(),
+                arr2 = league.members.slice();
 
             arr1.sort(function() { return 0.5 - Math.random();}); // shuffle arrays
             arr2.sort(function() { return 0.5 - Math.random();});
 
-            while (arr1.length) {
-              var member1 = arr1.pop(), // get the last value of arr1
+            var halfArr1 = arr1.length/2;
+
+            for(j = 0; j < halfArr1; j++) {
+              var member1 = arr1.pop(),
                   member2 = arr2[0] == member1 ? arr2.pop() : arr2.shift();
-                  //        ^^ if the first value is the same as name1,
-                  //           get the last value, otherwise get the first
+
               var weekNum = i + 1;
-              league.pairings.push({week:weekNum,user1:member1,user2:member2}); //save pairing information into pairings array
+              league.showdowns.push({week:weekNum,showdownNum:j,user1:member1,user2:member2}); //save pairing information into showdowns array
             }
           }
         }
@@ -188,26 +186,23 @@ exports.createShowdowns = function(req, res, next){
 };
 // /league/:leagueId/showdowns/1/1
 
-exports.readWeek = function(req, res, next){
-  console.log(req.league);
+//returns the week's showdowns in json form
+exports.readWeeklyShowdowns = function(req, res){
   res.json(req.league);
 };
 
-exports.getShowdowns = function(req, res, next){
-  res.json(req.league);
-};
-
+//Finds showdowns for week based on week number parameter
 exports.getWeekNum = function(req, res, next, weekNum){
   League.aggregate([
-  	{$unwind: "$pairings"},
+  	{$unwind: "$showdowns"},
   	{$match:
   	   { $and: [
   	     {"_id" : req.league._id} ,
-  	     {"pairings.week" : 1}
+  	     {"showdowns.week" : 1} //adding weekNum param returns an empty array
   	  ]}
   	},
-  	{$project: {"pairings": 1}}
-  ], function(err, results){
+  	{$project: {"showdowns": 1}}
+  ],function(err, results){
       if(err){
         return next(err);
       } if(!results) {
@@ -219,10 +214,10 @@ exports.getWeekNum = function(req, res, next, weekNum){
     });
 };
 
-exports.getShowdownById = function(req, res, next, showdownId){
+exports.getShowdownByNum = function(req, res, next, showdownNum){
+  console.log(showdownNum);
   League.find(
-    { '_id': req.league._id },
-    { 'showdowns': { $elemMatch: {'showdownId': showdownId } } }
+    { 'showdowns': { $elemMatch: { 'showdownNum': showdownNum } } }
   )
     .exec(function(err, showdown){
       if(err){
@@ -237,7 +232,7 @@ exports.getShowdownById = function(req, res, next, showdownId){
 };
 
 exports.readShowdown = function(req, res, next){
-  res.json(req.league.showdowns);
+  res.json(req.league);
 };
 
 exports.updateShowdown = function(req, res, next){

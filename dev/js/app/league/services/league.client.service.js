@@ -12,7 +12,7 @@ angular.module('league')
                      { leagueId : '@leagueId', memberId : '@memberId'},
                      { update : { method : 'PUT'} }
                     ),
-        Pairings    : $resource('/league/:leagueId/pairings',
+        Pairings    : $resource('/league/:leagueId/showdowns',
                      { leagueId : '@leagueId'},
                      { update : { method : 'PUT'} }
                     ),
@@ -23,6 +23,6 @@ angular.module('league')
         Standings : $resource('/league/:leagueId/standings/',
                      { leagueId : '@leagueId' }
                     )
-      }
+      };
     }
   ]);

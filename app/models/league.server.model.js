@@ -11,8 +11,21 @@ leagueSchema = new Schema({
       ref: 'User'
     }
   }],
-  pairings : [{
-    week : Number,
+  // pairings : [{
+  //   week : Number,
+  //   showdownNum : Number,
+  //   user1 : {
+  //     type: Schema.ObjectId,
+  //     ref: 'User'
+  //   },
+  //   user2 : {
+  //     type: Schema.ObjectId,
+  //     ref: 'User'
+  //   }
+  // }],
+  showdowns : [{
+    week        : Number,
+    showdownNum : Number,
     user1 : {
       type: Schema.ObjectId,
       ref: 'User'
@@ -20,11 +33,7 @@ leagueSchema = new Schema({
     user2 : {
       type: Schema.ObjectId,
       ref: 'User'
-    }
-  }],
-  showdowns : [{
-    week       : Number,
-    showdownId : Number,
+    },
     games   : [{
       gameInfo : {
         homeTeamName  : String,
@@ -35,7 +44,11 @@ leagueSchema = new Schema({
         status        : String,
         date          : Date
       },
-      user_id: {
+      user1: {
+        type: Schema.ObjectId,
+        ref: 'User'
+      },
+      user2: {
         type: Schema.ObjectId,
         ref: 'User'
       },
