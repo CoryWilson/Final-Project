@@ -193,12 +193,13 @@ exports.readWeeklyShowdowns = function(req, res){
 
 //Finds showdowns for week based on week number parameter
 exports.getWeekNum = function(req, res, next, weekNum){
+  var numberfiedWeek = Number(weekNum);
   League.aggregate([
   	{$unwind: "$showdowns"},
   	{$match:
   	   { $and: [
   	     {"_id" : req.league._id} ,
-  	     {"showdowns.week" : 1} //adding weekNum param returns an empty array
+  	     {"showdowns.week" : numberfiedWeek} //adding weekNum param returns an empty array
   	  ]}
   	},
   	{$project: {"showdowns": 1}}
@@ -216,9 +217,7 @@ exports.getWeekNum = function(req, res, next, weekNum){
 
 exports.getShowdownByNum = function(req, res, next, showdownNum){
   console.log(showdownNum);
-  League.find(
-    { 'showdowns': { $elemMatch: { 'showdownNum': showdownNum } } }
-  )
+  League.findOne({})
     .exec(function(err, showdown){
       if(err){
         return next(err);
