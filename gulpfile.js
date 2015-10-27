@@ -171,4 +171,6 @@ gulp.task('browser-sync', ['nodemon'], function(){
 
 gulp.task('default', ['bower','ng-scripts','ng-html', 'mongod','browser-sync']);
 
+//build all assets without watch and plug that into default
+
 gulp.task('assets', ['bower','fonts','images','styles','scripts','ng-scripts']);

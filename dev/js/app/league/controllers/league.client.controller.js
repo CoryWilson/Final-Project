@@ -99,7 +99,7 @@ angular.module('league')
         $scope.showdown = League.Showdowns.query({
           leagueId   : $routeParams.leagueId,
           weekNum    : $routeParams.weekNum,
-          showdownId : $routeParams.showdownId
+          showdownId : $routeParams.showdownNum
         });
       };
 
