@@ -19,11 +19,11 @@ module.exports = function(app,passport) {
   // User Authenticate routes
   //------------------------------------------
 
-  app.get('/register-login', usersController.renderRegisterLogin);
+  //app.get('/register-login', usersController.renderRegisterLogin);
 
   //Local Register Route
   app.route('/register')
-		//.get(usersController.renderRegister)
+		.get(usersController.renderRegister)
 		.post(passport.authenticate('local-register', {
       successRedirect : '/',
       failureRedirect : '/register',
@@ -32,7 +32,7 @@ module.exports = function(app,passport) {
 
   //Local Login Route
 	app.route('/login')
-  	//.get(usersController.renderLogin)
+  	.get(usersController.renderLogin)
   	.post(passport.authenticate('local-login', {
   		successRedirect: '/',
   		failureRedirect: '/login',

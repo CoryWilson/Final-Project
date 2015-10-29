@@ -45,7 +45,7 @@ module.exports = function(app,passport) {
   app.route('/league/:leagueId/showdowns/:weekNum')
      .get(leagueController.readWeeklyShowdowns);
 
-  app.route('/league/:leagueId/showdowns/:weekNum/:showdownId')
+  app.route('/league/:leagueId/showdowns/:weekNum/:showdownNum')
     .get(leagueController.readShowdown)
     .put(leagueController.updateShowdown);
 

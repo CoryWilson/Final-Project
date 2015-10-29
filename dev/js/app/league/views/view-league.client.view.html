@@ -22,7 +22,7 @@
     <h3>Showdowns</h3>
     <ul>
       <li ng-repeat="pairing in league.pairings">
-        <a href="#!/league/{{league._id}}/showdowns/{{pairing.week}}/{{pairing._id}}">
+        <a href="#!/league/{{league._id}}/showdowns/{{pairing.week}}/{{pairing.showdownNum}}">
         Week {{pairing.week}} <br>
         P1: {{pairing.user1}} <br>
         P2: {{pairing.user2}}

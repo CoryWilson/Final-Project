@@ -193,13 +193,13 @@ exports.readWeeklyShowdowns = function(req, res){
 
 //Finds showdowns for week based on week number parameter
 exports.getWeekNum = function(req, res, next, weekNum){
-  var numberfiedWeek = Number(weekNum);
+  var weekNumber = Number(weekNum);
   League.aggregate([
   	{$unwind: "$showdowns"},
   	{$match:
   	   { $and: [
   	     {"_id" : req.league._id} ,
-  	     {"showdowns.week" : numberfiedWeek} //adding weekNum param returns an empty array
+  	     {"showdowns.week" : weekNumber} //adding weekNum param returns an empty array
   	  ]}
   	},
   	{$project: {"showdowns": 1}}
@@ -209,25 +209,23 @@ exports.getWeekNum = function(req, res, next, weekNum){
       } if(!results) {
         return next(new Error('Failed to load week '+ results._id));
       } else {
+        League.populate(
+          results,
+          {path:"showdowns.user1 showdowns.user2"},
+          function(error, callback){
+            console.log(callback);
+          });
         req.league = results;
         next();
       }
     });
+
 };
 
 exports.getShowdownByNum = function(req, res, next, showdownNum){
-  console.log(showdownNum);
-  League.findOne({})
-    .exec(function(err, showdown){
-      if(err){
-        return next(err);
-      } if(!showdown) {
-        return next(new Error('Failed to load member '+ showdown._id));
-      } else {
-        req.league = showdown;
-        next();
-      }
-    });
+  var showdownNumber = Number(showdownNum);
+  var showdown = req.league[showdownNum];
+  res.json(showdown);
 };
 
 exports.readShowdown = function(req, res, next){

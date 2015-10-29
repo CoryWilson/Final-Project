@@ -1,51 +1,62 @@
 <body>
   <header role="banner">
-    <div class="header__logo">
-      <a href="/" class="nav-logo">
-        <h1>Showdown Sports</h1>
-      </a>
+    <div class="header__wrapper">
+      <div class="header__logo">
+        <a href="/" class="header__logo--link">
+          <h1>Showdown Sports</h1>
+        </a>
+      </div>
+      <div class="header__nav--mobile">
+        <i class="icon ion-navicon"></i>
+      </div>
+      <nav role="navigation" class="header__nav">
+        <ul>
+          <% if(!isAuthenticated) {%>
+            <li>
+              <a href="/">
+                <i class="icon ion-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="/register">
+                <i class="icon ion-ios-plus-outline"></i>
+                <span>Register</span>
+              </a>
+            </li>
+            <li>
+              <a href="/login">
+                <i class="icon ion-log-in"></i>
+                <span>Log In</span>
+              </a>
+            </li>
+          <% } else { %>
+            <li>
+              <a href="/#!/league/">
+                <i class="icon ion-trophy"></i>
+                <span>Showdown</span>
+              </a></li>
+            <li>
+              <a href="/#!/league">
+                <i class="icon ion-ios-list"></i>
+                <span>League</span>
+              </a>
+            </li>
+            <li>
+              <a href="/profile">
+                <i class="icon ion-person"></i>
+                <span>Profile</span>
+              </a>
+            </li>
+            <li>
+              <a href="/logout">
+                <i class="icon ion-log-out"></i>
+                <span>Logout</span>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+      </nav>
     </div>
-    <nav role="navigation" class="nav-main">
-      <ul>
-        <% if(!isAuthenticated) {%>
-          <li>
-            <a href="/">
-              <i class="icon ion-home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="/register-login">
-              <i class="icon ion-log-in"></i>
-              <span>Register/Login</span>
-            </a>
-          </li>
-        <% } else { %>
-          <li>
-            <a href="/#!/league/">
-              <i class="icon ion-trophy"></i>
-              <span>Showdown</span>
-            </a></li>
-          <li>
-            <a href="/#!/league">
-              <i class="icon ion-ios-list"></i>
-              <span>League</span>
-            </a>
-          </li>
-          <li>
-            <a href="/profile">
-              <i class="icon ion-person"></i>
-              <span>Profile</span>
-            </a>
-          </li>
-          <li>
-            <a href="/logout">
-              <i class="icon ion-log-out"></i>
-              <span>Logout</span>
-            </a>
-          </li>
-        <% } %>
-      </ul>
-    </nav>
   </header>
   <div class="page-wrap">

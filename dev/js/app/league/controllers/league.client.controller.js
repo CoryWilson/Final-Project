@@ -89,14 +89,14 @@ angular.module('league')
 
       //Find showdowns in league
       $scope.findShowdowns = function(){
-        $scope.showdowns = League.Showdowns.query({
+        $scope.showdowns = League.Showdown.query({
           leagueId : $routeParams.leagueId,
           weekNum  : $routeParams.weekNum
         });
       };
 
       $scope.findShowdown = function(){
-        $scope.showdown = League.Showdowns.query({
+        $scope.showdown = League.Showdown.query({
           leagueId   : $routeParams.leagueId,
           weekNum    : $routeParams.weekNum,
           showdownId : $routeParams.showdownNum

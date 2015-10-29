@@ -10,8 +10,6 @@ module.exports = function() {
   require('../app/models/league.server.model');
   require('../app/models/week.server.model');
   require('../app/models/pairings.server.model');
-  require('../app/models/standings.server.model');
-  require('../app/models/showdown.server.model');
 
   return db;
 };
