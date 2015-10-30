@@ -1,18 +1,7 @@
 //File Name: ./app/controllers/league.server.controller.js
 
 var League   = require('mongoose').model('League'),
-    User     = require('mongoose').model('User'),
-    passport = require('passport');
-
-var getErrorMessage = function(err){
-  if(err.errors){
-    for(var errName in err.errors){
-      if(err.errors[errName].message) return err.errors[errName].message;
-    }
-  } else {
-    return 'Unknown server error';
-  }
-};
+    User     = require('mongoose').model('User');
 
 //===========================\\
 //===== League Overview =====\\
@@ -135,7 +124,7 @@ exports.deleteMember = function(req, res, next){
   });
 };
 
-exports.getMembers = function(req, res, next){
+exports.getMembers = function(req, res){
   res.json(req.league.members);
 };
 
@@ -150,9 +139,9 @@ exports.createShowdowns = function(req, res, next){
       if(err){
         return next(err); //If you can't find the league return an error
       } else {
-        for(i = 0; i < req.body.weeks; i++){ //loop through amount of weeks
+        for(var i = 0; i < req.body.weeks; i++){ //loop through amount of weeks
           if (league.members.length % 2 !== 0) {
-            alert("You must have an even number of members. You currently have " + league.members.length + " members.");
+            console.log("You must have an even number of members. You currently have " + league.members.length + " members.");
           } else {
             var arr1 = league.members.slice(),
                 arr2 = league.members.slice();
@@ -162,9 +151,9 @@ exports.createShowdowns = function(req, res, next){
 
             var halfArr1 = arr1.length/2;
 
-            for(j = 0; j < halfArr1; j++) {
+            for(var j = 0; j < halfArr1; j++) {
               var member1 = arr1.pop(),
-                  member2 = arr2[0] == member1 ? arr2.pop() : arr2.shift();
+                  member2 = arr2[0] === member1 ? arr2.pop() : arr2.shift();
 
               var weekNum = i + 1;
               league.showdowns.push({week:weekNum,showdownNum:j,competitors:[member1,member2]}); //save pairing information into showdowns array
@@ -225,11 +214,11 @@ exports.getWeekNum = function(req, res, next, weekNum){
 
 exports.getShowdownByNum = function(req, res, next, showdownNum){
   var showdownNumber = Number(showdownNum);
-  var showdown = req.league[showdownNum];
+  var showdown = req.league[showdownNumber];
   res.json(showdown);
 };
 
-exports.readShowdown = function(req, res, next){
+exports.readShowdown = function(req, res){
   res.json(req.league);
 };
 
@@ -247,7 +236,7 @@ exports.updateShowdown = function(req, res, next){
 //============================\\
 //===== League Standings =====\\
 //============================\\
-exports.readStandings = function(req, res, next){
+exports.readStandings = function(req, res){
   res.json(req.league.standings);
 };
 

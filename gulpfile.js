@@ -6,8 +6,6 @@ var gulp         = require('gulp'),
     buffer       = require('vinyl-buffer'),
     childProcess = require('child_process'),
     del          = require('del'),
-    eventStream  = require('event-stream'),
-    gZip         = require('gulp-gzip'),
     gUtil        = require('gulp-util'),
     minifyCss    = require('gulp-minify-css'),
     nodemon      = require('gulp-nodemon'),
@@ -17,7 +15,6 @@ var gulp         = require('gulp'),
     sass         = require('gulp-sass'),
     source       = require('vinyl-source-stream'),
     sourcemaps   = require('gulp-sourcemaps'),
-    transform    = require('vinyl-transform'),
     uglify       = require('gulp-uglify'),
     watchify     = require('watchify');
 
@@ -122,7 +119,7 @@ gulp.task('nodemon', function (cb) {
 
 /* Startup the app server */
 gulp.task('mongod', function(){
-  childProcess.exec('mongod', function(err,stdout,stderr){
+  childProcess.exec('mongod', function(err,stdout){
     console.log(stdout);
   });
 });

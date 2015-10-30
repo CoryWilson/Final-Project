@@ -3,7 +3,9 @@ var Week = require('mongoose').model('Week');
 var getErrorMessage = function(err){
   if(err.errors){
     for(var errName in err.errors){
-      if(err.errors[errName].message) return err.errors[errName].message;
+      if(err.errors[errName].message) {
+        return err.errors[errName].message;
+      }
     }
   } else {
     return 'Unknown server error';
@@ -46,12 +48,16 @@ exports.weekById = function(req, res, next, id){
   Week.findById(id)
     .populate('creator','username')
     .exec(function(err, week){
-      if(err)
+      if(err) {
         return next(err);
-      if(!week)
+      }
+      if(!week) {
         return next(new Error('Failed to load week '+id));
+      }
+      else {
         req.week = week;
         next();
+      }
     });
 };
 
