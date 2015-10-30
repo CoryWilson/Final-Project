@@ -1,7 +1,6 @@
 //File Name: ./app/routes/users.server.routes.js
 
-var usersController    = require('../controllers/users.server.controller.js'),
-    passport = require('passport');
+var usersController    = require('../controllers/users.server.controller.js');
 
 module.exports = function(app,passport) {
 

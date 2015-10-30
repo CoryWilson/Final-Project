@@ -34,12 +34,12 @@ var config = {
 };
 
 /* Clean Public Folder */
-gulp.task('clean:public', function(){
+gulp.task('clean:public', function(finished){
   return del([
     './public/assets/css/*',
     './public/assets/images/**/*',
     './public/assets/js/**/**/**/*'
-  ]);
+  ], finished);
 });
 
 /* Bower */

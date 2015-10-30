@@ -71,11 +71,3 @@ leagueSchema = new Schema({
 });
 
 module.exports = mongoose.model('League', leagueSchema);
-
-
-//bake custom error handling into the models
-
-//flash message figure that out
-//security
-//naming conventions for sass variables
-//naming conventions for breakpoints like mobile - does that mean landscape or portrait?
