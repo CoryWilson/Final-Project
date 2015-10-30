@@ -167,7 +167,7 @@ exports.createShowdowns = function(req, res, next){
                   member2 = arr2[0] == member1 ? arr2.pop() : arr2.shift();
 
               var weekNum = i + 1;
-              league.showdowns.push({week:weekNum,showdownNum:j,user1:member1,user2:member2}); //save pairing information into showdowns array
+              league.showdowns.push({week:weekNum,showdownNum:j,competitors:[member1,member2]}); //save pairing information into showdowns array
             }
           }
         }
@@ -211,12 +211,13 @@ exports.getWeekNum = function(req, res, next, weekNum){
       } else {
         League.populate(
           results,
-          {path:"showdowns.user1 showdowns.user2"},
+          {path:"showdowns.competitors.user_id"},
           function(error, callback){
             console.log(callback);
+            req.league = callback;
+            next();
           });
-        req.league = results;
-        next();
+
       }
     });
 

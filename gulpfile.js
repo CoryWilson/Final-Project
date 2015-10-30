@@ -5,6 +5,7 @@ var gulp         = require('gulp'),
     bower        = require('gulp-bower'),
     buffer       = require('vinyl-buffer'),
     childProcess = require('child_process'),
+    del          = require('del'),
     eventStream  = require('event-stream'),
     gZip         = require('gulp-gzip'),
     gUtil        = require('gulp-util'),
@@ -31,6 +32,15 @@ var config = {
   routesPath      : './app/routes',
   viewsPath       : './app/views'
 };
+
+/* Clean Public Folder */
+gulp.task('clean:public', function(){
+  return del([
+    './public/assets/css/*',
+    './public/assets/images/**/*',
+    './public/assets/js/**/**/**/*'
+  ]);
+});
 
 /* Bower */
 gulp.task('bower', function(){
@@ -69,10 +79,6 @@ gulp.task('script-watch', ['scripts'], reload);
 gulp.task('ng-scripts', function(){
   gulp.src(config.jsPath+'/app/**/**/*.js')
   .pipe(sourcemaps.init())
-    //.pipe(uglify())
-    // .pipe(rename(function(path){
-    //   path.extname = ".min.js";
-    // }))
   .pipe(sourcemaps.write('../../../../maps/js/angularApp'))
   .pipe(gulp.dest('./public/assets/js/app'));
 });
@@ -121,7 +127,6 @@ gulp.task('mongod', function(){
   });
 });
 
-
 /* Styles */
 gulp.task('styles', function(){
   gulp.src(config.sassPath+'/main.scss')
@@ -133,6 +138,17 @@ gulp.task('styles', function(){
   .pipe(gulp.dest('./public/assets/css'))
   .pipe(browserSync.stream())
   .pipe(notify('Wubalubadubdub! Styles Done!'));
+});
+
+/* Styles task without browser-sync */
+gulp.task('styles-no-bs', function(){
+  gulp.src(config.sassPath+'/main.scss')
+  .pipe(sourcemaps.init())
+    .pipe(sass())
+    .pipe(minifyCss())
+    .pipe(rename('main.min.css'))
+  .pipe(sourcemaps.write('../../../maps/css'))
+  .pipe(gulp.dest('./public/assets/css'));
 });
 
 /* Images */
@@ -169,8 +185,12 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./public/*.html',reload);
 });
 
-gulp.task('default', ['bower','ng-scripts','ng-html', 'mongod','browser-sync']);
+//Build Task
+gulp.task('build',['images','bower','ng-html','styles-no-bs','scripts','ng-scripts']);
 
-//build all assets without watch and plug that into default
-
-gulp.task('assets', ['bower','fonts','images','styles','scripts','ng-scripts']);
+//Default Task
+//Cleans public folder
+//Rebuilds public folder
+//Starts mongod
+//Runs browser-sync
+gulp.task('default', ['clean:public','build','mongod','browser-sync']);

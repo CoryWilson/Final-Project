@@ -19,8 +19,6 @@ module.exports = function(app,passport) {
   // User Authenticate routes
   //------------------------------------------
 
-  //app.get('/register-login', usersController.renderRegisterLogin);
-
   //Local Register Route
   app.route('/register')
 		.get(usersController.renderRegister)

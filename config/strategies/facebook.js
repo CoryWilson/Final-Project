@@ -3,16 +3,16 @@
 var passport         = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     User             = require('mongoose').model('User'),
-    configAuth       = require('../auth');
+    Config           = require('../config');
 
 module.exports = function(){
 
   /***** Facebook Login *****/
   passport.use(new FacebookStrategy({
       // pull in our app id and secret from our auth.js file
-      clientID          : configAuth.facebookAuth.clientID,
-      clientSecret      : configAuth.facebookAuth.clientSecret,
-      callbackURL       : configAuth.facebookAuth.callbackURL,
+      clientID          : Config.facebookAuth.clientID,
+      clientSecret      : Config.facebookAuth.clientSecret,
+      callbackURL       : Config.facebookAuth.callbackURL,
       passReqToCallback : true,
       profileFields     : ["emails","displayName","name"]
     },

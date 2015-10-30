@@ -14,4 +14,3 @@ var server   = app.listen(config.port);
 var io = require('socket.io').listen(server);
 
 module.exports = app;
-console.log(process.env.NODE_ENV + ' server running at http://localhost:' + config.port);

@@ -3,15 +3,15 @@
 var passport         = require('passport'),
     TwitterStrategy  = require('passport-twitter').Strategy,
     User             = require('mongoose').model('User'),
-    configAuth       = require('../auth');
+    Config           = require('../config');
 
 module.exports = function(){
 
   /***** Twitter Login *****/
   passport.use(new TwitterStrategy({
-      consumerKey       : configAuth.twitterAuth.consumerKey,
-      consumerSecret    : configAuth.twitterAuth.consumerSecret,
-      callbackURL       : configAuth.twitterAuth.callbackURL,
+      consumerKey       : Config.twitterAuth.consumerKey,
+      consumerSecret    : Config.twitterAuth.consumerSecret,
+      callbackURL       : Config.twitterAuth.callbackURL,
       passReqToCallback : true,
     },
     function(req, token, tokenSecret, profile, done) {

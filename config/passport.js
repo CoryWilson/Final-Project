@@ -2,7 +2,7 @@
 
 var passport 	 = require('passport'),
 	  mongoose 	 = require('mongoose'),
-		configAuth = require('./auth');
+		Config 		 = require('./config');
 
 module.exports = function() {
 	var User = mongoose.model('User');

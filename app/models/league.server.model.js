@@ -11,29 +11,15 @@ leagueSchema = new Schema({
       ref: 'User'
     }
   }],
-  // pairings : [{
-  //   week : Number,
-  //   showdownNum : Number,
-  //   user1 : {
-  //     type: Schema.ObjectId,
-  //     ref: 'User'
-  //   },
-  //   user2 : {
-  //     type: Schema.ObjectId,
-  //     ref: 'User'
-  //   }
-  // }],
   showdowns : [{
     week        : Number,
     showdownNum : Number,
-    user1 : {
-      type: Schema.ObjectId,
-      ref: 'User'
-    },
-    user2 : {
-      type: Schema.ObjectId,
-      ref: 'User'
-    },
+    competitors : [{
+      user_id : {
+        type: Schema.ObjectId,
+        ref: 'User'
+      }
+    }],
     games   : [{
       gameInfo : {
         homeTeamName  : String,
@@ -44,18 +30,16 @@ leagueSchema = new Schema({
         status        : String,
         date          : Date
       },
-      user1: {
-        type: Schema.ObjectId,
-        ref: 'User'
-      },
-      user2: {
-        type: Schema.ObjectId,
-        ref: 'User'
-      },
-      pick : {
-        team  : Boolean,
-        value : Number
-      }
+      selections : [{
+        pick : {
+          team  : Boolean,
+          value : Number
+        },
+        user_id : {
+          type: Schema.ObjectId,
+          ref: 'User'
+        }
+      }],
     }]
   }],
   standings : {
@@ -87,3 +71,11 @@ leagueSchema = new Schema({
 });
 
 module.exports = mongoose.model('League', leagueSchema);
+
+
+//bake custom error handling into the models
+
+//flash message figure that out
+//security
+//naming conventions for sass variables
+//naming conventions for breakpoints like mobile - does that mean landscape or portrait?
