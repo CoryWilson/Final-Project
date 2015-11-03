@@ -1,5 +1,5 @@
 fieldset {
-  background-color: $secondary-background-color;
+  background-color: $base-background-color;
   border: $base-border;
   margin: 0 0 $small-spacing;
   padding: $base-spacing;
@@ -30,7 +30,7 @@ label {
 select[multiple=multiple] {
   background-color: $base-background-color;
   border: none;
-  border-bottom: 3px solid $black;
+  border-bottom: $base-border;
   box-sizing: border-box;
   font-family: $base-font-family;
   font-size: $base-font-size;
@@ -39,17 +39,17 @@ select[multiple=multiple] {
   transition: border-color $base-duration $base-timing;
   width: 100%;
 
-  ::-webkit-input-placeholder { color: $black;}
-  :-moz-placeholder { color: $black;}
-  ::-moz-placeholder {color: $black;}
-  :-ms-input-placeholder {color: $black;}
+  ::-webkit-input-placeholder { color: $base-font-color;}
+  :-moz-placeholder { color: $base-font-color;}
+  ::-moz-placeholder {color: $base-font-color;}
+  :-ms-input-placeholder {color: $base-font-color;}
 
   &:hover {
     border-color: shade($base-border-color, 5%);
   }
 
   &:focus {
-    border-color: $black;
+    border-color: $base-border-color;
     outline: none;
   }
 
@@ -86,13 +86,13 @@ input[type="file"] {
 .select-style {
   padding: 0;
   margin: 0 auto;
-  border: 3px solid $black;
+  border: $base-border;
   width: 60%;
   overflow: hidden;
   background: url(../vendor/ionicons/src/arrow-down-b.svg) $white right no-repeat;
   background-size: 10% 95%;
   &:hover {
-    background-color: $yellow;
+    background-color: $action-color;
   }
   select {
     padding: .2em;

@@ -34,11 +34,15 @@ $facebook-blue: #3B5999;
 $twitter-blue: #55ACEE;
 
 // Font Colors
-$base-font-color : $black;
-$action-color    : $yellow;
+$base-font-color      : $black;
+$secondary-font-color : $white;
+$action-color         : $yellow;
 
 //Background Colors
-$base-background-color : $gray-light;
+$base-background-color     : $gray-light;
+$block-background-color    : $gray-dark;
+$partials-background-color : $white;
+$content-background-color  : $white;
 
 // Border
 $base-border-color : $black;
@@ -46,7 +50,9 @@ $base-border       : 3px solid $base-border-color;
 
 // Background Colors
 $base-background-color      : $white;
-$secondary-background-color : $gray-light;
+
+//Background Images
+$hero-bg-image : '../images/stock/football-crowd.jpg';
 
 // Animations
 $base-duration : 150ms;

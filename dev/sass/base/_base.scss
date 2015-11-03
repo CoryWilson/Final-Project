@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: $black;
+  color: $base-font-color;
   &:hover {
     color: $action-color;
   }
@@ -17,12 +17,79 @@ a {
 
 .page-wrap {
   min-height: 100%;
-  margin-bottom: 106.969px;
+  //margin-bottom: 106.969px;
 }
 .page-wrap:after {
   content: "";
   display: block;
 }
 .page-wrap:after {
-  height: 106.969px;
+  //height: 106.969px;
+}
+
+.index {
+  width: 100%;
+}
+
+.hero {
+  height: 500px;
+  @include background(url($hero-bg-image), no-repeat bottom);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.hero__content {
+  background: rgba($gray-light,0.5);
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blocks {
+
+}
+
+.blocks__block {
+  @include span-columns(4 of 16, block-collapse);
+  background: $partials-background-color;
+  height: 300px;
+  border: none;
+  border-bottom: $base-border;
+  border-right: $base-border;
+  @include media($desktop) {
+    @include span-columns(3 of 12, block-collapse);
+  }
+  @include media($tablet) {
+    @include span-columns(4 of 8, block-collapse);
+    width: 50%;
+  }
+  @include media($mobile) {
+    @include span-columns(4 of 4, block-collapse);
+  }
+}
+.blocks__block:last-child {
+  border-right: none;
+  @include media($tablet) {
+    width: 50%;
+  }
+  @include media($mobile) {
+    width: 100%;
+  }
+}
+
+.blocks__block--header {
+  @include pad();
+  text-align: center;
+  height: 115px;
+}
+.blocks__block--content {
+  @include pad();
+  height: 100%;
+  text-align: center;
+  i {
+    color: $base-font-color;
+    font-size: $huge-font-size;
+  }
 }
