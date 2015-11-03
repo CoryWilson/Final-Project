@@ -2,7 +2,7 @@
 
 angular.module('league')
   .controller('LeagueController',
-    ['$scope', '$routeParams', '$location', 'League', 'Authentication', 'Users', function($scope, $routeParams, $location, League, Authentication, Users){
+    ['$scope', '$routeParams', '$location', 'League', 'API', 'Authentication', 'Users', function($scope, $routeParams, $location, League, API, Authentication, Users){
 
       //===== Users =====\\
 
@@ -22,7 +22,7 @@ angular.module('league')
           name : this.name
         });
         league.$save(function(response){
-          $location.path('league/'+$scope.league._id);
+          $location.path('league/');
         }, function(errorRes){
           $scope.error = errorRes.data.message;
         });
@@ -74,14 +74,14 @@ angular.module('league')
       //===== Showdowns =====\\
 
       $scope.createShowdowns = function(){
-        var pairings = new League.Pairings({
+        var pairings = new League.Showdowns({
             leagueId : $scope.league._id,
             weeks   : this.data.weeks
         });
 
         //pass league Id to save function
         pairings.$save(function(response){
-          $location.path('league/'+$scope.league._id);
+          $location.path('league/');
         }, function(errorRes){
           $scope.error = errorRes.data.message;
         });
@@ -89,18 +89,30 @@ angular.module('league')
 
       //Find showdowns in league
       $scope.findShowdowns = function(){
-        $scope.showdowns = League.Showdown.query({
+        $scope.showdowns = League.Showdowns.query({
           leagueId : $routeParams.leagueId,
           weekNum  : $routeParams.weekNum
         });
       };
 
       $scope.findShowdown = function(){
-        $scope.showdown = League.Showdown.query({
+        $scope.showdown = League.Showdown.get({
           leagueId   : $routeParams.leagueId,
           weekNum    : $routeParams.weekNum,
-          showdownId : $routeParams.showdownNum
+          showdownNum : $routeParams.showdownNum
         });
       };
 
+      $scope.updatePicks = function(){
+        alert($scope.user._id);
+        var picks = new League.Showdown({
+          pick : this.pick
+        });
+
+        picks.$update(function(response){
+          $location.path('league/');
+        }, function(errorRes){
+          $scope.error = errorRes.data.message
+;        });
+      };
   }]);

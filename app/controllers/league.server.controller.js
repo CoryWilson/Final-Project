@@ -31,7 +31,7 @@ exports.createLeague = function(req, res, next){
 
 exports.getLeagueById = function(req, res, next, id){
   League.findById(id)
-    .populate('members.user_id')//populate the user information based off the user_id
+    .populate('members.user_id showdowns.competitors.user_id')//populate the user information based off the user_id
     .exec(function(err, league){
       if(err)
         return next(err);
@@ -223,7 +223,8 @@ exports.readShowdown = function(req, res){
 };
 
 exports.updateShowdown = function(req, res, next){
-  var showdown = req.league.showdowns; //set the member equal to current user
+  var showdown = req.league; //set the member equal to current user
+  console.log(showdown);
   showdown.save(function(err){
     if(err){
       return next(err);

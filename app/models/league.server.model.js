@@ -32,7 +32,7 @@ leagueSchema = new Schema({
       },
       selections : [{
         pick : {
-          team  : Boolean,
+          team  : String,
           value : Number
         },
         user_id : {

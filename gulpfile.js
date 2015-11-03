@@ -31,12 +31,12 @@ var config = {
 };
 
 /* Clean Public Folder */
-gulp.task('clean:public', function(finished){
+gulp.task('clean', function(){
   return del([
     './public/assets/css/*',
     './public/assets/images/**/*',
     './public/assets/js/**/**/**/*'
-  ], finished);
+  ]);
 });
 
 /* Bower */
@@ -82,7 +82,7 @@ gulp.task('ng-scripts', function(){
 
 gulp.task('ng-script-watch', ['ng-scripts'], reload);
 
-gulp.task('ng-html',function(){
+gulp.task('ng-html', function(){
   gulp.src(config.ngViewPath+'/*.html')
   .pipe(gulp.dest('./public/assets/js/app/'));
 });
@@ -190,4 +190,4 @@ gulp.task('build',['images','bower','ng-html','styles-no-bs','scripts','ng-scrip
 //Rebuilds public folder
 //Starts mongod
 //Runs browser-sync
-gulp.task('default', ['clean:public','build','mongod','browser-sync']);
+gulp.task('default', ['build','mongod','browser-sync']);

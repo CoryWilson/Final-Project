@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["index/index.client.module.js"],"sourcesContent":["//File Name: ./dev/js/app/league/index.client.modules.js\n\nangular.module('index', []);\n"],"file":"index/index.client.module.js","sourceRoot":"/source/"}

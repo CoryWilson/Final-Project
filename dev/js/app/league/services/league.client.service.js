@@ -12,12 +12,12 @@ angular.module('league')
                      { leagueId : '@leagueId', memberId : '@memberId'},
                      { update : { method : 'PUT'} }
                     ),
-        Pairings    : $resource('/league/:leagueId/showdowns',
-                     { leagueId : '@leagueId'},
+        Showdowns    : $resource('/league/:leagueId/showdowns/:weekNum',
+                     { leagueId : '@leagueId', weekNum: '@weekNum'},
                      { update : { method : 'PUT'} }
                     ),
-        Showdown  : $resource('/league/:leagueId/showdowns/:weekNum/:showdownId',
-                     { leagueId : '@leagueId', weekNum : '@weekNum', showdownId : '@showdownId' },
+        Showdown  : $resource('/league/:leagueId/showdowns/:weekNum/:showdownNum',
+                     { leagueId : '@leagueId', weekNum : '@weekNum', showdownNum : '@showdownNum' },
                      { update : { method : 'PUT' } }
                     ),
         Standings : $resource('/league/:leagueId/standings/',
