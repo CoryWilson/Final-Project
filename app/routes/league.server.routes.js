@@ -34,23 +34,17 @@ module.exports = function(app,passport) {
   //============================\\
   //===== League Showdowns =====\\
   //============================\\
-  //maybe a generate weeks button
-  //maybe a generate showdowns button
-
-  // app.route('/league/:leagueId/showdowns')
-  //    .get(leagueController.getShowdowns);
-
-  app.post('/league/:leagueId/showdowns',leagueController.createShowdowns);
+  app.post('/league/:leagueId/showdowns',leagueController.createShowdowns); //create all showdowns
 
   app.route('/league/:leagueId/showdowns/:weekNum')
-     .get(leagueController.readWeeklyShowdowns);
+     .get(leagueController.readWeeklyShowdowns); //read the weekly showdowns
 
   app.route('/league/:leagueId/showdowns/:weekNum/:showdownNum')
-    .get(leagueController.readShowdown)
-    .put(leagueController.updateShowdown);
+    .get(leagueController.readShowdown) //read the individual showdown based on weekNum and showdownNum
+    .put(leagueController.updateShowdown); //used for updating the individual showdown record
 
-  app.param('weekNum',leagueController.getWeekNum);
-  app.param('showdownNum',leagueController.getShowdownByNum);
+  app.param('weekNum',leagueController.getWeekNum); //get showdowns based on week
+  app.param('showdownNum',leagueController.getShowdownByNum); //get showdowns based on number
 
   //============================\\
   //===== League Standings =====\\

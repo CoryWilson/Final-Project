@@ -202,7 +202,6 @@ exports.getWeekNum = function(req, res, next, weekNum){
           results,
           {path:"showdowns.competitors.user_id"},
           function(error, callback){
-            console.log(callback);
             req.league = callback;
             next();
           });
@@ -219,19 +218,20 @@ exports.getShowdownByNum = function(req, res, next, showdownNum){
 };
 
 exports.readShowdown = function(req, res){
-  res.json(req.league);
+  res.json(req.body);
 };
 
 exports.updateShowdown = function(req, res, next){
-  var showdown = req.league; //set the member equal to current user
-  console.log(showdown);
-  showdown.save(function(err){
-    if(err){
-      return next(err);
-    } else {
-      res.json(showdown); //return updated info
-    }
-  });
+  // var showdown = req.league; //set the showdown equal to current showdown
+  // showdown.showdowns.games.selections.push({pick:'home',user_id:req.user._id});
+  // showdown.update(function(err) {
+  //   if (err){
+  //     return next(err);
+  //   } else {
+  //     res.json(showdown);
+  //   }
+  // });
+  alert('Hi');
 };
 
 //============================\\

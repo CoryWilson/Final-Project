@@ -1,4 +1,4 @@
-<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();findShowdown();" class="league">
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();" class="league">
   User
   <br>
   {{user}}
@@ -29,7 +29,7 @@
     </div>
     <div class="showdown__games" ng-init="findGames();">
       <h2>Games</h2>
-      <form action="" ng-submit="updatePicks()">
+      <form action="" ng-submit="updateShowdown()">
         <div class="showdown__games--game">
           <h3>Game #</h3>
           <div class="showdown__games--team">
@@ -54,9 +54,6 @@
             <input type="radio"
                    ng-model="pick" value="away"/>
           </div>
-        </div>
-        <div class="showdown__games--points">
-          <input type="range" min="1" max="5">
         </div>
         <button type="submit">Submit Picks</button>
       </form>
