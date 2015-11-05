@@ -11,37 +11,6 @@ leagueSchema = new Schema({
       ref: 'User'
     }
   }],
-  showdowns : [{
-    week        : Number,
-    showdownNum : Number,
-    competitors : [{
-      user_id : {
-        type: Schema.ObjectId,
-        ref: 'User'
-      }
-    }],
-    games   : [{
-      gameInfo : {
-        homeTeamName  : String,
-        homeTeamScore : Number,
-        awayTeamName  : String,
-        awayTeamScore : Number,
-        location      : String,
-        status        : String,
-        date          : Date
-      },
-      selections : [{
-        pick : {
-          team  : String,
-          value : Number
-        },
-        user_id : {
-          type: Schema.ObjectId,
-          ref: 'User'
-        }
-      }],
-    }]
-  }],
   standings : {
     members : [{
       user_id: {

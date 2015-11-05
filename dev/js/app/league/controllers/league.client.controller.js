@@ -95,48 +95,20 @@ angular.module('league')
         });
       };
 
-      // $scope.findShowdown = function(){
-      //   $scope.showdown = League.Showdown.get({
-      //     leagueId   : $routeParams.leagueId,
-      //     weekNum    : $routeParams.weekNum,
-      //     showdownNum : $routeParams.showdownNum
-      //   });
-      // };
-
-      $scope.showdown = League.Showdown.get(
-        {
-          leagueId   : $routeParams.leagueId,
-          weekNum    : $routeParams.weekNum,
+      $scope.findShowdown = function(){
+        $scope.showdown = League.Showdown.get({
+          leagueId    : $routeParams.leagueId,
+          weekNum     : $routeParams.weekNum,
           showdownNum : $routeParams.showdownNum
-        }
-      );
-
-      $scope.updateShowdown = function(){
-        $scope.showdown.$update(
-          {
-            leagueId    : $routeParams.leagueId,
-            weekNum     : $routeParams.weekNum,
-            showdownNum : $routeParams.showdownNum,
-            picks       : this.pick
-          }
-        );
-        alert(picks);
+        });
       };
 
-      // $scope.updatePicks = function(){
-      //   var picks = League.Showdown.get({
-      //       leagueId    : $routeParams.leagueId,
-      //       weekNum     : $routeParams.weekNum,
-      //       showdownNum : $routeParams.showdownNum,
-      //       pick        : this.pick
-      //   });
-      //
-      //   //pass league Id to save function
-      //   picks.$update(function(response){
-      //     $location.path('league/');
-      //   }, function(errorRes){
-      //     $scope.error = errorRes.data.message;
-      //   });
-      // };
+      $scope.updateShowdown = function(){
+        $scope.showdown.$update(function(){
+          $location.path('/showdowns/'+$routeParams.weekNum+'/'+$routeParams.showdownNum);
+        }, function(errorResponse){
+          $scope.error = errorResponse.data.message;
+        });
+      };
 
   }]);

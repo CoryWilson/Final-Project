@@ -13,8 +13,7 @@ angular.module('league')
                      { update : { method : 'PUT'} }
                     ),
         Showdowns : $resource('/league/:leagueId/showdowns/:weekNum',
-                     { leagueId : '@leagueId', weekNum: '@weekNum'},
-                     { update : { method : 'PUT'} }
+                     { leagueId : '@leagueId', weekNum: '@weekNum'}
                     ),
         Showdown  : $resource('/league/:leagueId/showdowns/:weekNum/:showdownNum',
                      { leagueId : '@leagueId', weekNum : '@weekNum', showdownNum : '@showdownNum' },

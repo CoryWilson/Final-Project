@@ -8,6 +8,7 @@ module.exports = function() {
 
   require('../app/models/user.server.model');
   require('../app/models/league.server.model');
+  require('../app/models/showdown.server.model');
   require('../app/models/week.server.model');
   require('../app/models/pairings.server.model');
 

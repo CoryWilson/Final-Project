@@ -1,6 +1,6 @@
 <section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findShowdowns();" class="league">
 	<div class="league__header">
-		<h1>{{league.name}} Week {{showdowns.showdowns[0].week}}</h1>
+		<h1>{{league.name}} Week {{showdowns.showdowns.week}}</h1>
 	</div>
 	<div class="league__content">
 		<a data-ng-href="#!/league/{{league._id}}">

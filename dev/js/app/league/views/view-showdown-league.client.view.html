@@ -1,4 +1,4 @@
-<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();" class="league">
+<section data-ng-controller="LeagueController" data-ng-init="findUser();findLeague();findMember();findShowdown();" class="league">
   User
   <br>
   {{user}}
@@ -10,7 +10,7 @@
   <div class="league__header">
     <h1>Week 1 Showdown</h1>
     <div class="showdown__header">
-      <div class="showdown__header--user" ng-repeat="user in showdown.showdowns.competitors">
+      <div class="showdown__header--user" ng-repeat="user in showdown.showdowns[0].competitors">
         <img src="assets/vendor/Ionicons/src/person.svg" alt="">
         <h3>{{user.user_id.username}}</h3>
       </div>

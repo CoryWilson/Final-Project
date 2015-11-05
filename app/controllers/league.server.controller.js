@@ -1,12 +1,13 @@
 //File Name: ./app/controllers/league.server.controller.js
 
 var League   = require('mongoose').model('League'),
+    Showdown = require('mongoose').model('Showdown'),
     User     = require('mongoose').model('User');
 
 //===========================\\
 //===== League Overview =====\\
 //===========================\\
-exports.getLeagues = function(req, res, next){
+module.exports.getLeagues = function(req, res, next){
   League.find()
     .exec(function(err,league){
       if(err){
@@ -17,7 +18,7 @@ exports.getLeagues = function(req, res, next){
     });
 };
 
-exports.createLeague = function(req, res, next){
+module.exports.createLeague = function(req, res, next){
   var league = new League(req.body);
   league.name = req.body.name;
   league.save(function(err){
@@ -29,7 +30,7 @@ exports.createLeague = function(req, res, next){
   });
 };
 
-exports.getLeagueById = function(req, res, next, id){
+module.exports.getLeagueById = function(req, res, next, id){
   League.findById(id)
     .populate('members.user_id showdowns.competitors.user_id')//populate the user information based off the user_id
     .exec(function(err, league){
@@ -42,11 +43,11 @@ exports.getLeagueById = function(req, res, next, id){
     });
 };
 
-exports.readLeague = function(req, res){
+module.exports.readLeague = function(req, res){
   res.json(req.league);
 };
 
-exports.getAllUsers = function(req, res, next){
+module.exports.getAllUsers = function(req, res, next){
   User.find()
     .exec(function(err,users){
       if(err){
@@ -61,7 +62,7 @@ exports.getAllUsers = function(req, res, next){
 //==========================\\
 //===== League Members =====\\
 //==========================\\
-exports.addMember = function(req, res, next){
+module.exports.addMember = function(req, res, next){
   League.findOne(
     {'_id':req.league._id})
     .exec(function(err,league){
@@ -80,7 +81,7 @@ exports.addMember = function(req, res, next){
     });
 };
 
-exports.getMemberById = function(req, res, next, memberId){
+module.exports.getMemberById = function(req, res, next, memberId){
   League.findOne(
       {'_id':req.league._id},//search for user's league
       {'members':{$elemMatch:{'_id':memberId}}}//see if url param for memberId matches the _id in members
@@ -98,11 +99,11 @@ exports.getMemberById = function(req, res, next, memberId){
     });
 };
 
-exports.readMember = function(req, res){
+module.exports.readMember = function(req, res){
   res.json(req.league.members);//return member json
 };
 
-exports.updateMember = function(req, res, next){
+module.exports.updateMember = function(req, res, next){
   var member = req.league.members; //set the member equal to current user
   member.save(function(err){
     if(err){
@@ -113,7 +114,7 @@ exports.updateMember = function(req, res, next){
   });
 };
 
-exports.deleteMember = function(req, res, next){
+module.exports.deleteMember = function(req, res, next){
   var member = req.league.members; //set the member equal to the current member
   member.remove(function(err){
     if(err){
@@ -124,7 +125,7 @@ exports.deleteMember = function(req, res, next){
   });
 };
 
-exports.getMembers = function(req, res){
+module.exports.getMembers = function(req, res){
   res.json(req.league.members);
 };
 
@@ -132,12 +133,13 @@ exports.getMembers = function(req, res){
 //============================\\
 //===== League Showdowns =====\\
 //============================\\
-exports.createShowdowns = function(req, res, next){
 
-  League.findOne({'_id':req.league._id}) //Find league by id
-    .exec(function(err,league){
+module.exports.createShowdowns = function(req, res, next){
+  var showdown = new Showdown(req.body);
+  League.findOne({'_id':req.league._id})
+    .exec(function(err, league){
       if(err){
-        return next(err); //If you can't find the league return an error
+        return next(err);
       } else {
         for(var i = 0; i < req.body.weeks; i++){ //loop through amount of weeks
           if (league.members.length % 2 !== 0) {
@@ -156,92 +158,110 @@ exports.createShowdowns = function(req, res, next){
                   member2 = arr2[0] === member1 ? arr2.pop() : arr2.shift();
 
               var weekNum = i + 1;
-              league.showdowns.push({week:weekNum,showdownNum:j,competitors:[member1,member2]}); //save pairing information into showdowns array
+              showdown.showdowns.push({league_id:req.league._id,week:weekNum,showdownNum:j,competitors:[member1,member2]}); //save pairing information into showdowns array
             }
           }
         }
-
-         //pushes the user's id into the user_id section of the members array
-        league.save(function(err){
+        showdown.save(function(err){
           if(err){
             return next(err);
           } else {
             res.json(league);
           }
         });
-      }
-    }
-  );
-};
-// /league/:leagueId/showdowns/1/1
-
-//returns the week's showdowns in json form
-exports.readWeeklyShowdowns = function(req, res){
-  res.json(req.league);
-};
-
-//Finds showdowns for week based on week number parameter
-exports.getWeekNum = function(req, res, next, weekNum){
-  var weekNumber = Number(weekNum);
-  League.aggregate([
-  	{$unwind: "$showdowns"},
-  	{$match:
-  	   { $and: [
-  	     {"_id" : req.league._id} ,
-  	     {"showdowns.week" : weekNumber} //adding weekNum param returns an empty array
-  	  ]}
-  	},
-  	{$project: {"showdowns": 1}}
-  ],function(err, results){
-      if(err){
-        return next(err);
-      } if(!results) {
-        return next(new Error('Failed to load week '+ results._id));
-      } else {
-        League.populate(
-          results,
-          {path:"showdowns.competitors.user_id"},
-          function(error, callback){
-            req.league = callback;
-            next();
-          });
-
-      }
+      }//end for loop
     });
 
 };
 
-exports.getShowdownByNum = function(req, res, next, showdownNum){
+//returns the week's showdowns in json form
+module.exports.readWeeklyShowdowns = function(req, res){
+  res.json(req.showdowns);
+};
+
+//Finds showdowns for week based on week number parameter
+module.exports.getWeekNum = function(req, res, next, weekNum){
+  var weekNumber = Number(weekNum);
+  // Showdown.find(
+  //     {'showdowns.league_id':req.league._id,'showdowns.week':weekNumber}
+  //   )
+  //   .exec(function(err,showdowns){
+  //     if(err){
+  //       return next(err);
+  //     } else {
+  //       req.showdowns = showdowns; //return showdowns for week
+  //       next();
+  //     }
+  //   });
+  Showdown.aggregate([
+   {$unwind: "$showdowns"},
+   {$match:
+      { $and: [
+        {"showdowns.league_id" : req.league._id} ,
+        {"showdowns.week" : weekNumber} //adding weekNum param returns an empty array
+     ]}
+   },
+   {$project: {"showdowns": 1}}
+ ],function(err, results){
+     if(err){
+       return next(err);
+     } if(!results) {
+       return next(new Error('Failed to load week '+ results._id));
+     } else {
+       Showdown.populate(
+         results,
+         {path:"showdowns.competitors.user_id"},
+         function(error, showdowns){
+           req.showdowns = showdowns;
+           next();
+         });
+
+     }
+   });
+
+};
+
+module.exports.getShowdownByNum = function(req, res, next, showdownNum){
+  var weekNumber = Number(req.showdowns[0].showdowns.week);
   var showdownNumber = Number(showdownNum);
-  var showdown = req.league[showdownNumber];
-  res.json(showdown);
+  Showdown.findOne(
+      {showdowns:{$elemMatch:{league_id:req.league._id,week:weekNumber,showdownNum:showdownNumber}}},
+      {"showdowns.$":1}
+    )
+    .populate('showdowns.competitors.user_id')
+    .exec(function(err,showdown){
+      if(err){
+        return next(err);
+      } else {
+        req.showdown = showdown;
+        next(); //return showdown
+      }
+    });
 };
 
-exports.readShowdown = function(req, res){
-  res.json(req.body);
+module.exports.readShowdown = function(req, res){
+  res.json(req.showdown);
 };
 
-exports.updateShowdown = function(req, res, next){
-  // var showdown = req.league; //set the showdown equal to current showdown
-  // showdown.showdowns.games.selections.push({pick:'home',user_id:req.user._id});
-  // showdown.update(function(err) {
-  //   if (err){
-  //     return next(err);
-  //   } else {
-  //     res.json(showdown);
-  //   }
-  // });
-  alert('Hi');
+module.exports.updateShowdown = function(req, res){
+  var showdown = req.showdown.showdowns[0];
+  console.log(showdown);
+  showdown.games.push({selections:[{pick:{team:'Home'}}]});
+  showdown.markModified('games');
+  console.log(showdown);
+  showdown.save(function(){
+      res.json(showdown); //return updated showdown info
+  });
 };
 
 //============================\\
 //===== League Standings =====\\
 //============================\\
-exports.readStandings = function(req, res){
+module.exports.readStandings = function(req, res){
   res.json(req.league.standings);
 };
 
-exports.getStandings = function(req, res, next){
+module.exports.getStandings = function(req, res, next){
   League.findOne(
       { '_id' : req.league._id }
     )
@@ -256,7 +276,7 @@ exports.getStandings = function(req, res, next){
     });
 };
 
-exports.getStandingsById = function(req, res, next, memberId){
+module.exports.getStandingsById = function(req, res, next, memberId){
   League.findOne(
       { '_id' : req.league_id },
       { 'members': { $elemMatch: { '_id': memberId } } }
