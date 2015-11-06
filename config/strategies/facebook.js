@@ -10,9 +10,9 @@ module.exports = function(){
   /***** Facebook Login *****/
   passport.use(new FacebookStrategy({
       // pull in our app id and secret from our auth.js file
-      clientID          : Config.facebookAuth.clientID,
-      clientSecret      : Config.facebookAuth.clientSecret,
-      callbackURL       : Config.facebookAuth.callbackURL,
+      clientID          : process.env.FB_CLIENT_ID,
+      clientSecret      : process.env.FB_CLIENT_SECRET,
+      callbackURL       : process.env.FB_CALLBACK_URL,
       passReqToCallback : true,
       profileFields     : ["emails","displayName","name"]
     },

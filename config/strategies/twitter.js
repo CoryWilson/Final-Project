@@ -9,9 +9,9 @@ module.exports = function(){
 
   /***** Twitter Login *****/
   passport.use(new TwitterStrategy({
-      consumerKey       : Config.twitterAuth.consumerKey,
-      consumerSecret    : Config.twitterAuth.consumerSecret,
-      callbackURL       : Config.twitterAuth.callbackURL,
+      consumerKey       : process.env.TWITTER_CONSUMER_KEY,
+      consumerSecret    : process.env.TWITTER_CONSUMER_SECRET,
+      callbackURL       : process.env.TWITTER_CALLBACK_URL,
       passReqToCallback : true,
     },
     function(req, token, tokenSecret, profile, done) {

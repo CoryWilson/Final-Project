@@ -2,6 +2,7 @@
 
 //Declare Dependencies
 var config       = require('./config'),
+    dotenv       = require('dotenv').load(),
     express      = require('express'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
@@ -37,10 +38,6 @@ module.exports = function(){
 
   app.set('views', './app/views');//location of views
   app.set('view engine', 'ejs');//declare view engine
-
-  app.use(function(){
-    console.log(req.body);
-  });
 
   //require routes
   require('../app/routes/index.server.routes.js')(app,passport);
