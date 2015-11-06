@@ -38,6 +38,10 @@ module.exports = function(){
   app.set('views', './app/views');//location of views
   app.set('view engine', 'ejs');//declare view engine
 
+  app.use(function(){
+    console.log(req.body);
+  });
+
   //require routes
   require('../app/routes/index.server.routes.js')(app,passport);
   require('../app/routes/league.server.routes.js')(app,passport);
