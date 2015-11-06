@@ -2,14 +2,37 @@
     <footer class="footer" role="contentinfo">
       <div class="footer-wrapper">
           <ul>
-            <li><a href="/">Home</a></li>
             <% if(!isAuthenticated) {%>
-              <li><a href="/register-login">Register or Login</a></li>
+              <li>
+                <a href="/#!/">
+                  <i class="icon ion-home"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="/sign-in">
+                  <i class="icon ion-log-in"></i>
+                  <span>Sign-In</span>
+                </a>
+              </li>
             <% } else { %>
-              <li><a href="/profile">Profile</a></li>
-              <li><a href="#!/showdown">Leagues</a></li>
-              <li><a href="#!/standings">Weeks</a></li>
-              <li><a href="/logout">Logout</a></li>
+              <li>
+                <a href="/#!/pick">
+                  <i class="icon ion-trophy"></i>
+                  <span>Make Your Picks</span>
+                </a></li>
+              <li>
+                <a href="/#!/leaderboard">
+                  <i class="icon ion-ios-list"></i>
+                  <span>Leaderboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="/profile">
+                  <i class="icon ion-person"></i>
+                  <span>Profile</span>
+                </a>
+              </li>
             <% } %>
           </ul>
 
