@@ -40,7 +40,7 @@ module.exports = function(app,passport) {
   		failureFlash: true
   	}));
 
-  /*
+
   //Facebook Authenticate Routes
   app.get('/auth/facebook',
   passport.authenticate('facebook', {
@@ -52,7 +52,7 @@ module.exports = function(app,passport) {
     successRedirect: '/',
     scope: ['email']
   }));
-
+  /*
   //Twitter Authenticate Routes
   app.get('/auth/twitter',
   passport.authenticate('twitter', {
