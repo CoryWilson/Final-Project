@@ -1,9 +1,12 @@
 //File Name: ./app/routes/users.server.routes.js
 
-var usersController    = require('../controllers/users.server.controller.js');
+var usersController = require('../controllers/users.server.controller.js'),
+    passport        = require('passport');
+
 
 module.exports = function(app,passport) {
 
+    /*
     app.get('/profile', usersController.profile);
 
     app.get('/editProfile', usersController.edit);
@@ -11,6 +14,7 @@ module.exports = function(app,passport) {
     app.post('/updateProfile', usersController.update);
 
     app.get('/profileInfo', usersController.findUserById);
+    */
 
     app.get('/logout', usersController.logout);
 
@@ -36,6 +40,7 @@ module.exports = function(app,passport) {
   		failureFlash: true
   	}));
 
+  /*
   //Facebook Authenticate Routes
   app.get('/auth/facebook',
   passport.authenticate('facebook', {
@@ -96,11 +101,12 @@ module.exports = function(app,passport) {
     successRedirect: '/',
     scope: ['email']
   }));
-
+  */
   //------------------------------------------
   // Unlink Accounts Routes
   //------------------------------------------
 
+  /*
   //Unlink Local
   app.get('/unlink/local', usersController.unlinkLocal);
 
@@ -109,5 +115,6 @@ module.exports = function(app,passport) {
 
   //Unlink Twitter
 	app.get('/unlink/twitter', usersController.unlinkTwitter);
+  */
 
 };

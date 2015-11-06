@@ -1,16 +1,84 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+//File Name: ./server.js
 
-var config   = require('./config/config'),
-  	mongoose = require('./config/mongoose'),
-  	express  = require('./config/express'),
-  	passport = require('./config/passport');
+//Declare Dependencies
+var dotenv       = require('dotenv').load(),
+    express      = require('express'),
+    bodyParser   = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    morgan       = require('morgan'),
+    mysql        = require('mysql'),
+    passport     = require('passport'),
+    flash        = require('connect-flash'),
+    session      = require('express-session');
 
-var db       = mongoose(),
-  	app      = express(),
-  	passport = passport();
+//start up express app
+var app = express();
 
-var server   = app.listen(config.port);
+//connect to database
+//var connection = mysql.createConnection(dbconfig.connection);
+require('./config/passport')(passport);//pass passport for config
 
-var io = require('socket.io').listen(server);
+app.use(morgan('dev'));//log all requests to console
+app.use(cookieParser());//read cookies
+app.use(bodyParser.json());//read html forms
+app.use(bodyParser.urlencoded({extended:true}));
 
-module.exports = app;
+app.use(session({
+		saveUninitialized: true,
+		resave: true,
+		secret: 'Khaleesi4Lyfe'
+	}));//declare session
+app.use(flash());//session flash messages
+app.use(passport.initialize());
+app.use(passport.session());//login sessions
+
+app.use(function(req, res, next) {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+});
+
+app.set('views', './app/views');//location of views
+app.set('view engine', 'ejs');//declare view engine
+
+//require routes
+require('./app/routes/index.server.routes.js')(app,passport);
+require('./app/routes/users.server.routes.js')(app,passport);
+
+//use public folder to display static files
+app.use(express.static('./public'));
+
+
+//Error Handlers
+//Catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+//Development error handler
+//Will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      title: 'Error',
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+//Production error handler
+//No stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    title: 'Error',
+    message: err.message,
+    error: {}
+  });
+});
+
+app.listen(process.env.PORT);
+console.log('Listening on port '+process.env.PORT);

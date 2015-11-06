@@ -1,38 +1,67 @@
 //File Name: ./app/controllers/users.server.controller.js
+module.exports = function(){
 
-var User 	 	 = require('mongoose').model('User'),
-		passport = require('passport');
+  var _renderLogin = function(req, res, next) {
+  	res.render('login', {
+  		title: 'Login',
+  		messages: req.flash('loginMessage')
+  	});
+  };
 
-exports.list = function(req, res, next) {
-	User.find({}, function(err, users) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(users);
-		}
-	});
-};
+  var _renderRegister = function(req, res, next) {
+  	res.render('register', {
+  		title: 'Register',
+  		messages: req.flash('registerMessage')
+  	});
+  };
 
-exports.renderRegisterLogin = function(req,res,next){
-	res.render('register-login', {
-		title				 		: 'Register or Login',
-		loginMessage 		: req.flash('loginMessage'),
-		registerMessage : req.flash('registerMessage')
-	});
-};
 
-exports.renderLogin = function(req, res, next) {
-	res.render('login', {
-		title: 'Login',
-		messages: req.flash('loginMessage')
-	});
-};
+  var _renderProfile = function(req, res) {
+  	res.render('profile', {
+  		title: 'Profile',
+  		user: req.user
+  	});
+  };
 
-exports.renderRegister = function(req, res, next) {
-	res.render('register', {
-		title: 'Register',
-		messages: req.flash('registerMessage')
-	});
+  var _profileInfo = function(req, res){
+  	console.log(res);
+  	res.json(req.user);
+  };
+
+  var _logout = function(req, res) {
+  	req.logout();
+  	res.redirect('/');
+  };
+
+  var _requiresLogin = function(req, res, next) {
+  	if (!req.isAuthenticated()) {
+  		return res.status(401).send({
+  			message: 'User is not logged in'
+  		});
+  	}
+  	next();
+  };
+
+  return {
+    requiresLogin  : _requiresLogin,
+    renderLogin    : _renderLogin,
+    renderRegister : _renderRegister,
+    renderProfile  : _renderProfile,
+    profileInfo    : _profileInfo,
+    logout         : _logout
+  };
+}();
+
+
+/*
+var _list = function(req, res, next) {
+  User.find({}, function(err, users) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(users);
+    }
+  });
 };
 
 exports.renderAddLocal = function(req, res, next) {
@@ -67,23 +96,6 @@ exports.unlinkTwitter = function(req, res) {
 	});
 };
 
-exports.logout = function(req, res) {
-	req.logout();
-	res.redirect('/');
-};
-
-exports.profile = function(req, res) {
-	res.render('profile', {
-		title: 'Profile',
-		user: req.user
-	});
-};
-
-exports.profileInfo = function(req, res){
-	console.log(res);
-	res.json(req.user);
-};
-
 exports.findUserById = function(req, res){
 	User.findById(
 		req.user._id,
@@ -96,46 +108,4 @@ exports.findUserById = function(req, res){
 		}
 	);
 };
-
-exports.edit = function(req, res){
-	res.render('edit-profile', {
-		title: 'Edit Profile',
-		user: req.user
-	});
-};
-
-exports.update = function(req, res, next) {
-
-	var user = req.user;
-	user.username = req.body.username;
-	user.league		= req.body.league;
-
-	user.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: getErrorMessage(err)
-			});
-		} else {
-			console.log(user);
-			res.redirect('/profile');
-		}
-	});
-};
-
-exports.requiresLogin = function(req, res, next) {
-	if (!req.isAuthenticated()) {
-		return res.status(401).send({
-			message: 'User is not logged in'
-		});
-	}
-	next();
-};
-
-exports.commissionerStatus = function(req, res, next){
-  if (!req.user.commissioner) {
-		return res.status(403).send({
-			message: 'User is not the commissioner'
-		});
-	}
-	next();
-};
+*/
