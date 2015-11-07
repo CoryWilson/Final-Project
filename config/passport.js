@@ -51,18 +51,16 @@ module.exports = function(passport) {
 							facebook_id  : profile.id,
 							access_token : token,
 							firstName		 : profile.name.givenName,
-							lastName     : profile.name.familyName,
-							email				 : profile.emails[0].value
+							lastName     : profile.name.familyName
 						};
-						var insertQuery = "INSERT into user (facebook_id,access_token,firstName,lastName,email) values (?,?,?,?,?)";
+						var insertQuery = "INSERT into user (facebook_id,access_token,firstName,lastName) values (?,?,?,?)";
 						connection.query(
 							insertQuery,
 							[
 								newFacebookUser.facebook_id,
 								newFacebookUser.access_token,
 								newFacebookUser.firstName,
-								newFacebookUser.lastName,
-								newFacebookUser.email
+								newFacebookUser.lastName
 							],
 							function(err, rows){
 								newFacebookUser.id = rows.insertId;

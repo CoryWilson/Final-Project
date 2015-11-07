@@ -20,7 +20,7 @@ module.exports = function(app,passport) {
   //Facebook Auth Callback URL
   app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
-    failureRedirect: '/login',
+    failureRedirect: '/sign-in',
     successRedirect: '/',
     scope: ['email']
   }));
