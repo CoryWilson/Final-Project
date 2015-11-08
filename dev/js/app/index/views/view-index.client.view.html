@@ -1,5 +1,17 @@
-<section data-ng-controller="IndexController" data-ng-init="findUser();getLastName();" class="index">
-  {{last_name}}
+<section data-ng-controller="IndexController" data-ng-init="findUser();" class="index">
+
+  <div ng-repeat="game in NFL">
+    {{game.week}}
+    <br>
+    {{game.home}}
+    <br>
+    {{game.away}}
+    <hr>
+  </div>
+  {{Soccer}}
+  <div ng-repeat="match in Soccer">
+    {{match}}
+  </div>
   <div class="hero"></div>
   <div class="blocks">
     <div class="blocks__block">
