@@ -1,7 +1,7 @@
 //File Name: ./app/models/user.server.model.js
 
 module.exports = function(sequelize, DataTypes){
-  var User = sequelize.define('user', {
+  var User = sequelize.define('User', {
     id : {
       type          : DataTypes.INTEGER,
       primaryKey    : true,
@@ -18,6 +18,12 @@ module.exports = function(sequelize, DataTypes){
     },
     lastName : {
       type: DataTypes.STRING
+    }
+  }, {
+    classMethods: {
+      associate: function(models) {
+
+      }
     }
   });
 
