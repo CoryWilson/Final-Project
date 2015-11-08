@@ -286,7 +286,7 @@ module.exports = function(){
           }
       );
     } else {
-      res.send('It\'s the offseason! Come back next year!');
+      res.json('It\'s the offseason! Come back next year!');
     }
   };
 

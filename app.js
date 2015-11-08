@@ -1,27 +1,24 @@
-//File Name: ./server.js
-
-//Declare Dependencies
-var dotenv       = require('dotenv').load(),
-    express      = require('express'),
+var express      = require('express'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
+    favicon      = require('serve-favicon'),
     morgan       = require('morgan'),
-    mysql        = require('mysql'),
+    path         = require('path'),
     passport     = require('passport'),
     flash        = require('connect-flash'),
-    session      = require('express-session');
+    session      = require('express-session'),
+    sequelize    = require('sequelize');
 
-//start up express app
 var app = express();
 
-//connect to database
-//var connection = mysql.createConnection(dbconfig.connection);
-require('./config/passport')(passport);//pass passport for config
+require('dotenv').load(); //load environmental variables
 
-app.use(morgan('dev'));//log all requests to console
-app.use(cookieParser());//read cookies
-app.use(bodyParser.json());//read html forms
-app.use(bodyParser.urlencoded({extended:true}));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use(session({
 		saveUninitialized: true,
@@ -37,48 +34,47 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.set('views', './app/views');//location of views
-app.set('view engine', 'ejs');//declare view engine
+// view engine setup
+app.set('views', path.join(__dirname, 'app/views'));
+app.set('view engine', 'ejs');
 
 //require routes
 require('./app/routes/index.server.routes.js')(app,passport);
 require('./app/routes/api.server.routes.js')(app);
 require('./app/routes/users.server.routes.js')(app,passport);
 
-//use public folder to display static files
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-//Error Handlers
-//Catch 404 and forward to error handler
+// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-//Development error handler
-//Will print stacktrace
+// error handlers
+
+// development error handler
+// will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
-      title: 'Error',
       message: err.message,
       error: err
     });
   });
 }
 
-//Production error handler
-//No stacktraces leaked to user
+// production error handler
+// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
-    title: 'Error',
     message: err.message,
     error: {}
   });
 });
 
-app.listen(process.env.PORT);
-console.log('Listening on port '+process.env.PORT);
+
+module.exports = app;

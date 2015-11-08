@@ -4,7 +4,7 @@ angular.module('index')
   .factory('Index', ['$resource',
   	function($resource) {
   		return {
-        NFL    : $resource('/nfl/:week',{week:'@week'}),
+        NFL    : $resource('/nfl'),
         Soccer : $resource('/soccer/:week',{week:'@week'})
       };
     }
