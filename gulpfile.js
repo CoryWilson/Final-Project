@@ -46,7 +46,8 @@ gulp.task('bower', function(){
 /* Scripts */
 var customOpts = {
   entries: [
-    config.jsPath+'/main.js'
+    config.jsPath+'/main.js',
+    config.jsPath+'/fb_graph_api.js'
   ],
   debug: true
 };

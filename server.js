@@ -42,11 +42,11 @@ app.set('view engine', 'ejs');//declare view engine
 
 //require routes
 require('./app/routes/index.server.routes.js')(app,passport);
+require('./app/routes/api.server.routes.js')(app);
 require('./app/routes/users.server.routes.js')(app,passport);
 
 //use public folder to display static files
 app.use(express.static('./public'));
-
 
 //Error Handlers
 //Catch 404 and forward to error handler
