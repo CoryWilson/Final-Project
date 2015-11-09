@@ -14,6 +14,10 @@ module.exports = function(){
   	res.redirect('/');
   };
 
+  var _account = function(req, res){
+    res.json(req.user);
+  };
+
   //checks to see if a user is logged in
   var _requiresAuth = function(req, res, next) {
   	if (!req.isAuthenticated()) {
@@ -27,6 +31,7 @@ module.exports = function(){
   return {
     renderSignIn   : _renderSignIn,
     logout         : _logout,
+    account        : _account,
     requiresAuth   : _requiresAuth
   };
 }();

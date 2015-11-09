@@ -11,6 +11,9 @@ module.exports = function(app,passport) {
   //Log Out
   app.get('/logout', usersController.logout);
 
+  //Get User Info
+  app.get('/account', usersController.account);
+
   //Facebook Authenticate
   app.get('/auth/facebook',
   passport.authenticate('facebook', {

@@ -23,7 +23,7 @@ module.exports = function(passport){
 		callbackURL	 			: process.env.FB_CALLBACK_URL,
 		passReqToCallback : true,
 		profileFields			: ['emails','displayName','name']
-  }, function(req, token, refreshToken, profile, done){
+  }, function(req, access_token, refreshToken, profile, done){
 		process.nextTick(function(){
 			if(!req.user){//If there is no user run this code
 				//DB Query for User Facebook ID
@@ -34,10 +34,10 @@ module.exports = function(passport){
             } else { //Else there is no user so lets create the user
               User.create(
                 {
-                  facebook_id:profile.id,
-                  access_token:token,
-                  firstName:profile.name.givenName,
-                  lastName:profile.name.familyName
+                  facebook_id  : profile.id,
+                  access_token : access_token,
+                  firstName    : profile.name.givenName,
+                  lastName     : profile.name.familyName
                 }
               )
                 .then(function(newUser){
