@@ -12,7 +12,7 @@ module.exports = function(app,passport) {
   app.get('/logout', usersController.logout);
 
   //Get User Info
-  app.get('/account', usersController.account);
+  app.post('/account', usersController.account);
 
   //Facebook Authenticate
   app.get('/auth/facebook',

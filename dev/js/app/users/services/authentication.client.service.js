@@ -1,6 +1,6 @@
 angular.module('users')
   .factory('Authentication', ['$resource',
   	function($resource) {
-      return $resource('/profileInfo');
+      return $resource('/account',{},{ query : { method : 'POST'} });
     }
 ]);
