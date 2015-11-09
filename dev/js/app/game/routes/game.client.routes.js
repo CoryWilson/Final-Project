@@ -1,11 +1,12 @@
 //File Name: ./dev/js/app/index/routes/index.client.routes.js
 
-angular.module('index')
+//Determines what routes are used for the game
+angular.module('game')
   .config(['$routeProvider',
     function($routeProvider){
       $routeProvider.
       when('/', {
-        templateUrl: 'assets/js/app/index/views/view-index.client.view.html'
+        templateUrl: 'assets/js/app/game/views/view-index.client.view.html'
       });
     }
 ]);

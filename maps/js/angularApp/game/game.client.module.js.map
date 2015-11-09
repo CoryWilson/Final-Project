@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["game/game.client.module.js"],"sourcesContent":["//File Name: ./dev/js/app/game/game.client.modules.js\n\n//Declaring game module\nangular.module('game', []);\n"],"file":"game/game.client.module.js","sourceRoot":"/source/"}
