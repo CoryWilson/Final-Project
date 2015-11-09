@@ -1,75 +1,57 @@
-//File Name: ./config/passport.js
-
 var FacebookStrategy = require('passport-facebook').Strategy;
+var models           = require('../app/models');
+var User             = models.User;
 
-var	bcrypt		 = require('bcrypt-nodejs'),
-		dbconfig   = require('./db'),
-	  mongoose 	 = require('mongoose'),
-		mysql 		 = require('mysql'),
-		passport 	 = require('passport');
+module.exports = function(passport){
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
 
-
-var connection = mysql.createConnection(dbconfig.connection);
-
-connection.query('USE '+dbconfig.connection.database);
-module.exports = function(passport) {
-
-	passport.serializeUser(function(user, done) {
-		done(null, user.id);
-	});
-
-	passport.deserializeUser(function(id, done) {
-		connection.query("SELECT * FROM user WHERE id = ? ",[id], function(err, rows){
-      done(err, rows[0]);
+  passport.deserializeUser(function(id, done) {
+    User.findOne({where: {id: id}})
+    .then(function(user){
+      done(null, user);
+    }).error(function(err){
+      done(err, null);
     });
-	});
+  });
 
-	//Facebook Strategy
-	passport.use('facebook', new FacebookStrategy({
-		clientID 		 			: process.env.FB_CLIENT_ID,
+  // Use passport strategy to create user account
+  passport.use('facebook', new FacebookStrategy({
+    clientID 		 			: process.env.FB_CLIENT_ID,
 		clientSecret 			: process.env.FB_CLIENT_SECRET,
 		callbackURL	 			: process.env.FB_CALLBACK_URL,
 		passReqToCallback : true,
 		profileFields			: ['emails','displayName','name']
-	},
-	function(req, token, refreshToken, profile, done){
+  }, function(req, token, refreshToken, profile, done){
 		process.nextTick(function(){
-			if(!req.user){
+			if(!req.user){//If there is no user run this code
 				//DB Query for User Facebook ID
-				connection.query("SELECT * FROM user WHERE facebook_id = ?",[profile.id], function(err, rows){
-					//If no db connection stop everything
-					if(err){
-						return done(err);
-					}
-					//If user exists log them in
-					if(rows.length){
-						return done(null, rows[0]);
-					}
-					//If user doesn't exist create new user
-					else {
-						var newFacebookUser = {
-							facebook_id  : profile.id,
-							access_token : token,
-							firstName		 : profile.name.givenName,
-							lastName     : profile.name.familyName
-						};
-						var insertQuery = "INSERT into user (facebook_id,access_token,firstName,lastName) values (?,?,?,?)";
-						connection.query(
-							insertQuery,
-							[
-								newFacebookUser.facebook_id,
-								newFacebookUser.access_token,
-								newFacebookUser.firstName,
-								newFacebookUser.lastName
-							],
-							function(err, rows){
-								newFacebookUser.id = rows.insertId;
-								return done(null, newFacebookUser);
-							}
-						);
-					}
-				});
-			}
+				User.find({where:{facebook_id:profile.id}})
+          .then(function(user){
+            if(user) { //If there is a user return the user
+              return done(null, user);
+            } else { //Else there is no user so lets create the user
+              User.create(
+                {
+                  facebook_id:profile.id,
+                  access_token:token,
+                  firstName:profile.name.givenName,
+                  lastName:profile.name.familyName
+                }
+              )
+                .then(function(newUser){
+                  return done(null, newUser);
+                })
+                .error(function(err){
+                  done(err, null);
+                });
+  					}
+          }).error(function(err){
+            done(err, null);
+          });
+      }
 		});
 	}));
+
 };
