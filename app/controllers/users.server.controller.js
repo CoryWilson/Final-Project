@@ -2,7 +2,7 @@
 module.exports = function(){
 
   //renders login view
-  var _renderSignIn = function(req, res, next) {
+  var _renderSignIn = function(req, res) {
   	res.render('sign-in', {
   		title: 'Sign In'
   	});
