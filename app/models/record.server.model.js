@@ -10,8 +10,9 @@ module.exports = function(sequelize, DataTypes) {
       type : DataTypes.INTEGER(10),
       allowNull : false
     },
-    pick : {
+    points : {
       type : DataTypes.INTEGER,
+      allowNull : false
     }
   }, {
     classMethods: {
