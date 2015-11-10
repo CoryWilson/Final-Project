@@ -7,13 +7,22 @@ module.exports = function(){
     res.json(req.user);
   };
 
+  //gets user's access token
+  //request users profile information with that access token
   var _facebook = function(req, res){
     FB.setAccessToken(req.user.access_token);
 
-    console.log(req.user.access_token);
-
-    var body = 'My first post using facebook-node-sdk';
-    FB.api('me/', function (response) {
+    FB.api(
+      'me',
+      {fields : [
+        'first_name',
+        'last_name',
+        'name',
+        'picture',
+        'friends',
+        'favorite_teams'
+      ]},
+      function (response) {
       if (response && !response.error) {
         res.json(response);
       }
