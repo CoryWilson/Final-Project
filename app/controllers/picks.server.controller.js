@@ -4,14 +4,13 @@ var models = require('../models');
 module.exports = function(){
 
   var _createPick = function(req,res){
-    console.log(req.user);
-    models.Pick.create({
-      value   : req.body.value,
-      game_id : req.body.game_id,
-      UserId : req.user.id
-    }).then(function(pick){
-      console.log(pick);
-    });
+    models.Pick
+      .create({
+        value   : req.body.value,
+        game_id : req.body.game_id,
+        UserId : req.user.id
+      })
+      .then(function(pick){});
   };
 
   var _findPicks = function(req,res){

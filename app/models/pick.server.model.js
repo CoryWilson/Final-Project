@@ -24,7 +24,6 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Pick.belongsTo(models.User, {
-          onDelete: "CASCADE",
           foreignKey: {
             allowNull: false
           }

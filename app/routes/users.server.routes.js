@@ -2,13 +2,6 @@
 var usersController = require('../controllers/users.server.controller.js');
 
 module.exports = function(app,passport) {
-
-  //Sign In View
-	app.get('/sign-in',usersController.renderSignIn);
-
-  //Log Out
-  app.get('/logout', usersController.logout);
-
   //Get User Info
   app.post('/account', usersController.account);
 
@@ -26,4 +19,6 @@ module.exports = function(app,passport) {
     scope: ['email']
   }));
 
+	//Log Out
+  app.get('/logout', usersController.logout);
 };
