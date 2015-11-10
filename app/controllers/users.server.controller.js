@@ -18,8 +18,8 @@ module.exports = function(){
         'first_name',
         'last_name',
         'name',
-        'picture.height(540).width(540)',
-        'friends',
+        'picture.width(500).height(500)',
+        'friends{first_name,last_name,name,picture.width(500).height(500),favorite_teams}',
         'favorite_teams'
       ]},
       function (response) {

@@ -6,12 +6,12 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey    : true,
       autoIncrement : true
     },
+    week : {
+      type : DataTypes.INTEGER,
+    },
     game_id : {
       type : DataTypes.INTEGER(10),
       allowNull : false
-    },
-    week : {
-      type : DataTypes.INTEGER,
     },
     team : {
       type : DataTypes.STRING

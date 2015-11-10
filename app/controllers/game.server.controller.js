@@ -6,12 +6,19 @@ module.exports = function(){
 
   var _createPick = function(req,res){
     models.Pick
-      .create({
-        value   : req.body.value,
-        game_id : req.body.game_id,
-        UserId  : req.user.id
+      .findOrCreate({
+        where: {
+          game_id : req.body.game_id,
+          UserId  : req.user.id
+        }
       })
-      .then(function(pick){});
+      .spread(function(user, pick){
+        console.log(user);
+        console.log(pick);
+      })
+      .error(function(err){
+        console.log('Error creating pick: ',err);
+      });
   };
 
   //check picks
@@ -32,22 +39,22 @@ module.exports = function(){
   };
 
   var _checkPicks = function(req, res){
-    models.Pick
-      .findAll({})
-      .then(function(games){
-        //var points = 0;
-
-        games.forEach(console.log(_readNFLGame(games.game_id)));
-
-
-        // models.Record
-        //   .create({
-        //     game_id : game.game_id,
-        //     points  : points,
-        //     UserId  : req.user.id
-        //   })
-        //   .then(function(record){});
-      });
+    // models.Pick
+    //   .findAll({})
+    //   .then(function(games){
+    //     //var points = 0;
+    //
+    //     res.json(games);
+    //
+    //
+    //     // models.Record
+    //     //   .create({
+    //     //     game_id : game.game_id,
+    //     //     points  : points,
+    //     //     UserId  : req.user.id
+    //     //   })
+    //     //   .then(function(record){});
+    //   });
   };
 
   return {

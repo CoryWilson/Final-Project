@@ -11,4 +11,10 @@
   <img src="{{facebook.picture.data.url}}" alt="">
   <p>{{facebook}}</p>
 
+  <ul>
+    <li ng-repeat="friend in facebook.friends.data">
+      {{friend}}
+    </li>
+  </ul>
+
 </section>
