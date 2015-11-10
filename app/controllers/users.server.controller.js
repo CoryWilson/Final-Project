@@ -18,7 +18,7 @@ module.exports = function(){
         'first_name',
         'last_name',
         'name',
-        'picture',
+        'picture.height(540).width(540)',
         'friends',
         'favorite_teams'
       ]},

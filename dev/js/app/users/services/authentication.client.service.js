@@ -4,6 +4,9 @@
 angular.module('users')
   .factory('Authentication', ['$resource',
   	function($resource) {
-      return $resource('/account',{},{ query : { method : 'POST'} });
+      return {
+        User     : $resource('/account',{},{ query : { method : 'POST'} }),
+        Facebook : $resource('/facebook',{},{ query : { method : 'POST'} }),
+      };
     }
 ]);
