@@ -1,6 +1,6 @@
 //File Name: ./app/models/record.server.model.js
 module.exports = function(sequelize, DataTypes) {
-  var Record = sequelize.define('Pick', {
+  var Record = sequelize.define('Record', {
     id : {
       type          : DataTypes.INTEGER,
       primaryKey    : true,

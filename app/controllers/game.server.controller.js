@@ -9,6 +9,8 @@ module.exports = function(){
       .findOrCreate({
         where: {
           game_id : req.body.game_id,
+          value   : req.body.value,
+          week    : req.body.week,
           UserId  : req.user.id
         }
       })
@@ -39,22 +41,11 @@ module.exports = function(){
   };
 
   var _checkPicks = function(req, res){
-    // models.Pick
-    //   .findAll({})
-    //   .then(function(games){
-    //     //var points = 0;
-    //
-    //     res.json(games);
-    //
-    //
-    //     // models.Record
-    //     //   .create({
-    //     //     game_id : game.game_id,
-    //     //     points  : points,
-    //     //     UserId  : req.user.id
-    //     //   })
-    //     //   .then(function(record){});
-    //   });
+    models.Pick
+      .findAll({})
+      .then(function(games){
+        res.json(games);
+      });
   };
 
   return {

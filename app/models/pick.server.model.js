@@ -6,20 +6,18 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey    : true,
       autoIncrement : true
     },
-    week : {
-      type : DataTypes.INTEGER,
-    },
     game_id : {
       type : DataTypes.INTEGER(10),
       allowNull : false
     },
-    team : {
-      type : DataTypes.STRING
-    },
     value : {
       type : DataTypes.STRING,
       allowNull : false
-    }
+    },
+    week : {
+      type : DataTypes.INTEGER,
+      allowNull : false
+    },
   }, {
     classMethods: {
       associate: function(models) {
