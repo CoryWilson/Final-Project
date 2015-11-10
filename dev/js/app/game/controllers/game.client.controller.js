@@ -15,22 +15,37 @@ angular.module('game')
 
       $scope.pickHome = function(game){
         var pick = new Game.Pick({
-          game_id : Number(game.id),
-          week    : Number(game.week),
-          team    : String(game.home),
-          value   : 'Home'
+          game_id : game.id,
+          week    : game.week,
+          team    : game.home,
+          value   : 'home'
         });
         pick.$save();
       };
 
       $scope.pickAway = function(game){
         var pick = new Game.Pick({
-          game_id : Number(game.id),
-          week    : Number(game.week),
-          team    : String(game.away),
-          value   : 'Away'
+          game_id : game.id,
+          week    : game.week,
+          team    : game.away,
+          value   : 'away'
         });
         pick.$save();
+      };
+
+      $scope.sendRecord = function(game){
+        var points = 0;
+        if(game.home_score > game.away_score && value === 'home' ){
+          points = points++;
+        }
+        if(game.away_score > game.home_score && value === 'away' ){
+          points = points++;
+        }
+        var record = new Game.Record({
+          game_id : game.id,
+          points  : points
+        });
+        record.$save();
       };
 
     }]);

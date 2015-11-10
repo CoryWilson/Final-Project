@@ -42,7 +42,7 @@ app.set('view engine', 'ejs');
 //require routes
 require('./app/routes/index.server.routes.js')(app);
 require('./app/routes/api.server.routes.js')(app);
-require('./app/routes/picks.server.routes.js')(app);
+require('./app/routes/game.server.routes.js')(app);
 require('./app/routes/users.server.routes.js')(app,passport);
 
 

@@ -290,6 +290,19 @@ module.exports = function(){
     }
   };
 
+  var _readNFLGame = function(req, res){
+    request
+      .post({url:'https://profootballapi.com/game?api_key='+process.env.NFL_API_KEY+'&game_id='+req.params.game_id},
+        function(err, httpResponse, body){
+          if(err){
+            console.log(err);
+          }
+            var data = JSON.parse(body);
+            res.json(data);
+        }
+    );
+  };
+
   var _readSoccerAPI = function(req,res){
     var options = {
       url : 'http://api.football-data.org/alpha/soccerseasons/398/fixtures?matchday='+req.params.week,
@@ -310,6 +323,7 @@ module.exports = function(){
 
   return {
     readNFLAPI    : _readNFLAPI,
+    readNFLGame   : _readNFLGame,
     readSoccerAPI : _readSoccerAPI
   };
 }();

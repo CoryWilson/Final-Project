@@ -1,4 +1,4 @@
-//File Name: ./app/controllers/picks.server.controller.js
+//File Name: ./app/controllers/game.server.controller.js
 var models = require('../models');
 
 module.exports = function(){
@@ -13,16 +13,7 @@ module.exports = function(){
       .then(function(pick){});
   };
 
-  var _findPicks = function(req,res){
-    models.Pick.findAll({
-
-    }).then(function(picks){
-      picks.forEach(log);
-    });
-  };
-
   return {
-    createPick : _createPick,
-    findPicks  : _findPicks
+    createPick : _createPick
   };
 }();

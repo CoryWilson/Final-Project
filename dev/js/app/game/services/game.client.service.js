@@ -7,7 +7,8 @@ angular.module('game')
   	function($resource) {
   		return {
         NFL    : $resource('/nfl'),
-        Pick   : $resource('/pick')
+        Pick   : $resource('/pick'),
+        Record : $resource('/record')
       };
     }
   ]);
