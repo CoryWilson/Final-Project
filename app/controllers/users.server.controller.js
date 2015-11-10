@@ -1,8 +1,23 @@
 //File Name: ./app/controllers/users.server.controller.js
+var FB = require('fb');
+
 module.exports = function(){
   //gets user account information
   var _account = function(req, res){
     res.json(req.user);
+  };
+
+  var _facebook = function(req, res){
+    FB.setAccessToken(req.user.access_token);
+
+    console.log(req.user.access_token);
+
+    var body = 'My first post using facebook-node-sdk';
+    FB.api('me/', function (response) {
+      if (response && !response.error) {
+        res.json(response);
+      }
+    });
   };
 
   //logs user out
@@ -23,6 +38,7 @@ module.exports = function(){
 
   return {
     account        : _account,
+    facebook       : _facebook,
     logout         : _logout,
     requiresAuth   : _requiresAuth
   };

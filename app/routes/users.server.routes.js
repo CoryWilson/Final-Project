@@ -5,6 +5,8 @@ module.exports = function(app,passport) {
   //Get User Info
   app.post('/account', usersController.account);
 
+  app.get('/facebook', usersController.facebook);
+
   //Facebook Authenticate
   app.get('/auth/facebook',
   passport.authenticate('facebook', {

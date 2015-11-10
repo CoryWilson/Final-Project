@@ -1,6 +1,7 @@
 //File Name: ./dev/js/app/index/routes/index.client.routes.js
 
 //Determines what routes are used for the game
+//Replies with appropriate view
 angular.module('game')
   .config(['$routeProvider',
     function($routeProvider){
