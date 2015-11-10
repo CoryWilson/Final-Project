@@ -22,7 +22,7 @@ module.exports = function(app,passport) {
   app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
     failureRedirect: '/sign-in',
-    successRedirect: '/',
+    successRedirect: '/#!/game',
     scope: ['email']
   }));
 

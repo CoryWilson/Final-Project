@@ -1,0 +1,21 @@
+<section data-ng-controller="GameController" class="games">
+  <h1 ng-if="user">{{user.firstName}} {{user.lastName}}</h1>
+
+  <h1>NFL Week {{NFL[0].week}}</h1>
+  <div ng-repeat="game in NFL" class="game">
+    <div class="game__header">
+      <h2>{{game.home}} vs. {{game.away}}</h2>
+      <h3>Date: {{game.month}}/{{game.day}}/2015</h3>
+      <h3>Score: {{game.home_score}} - {{game.away_score}}</h3>
+    </div>
+    <div class="game__content">
+      <div ng-click="pickHome(game)" class="teams home">
+        <h2>Pick {{game.home}}</h2>
+      </div>
+      <div ng-click="pickAway(game)" class="teams away">
+        <h2>Pick {{game.away}}</h2>
+      </div>
+    </div>
+
+  </div>
+</section>

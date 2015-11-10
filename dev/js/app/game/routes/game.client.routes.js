@@ -7,6 +7,9 @@ angular.module('game')
       $routeProvider.
       when('/', {
         templateUrl: 'assets/js/app/game/views/view-index.client.view.html'
+      }).
+      when('/game', {
+        templateUrl: 'assets/js/app/game/views/view-games.client.view.html'
       });
     }
 ]);

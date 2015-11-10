@@ -53,7 +53,7 @@ var customOpts = {
 var opts = assign({}, watchify.args, customOpts);
 var b    = watchify(browserify(opts));
 
-gulp.task('scripts', ['clean'], bundle);
+gulp.task('scripts',  bundle);
 b.on('update', bundle);
 b.on('log', gUtil.log);
 
@@ -70,7 +70,7 @@ function bundle() {
 
 gulp.task('script-watch', ['scripts'], reload);
 
-gulp.task('ng-scripts', ['clean'], function(){
+gulp.task('ng-scripts',  function(){
   gulp.src(config.jsPath+'/app/**/**/*.js')
   .pipe(sourcemaps.init())
   .pipe(sourcemaps.write('../../../../maps/js/angularApp'))
@@ -79,7 +79,7 @@ gulp.task('ng-scripts', ['clean'], function(){
 
 gulp.task('ng-script-watch', ['ng-scripts'], reload);
 
-gulp.task('ng-html', ['clean'], function(){
+gulp.task('ng-html',  function(){
   gulp.src(config.ngViewPath+'/*.html')
   .pipe(gulp.dest('./public/assets/js/app/'));
 });
@@ -135,7 +135,7 @@ gulp.task('styles', function(){
 });
 
 /* Styles task without browser-sync */
-gulp.task('styles-no-bs', ['clean'], function(){
+gulp.task('styles-no-bs',  function(){
   gulp.src(config.sassPath+'/main.scss')
   .pipe(sourcemaps.init())
     .pipe(sass())
@@ -146,7 +146,7 @@ gulp.task('styles-no-bs', ['clean'], function(){
 });
 
 /* Images */
-gulp.task('images', ['clean'], function(){
+gulp.task('images',  function(){
   gulp.src(config.imgPath+'/**/*.*')
   .pipe(gulp.dest('./public/assets/images'));
 });
@@ -154,7 +154,7 @@ gulp.task('images', ['clean'], function(){
 gulp.task('image-watch', ['images'], reload);
 
 /* Fonts */
-gulp.task('fonts', ['clean'], function(){
+gulp.task('fonts',  function(){
   gulp.src(config.fontPath+'/*/*')
   .pipe(gulp.dest('./public/assets/fonts'));
 });
