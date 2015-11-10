@@ -40,9 +40,11 @@ app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'ejs');
 
 //require routes
-require('./app/routes/index.server.routes.js')(app,passport);
+require('./app/routes/index.server.routes.js')(app);
 require('./app/routes/api.server.routes.js')(app);
+require('./app/routes/picks.server.routes.js')(app);
 require('./app/routes/users.server.routes.js')(app,passport);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 

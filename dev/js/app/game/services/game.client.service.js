@@ -6,8 +6,8 @@ angular.module('game')
   .factory('Game', ['$resource',
   	function($resource) {
   		return {
-        NFL    : $resource('/nfl')
-        //Soccer : $resource('/soccer/:week',{week:'@week'})
+        NFL    : $resource('/nfl'),
+        Pick   : $resource('/pick')
       };
     }
   ]);

@@ -6,13 +6,29 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey    : true,
       autoIncrement : true
     },
-    pick: {
-      type: DataTypes.STRING
+    game_id : {
+      type : DataTypes.INTEGER(10),
+      allowNull : false
+    },
+    week : {
+      type : DataTypes.INTEGER,
+    },
+    team : {
+      type : DataTypes.STRING
+    },
+    value : {
+      type : DataTypes.STRING,
+      allowNull : false
     }
   }, {
     classMethods: {
       associate: function(models) {
-
+        Pick.belongsTo(models.User, {
+          onDelete: "CASCADE",
+          foreignKey: {
+            allowNull: false
+          }
+        });
       }
     }
   });

@@ -14,6 +14,7 @@ module.exports = function(){
   	res.redirect('/');
   };
 
+  //gets user account information
   var _account = function(req, res){
     res.json(req.user);
   };

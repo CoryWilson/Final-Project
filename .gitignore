@@ -6,4 +6,3 @@ bower_compennts
 config/env/*
 config/config.json
 .env
-.jshintrc

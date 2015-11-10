@@ -1,11 +1,10 @@
 <section data-ng-controller="GameController" class="index">
   <h1 ng-if="user">{{user.firstName}} {{user.lastName}}</h1>
+
+  <h1>NFL Week {{NFL[0].week}}</h1>
   <div ng-repeat="game in NFL">
-    {{game.week}}
-    <br>
-    {{game.home}}
-    <br>
-    {{game.away}}
+    <button ng-click="pickHome(game)">Pick {{game.home}}</button>
+    <button ng-click="pickAway(game)">Pick {{game.away}}</button>
     <hr>
   </div>
   <div class="hero"></div>
