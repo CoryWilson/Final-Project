@@ -6,7 +6,7 @@ module.exports = function(app){
   app.post('/pick',gameController.createPick);
 
   //Find all picks
-  //app.get('/picks',gameController.findPicks);
+  app.get('/checkPicks',gameController.checkPicks);
 
   //Send Record
   //app.post('/record',gameController.sendRecord);

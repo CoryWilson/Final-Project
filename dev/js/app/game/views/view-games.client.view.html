@@ -1,5 +1,5 @@
 <section data-ng-controller="GameController" class="games" data-ng-init="getUser();getNFLSchedule();">
-  <h1 ng-if="user">{{user.firstName}} {{user.lastName}}</h1>
+  <h1 ng-if="user">Welcome, {{user.firstName}} {{user.lastName}}</h1>
 
   <h1>NFL Week {{NFL[0].week}}</h1>
   <div ng-repeat="game in NFL" class="game">

@@ -1,0 +1,9 @@
+<section data-ng-controller="GameController" class="profile" data-ng-init="getUser()">
+
+  <h1>Profile</h1>
+
+  <h2 ng-if="user">Welcome, {{user.firstName}} {{user.lastName}}</h2>
+
+  <p>{{user}}</p>
+
+</section>

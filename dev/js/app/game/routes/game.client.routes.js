@@ -10,6 +10,12 @@ angular.module('game')
       }).
       when('/game', {
         templateUrl: 'assets/js/app/game/views/view-games.client.view.html'
+      }).
+      when('/leaderboard', {
+        templateUrl: 'assets/js/app/game/views/view-leaderboard.client.view.html'
+      }).
+      when('/profile', {
+        templateUrl: 'assets/js/app/game/views/view-profile.client.view.html'
       });
     }
 ]);
