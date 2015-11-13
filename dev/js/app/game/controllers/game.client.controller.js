@@ -35,19 +35,4 @@ angular.module('game')
         pick.$save();
       };
 
-      $scope.sendRecord = function(game){
-        var points = 0;
-        if(game.home_score > game.away_score && value === 'home' ){
-          points = points++;
-        }
-        if(game.away_score > game.home_score && value === 'away' ){
-          points = points++;
-        }
-        var record = new Game.Record({
-          game_id : game.id,
-          points  : points
-        });
-        record.$save();
-      };
-
     }]);

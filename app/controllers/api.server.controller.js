@@ -291,14 +291,31 @@ module.exports = function(){
   };
 
   var _readNFLGame = function(req, res){
+    //doesn't send a game until it happens
     request
-      .post({url:'https://profootballapi.com/game?api_key='+process.env.NFL_API_KEY+'&game_id='+req.params.game_id},
+      .post({url:'https://profootballapi.com/schedule?api_key='+process.env.NFL_API_KEY+'&year=2015&week=10&season=REG'},
         function(err, httpResponse, body){
           if(err){
             console.log(err);
           }
-            var data = JSON.parse(body);
-            res.json(data);
+          var data = JSON.parse(body);
+          var game_id = Number(req.params.game_id);
+          var points = 0;
+          for (var i = 0; i < data.length; i++) {
+            if(data[i].id === game_id){
+              if(data[i].home_score > data[i].away_score){
+                points++;
+                console.log(data[i].home,' wins! User chose correctly!');
+                console.log('User gets ',points, ' points!');
+              }
+              if(data[i].home_score < data[i].away_score){
+                points++;
+                console.log(data[i].away,' wins! User chose correctly!');
+                console.log('User gets ',points, 'points!');
+              }
+              res.send(data[i]);
+            }
+          }
         }
     );
   };
