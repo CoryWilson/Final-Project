@@ -6,10 +6,6 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey    : true,
       autoIncrement : true
     },
-    game_id : {
-      type : DataTypes.INTEGER(10),
-      allowNull : false
-    },
     points : {
       type : DataTypes.INTEGER,
       allowNull : false

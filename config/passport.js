@@ -41,6 +41,14 @@ module.exports = function(passport){
                 }
               )
                 .then(function(newUser){
+                  console.log(newUser);
+                  models.Record
+                    .create({
+                      points : 0,
+                      UserId : newUser.id
+                    }).then(function(data){
+                      console.log(data);
+                    });
                   return done(null, newUser);
                 })
                 .error(function(err){

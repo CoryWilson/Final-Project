@@ -19,7 +19,7 @@ module.exports = function(){
         'last_name',
         'name',
         'picture.width(500).height(500)',
-        'friends{first_name,last_name,name,picture.width(500).height(500),favorite_teams}',
+        'friends{id,first_name,last_name,name,picture.width(500).height(500),favorite_teams}',
         'favorite_teams'
       ]},
       function (response) {

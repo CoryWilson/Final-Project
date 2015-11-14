@@ -5,9 +5,9 @@ module.exports = function(app){
   //Create Pick
   app.post('/pick',gameController.createPick);
 
-  //Find all picks
-  app.get('/checkPicks',gameController.checkPicks);
+  //Update Records
+  app.get('/updateRecords',gameController.updateRecord);
 
-  //Send Record
-  //app.post('/record',gameController.sendRecord);
+  //Get Leaderboard
+  app.get('/leaderboard',gameController.getFriendsRecord);
 };

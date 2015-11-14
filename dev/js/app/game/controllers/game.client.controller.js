@@ -35,4 +35,8 @@ angular.module('game')
         pick.$save();
       };
 
+      $scope.getLeaderboard = function(){
+        $scope.leaderboard = Game.Leaderboard.query({});
+      };
+
     }]);

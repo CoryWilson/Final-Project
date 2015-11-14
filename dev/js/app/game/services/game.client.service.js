@@ -6,9 +6,10 @@ angular.module('game')
   .factory('Game', ['$resource',
   	function($resource) {
   		return {
-        NFL    : $resource('/nfl'),
-        Pick   : $resource('/pick'),
-        Record : $resource('/record')
+        NFL         : $resource('/nfl'),
+        Pick        : $resource('/pick'),
+        Record      : $resource('/record'),
+        Leaderboard : $resource('/leaderboard')
       };
     }
   ]);
