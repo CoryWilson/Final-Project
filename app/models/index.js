@@ -13,13 +13,16 @@ var options = {
   password : process.env.SSH_PASS
 };
 
-var server = tunnel(options, function(error, result){
+// var server = tunnel(options, function(error, result){
   if (config.use_env_variable) {
     var sequelize = new Sequelize(process.env[config.use_env_variable]);
   } else {
-    var sequelize = new Sequelize(config.database, config.username, config.password, config);
+    var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+      host : process.env.DB_HOST,
+      port : process.env.PORT,
+      dialict : process.env.DB_DIALECT
+    });
   }
-});
 
 fs
   .readdirSync(__dirname)
@@ -40,5 +43,7 @@ Object.keys(db).forEach(function(modelName) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+// });
 
 module.exports = db;
