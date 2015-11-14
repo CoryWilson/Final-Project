@@ -5,8 +5,7 @@ var gulp         = require('gulp'),
     bower        = require('gulp-bower'),
     buffer       = require('vinyl-buffer'),
     childProcess = require('child_process'),
-    eventStream  = require('event-stream'),
-    gZip         = require('gulp-gzip'),
+    del          = require('del'),
     gUtil        = require('gulp-util'),
     minifyCss    = require('gulp-minify-css'),
     nodemon      = require('gulp-nodemon'),
@@ -16,13 +15,13 @@ var gulp         = require('gulp'),
     sass         = require('gulp-sass'),
     source       = require('vinyl-source-stream'),
     sourcemaps   = require('gulp-sourcemaps'),
-    transform    = require('vinyl-transform'),
     uglify       = require('gulp-uglify'),
     watchify     = require('watchify');
 
 var config = {
   sassPath        : './dev/sass',
   jsPath          : './dev/js',
+  ngViewPath      : './dev/js/app/**/views',
   fontPath        : './assets/fonts',
   imgPath         : './assets/images',
   controllersPath : './app/controllers',
@@ -30,6 +29,14 @@ var config = {
   routesPath      : './app/routes',
   viewsPath       : './app/views'
 };
+
+/* Clean Public Folder */
+gulp.task('clean', function(){
+  return del([
+    './public/',
+    '!./public/assets/fonts/**/*'
+  ]);
+});
 
 /* Bower */
 gulp.task('bower', function(){
@@ -39,15 +46,14 @@ gulp.task('bower', function(){
 /* Scripts */
 var customOpts = {
   entries: [
-    config.jsPath+'/main.js',
-    config.jsPath+'/selection.js'
+    config.jsPath+'/main.js'
   ],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
 var b    = watchify(browserify(opts));
 
-gulp.task('scripts', bundle);
+gulp.task('scripts', ['clean'], bundle);
 b.on('update', bundle);
 b.on('log', gUtil.log);
 
@@ -64,6 +70,22 @@ function bundle() {
 
 gulp.task('script-watch', ['scripts'], reload);
 
+gulp.task('ng-scripts', ['clean'], function(){
+  gulp.src(config.jsPath+'/app/**/**/*.js')
+  .pipe(sourcemaps.init())
+  .pipe(sourcemaps.write('../../../../maps/js/angularApp'))
+  .pipe(gulp.dest('./public/assets/js/app'));
+});
+
+gulp.task('ng-script-watch', ['ng-scripts'], reload);
+
+gulp.task('ng-html', ['clean'], function(){
+  gulp.src(config.ngViewPath+'/*.html')
+  .pipe(gulp.dest('./public/assets/js/app/'));
+});
+
+gulp.task('ng-html-watch', ['ng-html'], reload);
+
 /* Nodemon */
 var BROWSER_SYNC_RELOAD_DELAY = 500;
 
@@ -72,10 +94,10 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
 
     // nodemon our expressjs server
-    script: 'server.js',
+    script: './bin/www',
 
     // watch core server file(s) that require server restart on change
-    watch: ['server.js']
+    watch: ['./bin/www']
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -94,11 +116,10 @@ gulp.task('nodemon', function (cb) {
 
 /* Startup the app server */
 gulp.task('mongod', function(){
-  childProcess.exec('mongod', function(err,stdout,stderr){
+  childProcess.exec('mongod', function(err,stdout){
     console.log(stdout);
   });
 });
-
 
 /* Styles */
 gulp.task('styles', function(){
@@ -110,19 +131,30 @@ gulp.task('styles', function(){
   .pipe(sourcemaps.write('../../../maps/css'))
   .pipe(gulp.dest('./public/assets/css'))
   .pipe(browserSync.stream())
-  .pipe(notify('Styles Done Bruh'));
+  .pipe(notify('Wubalubadubdub! Styles Done!'));
+});
+
+/* Styles task without browser-sync */
+gulp.task('styles-no-bs', ['clean'], function(){
+  gulp.src(config.sassPath+'/main.scss')
+  .pipe(sourcemaps.init())
+    .pipe(sass())
+    .pipe(minifyCss())
+    .pipe(rename('main.min.css'))
+  .pipe(sourcemaps.write('../../../maps/css'))
+  .pipe(gulp.dest('./public/assets/css'));
 });
 
 /* Images */
-gulp.task('images', function(){
-  gulp.src(config.imgPath+'/*/*.*')
+gulp.task('images', ['clean'], function(){
+  gulp.src(config.imgPath+'/**/*.*')
   .pipe(gulp.dest('./public/assets/images'));
 });
 
 gulp.task('image-watch', ['images'], reload);
 
 /* Fonts */
-gulp.task('fonts', function(){
+gulp.task('fonts', ['clean'], function(){
   gulp.src(config.fontPath+'/*/*')
   .pipe(gulp.dest('./public/assets/fonts'));
 });
@@ -133,17 +165,26 @@ gulp.task('browser-sync', ['nodemon'], function(){
     files   : ['./public/**/*.*'],
     proxy   : 'http://localhost:3000',
     port    : 4000,
-    browser : ['google-chrome']
+    browser : ['google-chrome'],
+    open    : false
   });
 
   gulp.watch(config.sassPath+'/**/**/*.scss',['styles']);
   gulp.watch(config.jsPath+'/*.js',['script-watch']);
+  gulp.watch(config.jsPath+'/app/**/**/*.js', ['ng-script-watch']);
+  gulp.watch(config.ngViewPath+'/*.html',['ng-html-watch']);
   gulp.watch(config.imgPath+'/*.*',['image-watch']);
   gulp.watch('./app/*/*',reload);
   gulp.watch('./app.js',reload);
-  gulp.watch('./public/*.html',reload);
+  gulp.watch('./public/*',reload);
 });
 
-gulp.task('default', ['bower', 'mongod','browser-sync']);
+//Build Task
+gulp.task('build',['images','bower','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
 
-gulp.task('assets', ['bower','fonts','images','styles','scripts']);
+//Default Task
+//Cleans public folder
+//Rebuilds public folder
+//Starts mongod
+//Runs browser-sync
+gulp.task('default', ['browser-sync']);

@@ -1,0 +1,10 @@
+<section data-ng-controller="GameController" class="games" data-ng-init="getUser();getLeaderboard();">
+  <h1>Leaderboard</h1>
+  <ul>
+    <li ng-repeat="friend in facebook.friends.data">
+      <img src="{{friend.picture.data.url}}" alt="" width="200px">
+      <span>{{friend.first_name}}</span> <span>{{friend.last_name}}</span>
+    </li>
+  </ul>
+  {{leaderboard}}
+</section>

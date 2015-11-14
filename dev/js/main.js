@@ -1,13 +1,4 @@
-$(document).ready(function() {
-  var menuToggle = $('#js-mobile-menu').unbind();
-  $('#js-navigation-menu').removeClass("show");
-
-  menuToggle.on('click', function(e) {
-    e.preventDefault();
-    $('#js-navigation-menu').slideToggle(function(){
-      if($('#js-navigation-menu').is(':hidden')) {
-        $('#js-navigation-menu').removeAttr('style');
-      }
-    });
-  });
-});
+//Resets the url hash from facebook redirect
+if(window.location.hash && window.location.hash === "#_=_"){
+  window.location.hash = "";
+}

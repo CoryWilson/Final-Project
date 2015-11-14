@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["league/league.client.module.js"],"sourcesContent":["//File Name: ./dev/js/app/league/league.client.modules.js\n\nangular.module('league', []);\n"],"file":"league/league.client.module.js","sourceRoot":"/source/"}

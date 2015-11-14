@@ -1,52 +1,42 @@
-// Uncomment this for a sticky footer.
-//
-// .wrapper-for-content-outside-of-footer {
-//   min-height: 100%;
-//   height: auto !important;
-//   height: 100%;
-//   margin: 0 auto -4em;
-// }
-
-// html, body {
-//  height: 100%;
-// }
-
-// .wrapper-for-content-outside-of-footer:after {
-//   content: "";
-//   display: block;
-// }
-
-// .footer-2, .wrapper-for-content-outside-of-footer:after {
-//   height: 17em;
-
-//   @include media($large-screen) {
-//     height: 4em;
-//   }
-// }
-
 .footer {
   $base-spacing: 1.5em !default;
   $action-color: #477DCA !default;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
-  $footer-background: $green;//desaturate(darken($action-color, 20%), 30%);
-  $footer-color: white;
-  $footer-link-color: transparentize($footer-color, 0.6);
-  $footer-disclaimer-color: transparentize($footer-color, 0.6);
+  $footer-background: $white;//desaturate(darken($action-color, 20%), 30%);
+  $footer-color: $black;
+  $footer-link-color: $footer-color;
+  $footer-disclaimer-color: transparentize($footer-color, 0.5);
 
-  background: $footer-background;
+  background: $partials-background-color;
   padding: $base-spacing;
   width: 100%;
-  display: inline-block;
+  display: none;
   margin-bottom: 0;
+  border-top: 3px solid $black;
+
+
+  @include media($medium-screen) {
+    display: inline-block;
+  }
+
 
   .footer-wrapper {
     @include outer-container;
+    display: none;
+    @include media($medium-screen) {
+      display: block;
+    }
   }
 
   .footer-logo {
     margin-right: 1em;
     margin-bottom: 1em;
+
+    img {
+      height: 1.6em;
+      background: $red;
+    }
 
     @include media($large-screen) {
       float: left;
@@ -54,9 +44,8 @@
     }
   }
 
-  .footer-logo img {
-    height: 1.6em;
-  }
+
+
 
   ul {
     line-height: 1.5em;
@@ -87,7 +76,7 @@
 
     &:focus,
     &:hover {
-      color: transparentize($footer-color, 0);
+      color: $yellow;
     }
   }
 
@@ -120,6 +109,9 @@
         }
       }
 
+    span {
+      font-size: $base-font-size;
+    }
       img {
         height: 1.6em;
         opacity: 0.7;
@@ -132,4 +124,5 @@
       }
     }
   }
+
 }

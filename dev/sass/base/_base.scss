@@ -2,133 +2,129 @@ html {
   height: 100%;
 }
 body {
-  background: $white;
+  background: $gray-light;
   min-height: 100%;
+  height: 100%;
   margin: 0;
 }
 
-//Hero
-.hero {
-  $base-border-radius: 3px !default;
-  $action-color: #477DCA !default;
-  $large-screen: em(860) !default;
-  $hero-background-top: $dark-gray;
-  $hero-background-bottom: $medium-gray;
-  $hero-color: $white;
-  $gradient-angle: 10deg;
-  $hero-image: '../../assets/images/football-crowd.jpg';
-
-  @include background(linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
-  background-color: #324766;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-bottom: 3em;
-
-  .hero-logo img {
-    height: 4em;
-    margin-bottom: 1em;
-  }
-
-  .hero-inner {
-    @include outer-container;
-    @include clearfix;
-    margin: auto;
-    padding: 3.5em;
-    text-align: center;
-
-    .hero-copy {
-      text-align: center;
-
-      h1 {
-        color: $hero-color;
-        font-size: $huge-font-size;
-        margin-bottom: 0.5em;
-
-        @include media($large-screen) {
-          font-size: 1.8em;
-        }
-      }
-
-      p {
-        color: $hero-color;
-        line-height: 1.4em;
-        margin: 0 auto 3em auto;
-
-        @include media($large-screen) {
-          font-size: 1.1em;
-          max-width: 40%;
-        }
-      }
-    }
+a {
+  color: $base-font-color;
+  &:hover {
+    color: $action-color;
   }
 }
 
-//bullets
-.bullets {
-  $base-line-height: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $base-font-color: $dark-gray !default;
-  $icon-bullet-size: 3.5em;
+.page-wrap {
+  min-height: 100%;
+  //margin-bottom: 106.969px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.page-wrap:after {
+  //height: 106.969px;
+}
 
-  @include outer-container;
-  @include display(flex);
-  @include flex-wrap(wrap);
-  margin-bottom: $base-line-height;
-  margin: 1em auto;
-  overflow: auto;
-  padding: 0;
+.index {
+  width: 100%;
+}
 
-  .bullet {
-    @include flex-basis(20em);
-    @include flex-grow(1);
+.hero {
+  height: 500px;
+  @include background(url($hero-bg-image), no-repeat bottom);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.hero__content {
+  background: rgba($gray-light,0.5);
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blocks {
+
+}
+
+.blocks__block {
+  @include span-columns(4 of 16, block-collapse);
+  background: $partials-background-color;
+  height: 300px;
+  border: none;
+  border-bottom: $base-border;
+  border-right: $base-border;
+  @include media($desktop) {
+    @include span-columns(3 of 12, block-collapse);
   }
-
-  .bullet-icon {
-    background: $action-color;
-    border-radius: 50%;
-    float: left;
-    height: $icon-bullet-size;
-    padding: $icon-bullet-size / 4;
-    width: $icon-bullet-size;
+  @include media($tablet) {
+    @include span-columns(4 of 8, block-collapse);
+    width: 50%;
   }
-
-  .bullet-icon-1 {
-    background: $action-color;
+  @include media($mobile) {
+    @include span-columns(4 of 4, block-collapse);
   }
-
-  .bullet-icon-2 {
-    background: adjust-hue($action-color, -50%);
+}
+.blocks__block:last-child {
+  border-right: none;
+  @include media($tablet) {
+    width: 50%;
   }
-
-  .bullet-icon-3 {
-    background: adjust-hue($action-color, -140%);
+  @include media($mobile) {
+    width: 100%;
   }
+}
 
-  .bullet-content {
-    margin-left: $icon-bullet-size * 1.4;
-    margin-bottom: 2em;
-  }
-
-  h2 {
-    border-bottom: 1px solid transparentize($base-font-color, 0.8);
-    display: inline-block;
-    font-size: $icon-bullet-size / 2.5;
-    margin: 0 0 ($icon-bullet-size / 6) 0;
-    padding-top: $icon-bullet-size / 7;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  p {
+.blocks__block--header {
+  @include pad();
+  text-align: center;
+  height: 115px;
+}
+.blocks__block--content {
+  @include pad();
+  height: 100%;
+  text-align: center;
+  i {
     color: $base-font-color;
-    line-height: $base-line-height;
+    font-size: $huge-font-size;
   }
+}
 
-  img {
-    max-width: 100%;
+.games {
+  max-width: 1200px;
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.game {
+  background: $content-background-color;
+  border: $base-border;
+  margin-bottom: 1em;
+  text-align: center;
+  overflow: hidden;
+}
+.game__header {
+  padding: 1em 0;
+}
+.teams {
+  @include span-columns(8 of 16, block-collapse);
+  height: 200px;
+  padding: 3em 0;
+  font: $black-font-family;
+  border-top: $base-border;
+  &:hover {
+    @include transition(all 0.2s ease-in-out);
+    background: $action-color;
+    cursor: pointer;
   }
+}
+.home {
+  background: $red;
+}
+.away {
+  background: $blue;
 }

@@ -17,41 +17,42 @@ $base-line-height    : 1.5;
 $heading-line-height : 1.2;
 
 // Other Sizes
-$base-border-radius : 3px;
 $base-spacing       : $base-line-height * 1em;
 $small-spacing      : $base-spacing / 2;
 $base-z-index       : 0;
 
-// Grey-Scale Colors
-$black       : hsla(222, 11%, 18%, 1);  //#2A2D34
-$dark-gray   : hsla(0, 0%, 20%, 1);     //#333333
-$medium-gray : hsla(0, 0%, 60%, 1);     //#999999
-$light-gray  : hsla(0, 0%, 87%, 1);     //#DDDDDD
-$white       : hsla(240, 100%, 98%, 1); //#F7F7FF
-
 //Color Pallet
-$green : hsla(159, 51%, 39%, 1); //#319673
-$beige : hsla(50, 38%, 82%, 1);  //#E2DCBE
-$navy  : hsla(236, 10%, 28%, 1); //#40414F
-$gray  : hsla(0, 4%, 34%, 1);    //#5A5353
-$red   : hsla(6, 70%, 56%, 1);   //#DD5141
-$blue  : hsla(200, 63%, 48%, 1); //#2E95C9
+$blue: #14ABE3; //rgba(20, 171, 227, 100)
+$white: #F5F4F3; //rgba(245, 244, 243, 100)
+$black: #1B2021; //rgba(27, 32, 33, 100)
+$red: #F1231E; //rgba(241, 35, 30, 100)
+$yellow: #FFCC33; //rgba(255, 204, 51, 100)
+$gray-dark: #3C3C3C; //rgba(0, 0, 24, 100)
+$gray: tint($gray-dark, 50%);
+$gray-light: tint($gray-dark, 75%);
+$facebook-blue: #3B5999;
+$twitter-blue: #55ACEE;
 
 // Font Colors
-$base-font-color : $black;
-$action-color    : $blue;
+$base-font-color      : $black;
+$secondary-font-color : $white;
+$action-color         : $yellow;
+
+//Background Colors
+$base-background-color     : $gray-light;
+$block-background-color    : $gray-dark;
+$partials-background-color : $white;
+$content-background-color  : $white;
 
 // Border
-$base-border-color : $light-gray;
-$base-border       : 1px solid $base-border-color;
+$base-border-color : $black;
+$base-border       : 3px solid $base-border-color;
 
 // Background Colors
-$base-background-color      : #fff;
-$secondary-background-color : tint($base-border-color, 75%);
+$base-background-color      : $white;
 
-// Forms
-$form-box-shadow        : inset 0 1px 3px rgba(#000, 0.06);
-$form-box-shadow-focus  : $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+//Background Images
+$hero-bg-image : '../images/stock/football.jpg';
 
 // Animations
 $base-duration : 150ms;

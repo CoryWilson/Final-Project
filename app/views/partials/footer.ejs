@@ -1,30 +1,64 @@
+    </div>
     <footer class="footer" role="contentinfo">
       <div class="footer-wrapper">
-        <div class="footer-logo">
-          <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
-        </div>
           <ul>
-            <li><a href="/home">Home</a></li>
             <% if(!isAuthenticated) {%>
-              <li><a href="/register">Register</a></li>
-              <li><a href="/login">Login</a></li>
+              <li>
+                <a href="/#!/">
+                  <i class="icon ion-home"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="/auth/facebook">
+                  <span>Sign-In with <i class="icon ion-social-facebook"></i></span>
+                </a>
+              </li>
             <% } else { %>
-              <li><a href="/showdown">Showdown</a></li>
-              <li><a href="/chat">Chat</a></li>
-              <li><a href="/profile">Profile</a></li>
-              <li><a href="/logout">Logout</a></li>
+              <li>
+                <a href="/#!/game">
+                  <i class="icon ion-trophy"></i>
+                  <span>Make Your Picks</span>
+                </a></li>
+              <li>
+                <a href="/#!/leaderboard">
+                  <i class="icon ion-ios-list"></i>
+                  <span>Leaderboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#!/profile">
+                  <i class="icon ion-person"></i>
+                  <span>Profile</span>
+                </a>
+              </li>
             <% } %>
           </ul>
 
           <div class="footer-secondary-links">
             <ul>
-              <li><a href="javascript:void(0)">      <span>Showdown Sports | &copy; Cory Wilson 2015</span>
+              <li><a href="/"><span>Showdown Sports | &copy; Cory Wilson 2015</span>
               </a></li>
             </ul>
           </div>
       </div>
     </footer>
-    <script src="assets/vendor/jquery-2.1.4.min/index.js"></script>
-    <script src="assets/js/bundle.js"></script>
+
+    <script type="text/javascript" src="assets/vendor/jquery-2.1.4.min/index.js"></script>
+    <script type="text/javascript" src="assets/js/bundle.js"></script>
+
+    <script type="text/javascript" src="assets/vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="assets/vendor/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.js"></script>
+
+    <script type="text/javascript" src="assets/js/app/users/users.client.module.js"></script>
+    <script type="text/javascript" src="assets/js/app/users/services/authentication.client.service.js"></script>
+
+    <script type="text/javascript" src="assets/js/app/game/game.client.module.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/controllers/game.client.controller.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/services/game.client.service.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/routes/game.client.routes.js"></script>
+
+    <script type="text/javascript" src="assets/js/app/app.js"></script>
   </body>
 </html>

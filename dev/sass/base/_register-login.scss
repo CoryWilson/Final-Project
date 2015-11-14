@@ -1,0 +1,51 @@
+.login {
+  @include outer-container;
+  margin: 2.2em auto;
+  padding: 1em;
+  width: 98%;
+  background: $white;
+  border-top: 3px solid $black;
+  border-right: 3px solid $black;
+  border-bottom: 3px solid $black;
+  border-left: 3px solid $black;
+  button {
+    a {
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}
+
+.login__header {
+  h2 {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.login__button--facebook {
+  background: $facebook-blue;
+  float: left;
+}
+
+.login__button--twitter {
+  background: $twitter-blue;
+  float: right;
+}
+
+.login__button--twitter,
+.login__button--facebook {
+  width: 49%;
+  margin-bottom: 1em;
+}
+
+.login__button--local {
+  @include span-columns(16 of 16);
+}
+
+.login__button--save {
+  @include span-columns(16 of 16);
+  display: block;
+  margin: 1em auto;
+}

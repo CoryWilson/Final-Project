@@ -1,6 +1,8 @@
 node_modules
-assets
+assets/fonts
 public
-config/apiKeys.js
-config/auth.js
+bower_compennts
 .bowerrc
+config/env/*
+config/config.json
+.env

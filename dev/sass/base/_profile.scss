@@ -1,3 +1,19 @@
+.profile {
+  margin: 30px auto;
+  .form {
+    button {
+      margin:0 auto;
+    }
+  }
+}
+
+.local,
+.facebook,
+.twitter,
+.preferences {
+  padding: 30px;
+}
+
 @mixin grid-item-columns($columns) {
   width: (100% / 12) * $columns;
 }
@@ -18,11 +34,7 @@
   $grid-item-height: 14em;
 
   @include clearfix;
-  @include outer-container;
   position: relative;
-  h1 {
-    text-align: center;
-  }
 
   .grid-item {
     @include transition (all 0.2s ease-in-out);
