@@ -62,6 +62,7 @@ module.exports = function(){
                     })
                     .then(function(record){
                       record.increment('points', {by:1});
+                      res.redirect('/#!/leaderboard');
                     })
                     .error(function(err){
                       console.log('Error updating record: ',err);
@@ -77,6 +78,7 @@ module.exports = function(){
                     })
                     .then(function(record){
                       record.increment('points', {by:1});
+                      res.redirect('/#!/leaderboard');
                     })
                     .error(function(err){
                       console.log('Error updating record: ',err);
@@ -91,6 +93,7 @@ module.exports = function(){
                     })
                     .then(function(record){
                       record.increment('points', {by:0});
+                      res.redirect('/#!/leaderboard');
                     })
                     .error(function(err){
                       console.log('Error updating record: ',err);
@@ -112,26 +115,31 @@ module.exports = function(){
         'friends{id,first_name,last_name,name,picture.width(500).height(500),favorite_teams}'
       ]},
       function (response) {
-        var friends = response.friends.data;
-        var friendsArray = []; //friendsArray
-        for (var i = 0; i < friends.length; i++) {
-          friendsArray.push(friends[i].id); //push facebook id's into friendsArray
-        }
         if (response && !response.error) {
-          models.Record.findAll({//find all the records of users who are facebook friends
-            include : [{
-              model : models.User,
-              where : {
-                facebook_id :{
-                  $in : friendsArray
+          var friendsArray = []; //friendsArray
+          var fb_id = req.user.facebook_id; //get user fb_id
+          friendsArray.push(fb_id); //place it in friends array
+          if(response.friends){
+            var friends = response.friends.data;
+            for (var i = 0; i < friends.length; i++) {
+              friendsArray.push(friends[i].id); //push facebook id's into friendsArray
+            }
+          }
+            console.log(friendsArray);
+            models.Record.findAll({//find all the records of users who are facebook friends
+              include : [{
+                model : models.User,
+                where : {
+                  facebook_id :{
+                    $in : friendsArray
+                  }
                 }
-              }
-            }],
-            order : 'UserId ASC'
-          })
-          .then(function(list){
-            res.json(list);
-          });
+              }],
+              order : 'points DESC'
+            })
+            .then(function(list){
+              res.json(list);
+            });
         }
       });
   };

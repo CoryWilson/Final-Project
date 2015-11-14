@@ -6,7 +6,7 @@ module.exports = function(app){
   app.post('/pick',gameController.createPick);
 
   //Update Records
-  app.get('/updateRecords',gameController.updateRecord);
+  app.get('/updateRecord',gameController.updateRecord);
 
   //Get Leaderboard
   app.get('/leaderboard',gameController.getFriendsRecord);
