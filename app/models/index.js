@@ -15,7 +15,7 @@ if (config.use_env_variable) {
   //   port : process.env.DB_PORT,
   //   dialict : process.env.DB_DIALECT
   // });
-  var sequelize = new Sequelize(CLEARDB_DATABASE_URL,{});
+  var sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL,{});
 }
 
 
