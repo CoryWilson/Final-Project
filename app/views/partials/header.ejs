@@ -1,4 +1,21 @@
 <body>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : 177156945954815,
+        xfbml      : true,
+        version    : 'v2.5'
+      });
+    };
+
+    (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
   <header role="banner">
     <div class="header__wrapper">
       <div class="header__logo">
@@ -19,31 +36,25 @@
               </a>
             </li>
             <li>
-              <a href="/register">
-                <i class="icon ion-ios-plus-outline"></i>
-                <span>Register</span>
-              </a>
-            </li>
-            <li>
-              <a href="/login">
-                <i class="icon ion-log-in"></i>
-                <span>Log In</span>
+              <a href="/auth/facebook">
+
+                <span>Sign-In with <i class="icon ion-social-facebook"></i></span>
               </a>
             </li>
           <% } else { %>
             <li>
-              <a href="/#!/league/">
+              <a href="/#!/game">
                 <i class="icon ion-trophy"></i>
-                <span>Showdown</span>
+                <span>Make Your Picks</span>
               </a></li>
             <li>
-              <a href="/#!/league">
+              <a href="/#!/leaderboard">
                 <i class="icon ion-ios-list"></i>
-                <span>League</span>
+                <span>Leaderboard</span>
               </a>
             </li>
             <li>
-              <a href="/profile">
+              <a href="/#!/profile">
                 <i class="icon ion-person"></i>
                 <span>Profile</span>
               </a>

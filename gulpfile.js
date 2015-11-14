@@ -33,9 +33,8 @@ var config = {
 /* Clean Public Folder */
 gulp.task('clean', function(){
   return del([
-    './public/assets/css/*',
-    './public/assets/images/**/*',
-    './public/assets/js/**/**/**/*'
+    './public/',
+    '!./public/assets/fonts/**/*'
   ]);
 });
 
@@ -47,16 +46,14 @@ gulp.task('bower', function(){
 /* Scripts */
 var customOpts = {
   entries: [
-    config.jsPath+'/main.js',
-    config.jsPath+'/selection.js',
-    config.jsPath+'/remove-fb-hash.js'
+    config.jsPath+'/main.js'
   ],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
 var b    = watchify(browserify(opts));
 
-gulp.task('scripts', bundle);
+gulp.task('scripts', ['clean'], bundle);
 b.on('update', bundle);
 b.on('log', gUtil.log);
 
@@ -73,7 +70,7 @@ function bundle() {
 
 gulp.task('script-watch', ['scripts'], reload);
 
-gulp.task('ng-scripts', function(){
+gulp.task('ng-scripts', ['clean'], function(){
   gulp.src(config.jsPath+'/app/**/**/*.js')
   .pipe(sourcemaps.init())
   .pipe(sourcemaps.write('../../../../maps/js/angularApp'))
@@ -82,7 +79,7 @@ gulp.task('ng-scripts', function(){
 
 gulp.task('ng-script-watch', ['ng-scripts'], reload);
 
-gulp.task('ng-html', function(){
+gulp.task('ng-html', ['clean'], function(){
   gulp.src(config.ngViewPath+'/*.html')
   .pipe(gulp.dest('./public/assets/js/app/'));
 });
@@ -97,10 +94,10 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
 
     // nodemon our expressjs server
-    script: 'server.js',
+    script: './bin/www',
 
     // watch core server file(s) that require server restart on change
-    watch: ['server.js']
+    watch: ['./bin/www']
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -138,7 +135,7 @@ gulp.task('styles', function(){
 });
 
 /* Styles task without browser-sync */
-gulp.task('styles-no-bs', function(){
+gulp.task('styles-no-bs', ['clean'], function(){
   gulp.src(config.sassPath+'/main.scss')
   .pipe(sourcemaps.init())
     .pipe(sass())
@@ -149,7 +146,7 @@ gulp.task('styles-no-bs', function(){
 });
 
 /* Images */
-gulp.task('images', function(){
+gulp.task('images', ['clean'], function(){
   gulp.src(config.imgPath+'/**/*.*')
   .pipe(gulp.dest('./public/assets/images'));
 });
@@ -157,7 +154,7 @@ gulp.task('images', function(){
 gulp.task('image-watch', ['images'], reload);
 
 /* Fonts */
-gulp.task('fonts', function(){
+gulp.task('fonts', ['clean'], function(){
   gulp.src(config.fontPath+'/*/*')
   .pipe(gulp.dest('./public/assets/fonts'));
 });
@@ -179,15 +176,15 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch(config.imgPath+'/*.*',['image-watch']);
   gulp.watch('./app/*/*',reload);
   gulp.watch('./app.js',reload);
-  gulp.watch('./public/*.html',reload);
+  gulp.watch('./public/*',reload);
 });
 
 //Build Task
-gulp.task('build',['images','bower','ng-html','styles-no-bs','scripts','ng-scripts']);
+gulp.task('build',['images','bower','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
 
 //Default Task
 //Cleans public folder
 //Rebuilds public folder
 //Starts mongod
 //Runs browser-sync
-gulp.task('default', ['build','mongod','browser-sync']);
+gulp.task('default', ['browser-sync']);

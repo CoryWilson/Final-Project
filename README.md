@@ -4,6 +4,5 @@ Showdown Sports is the Final Project of [Cory Wilson](https://github.com/CoryWil
 
 The Application was developed as a sports pick 'em game that allows users to pick on multiple sports in a weekly showdown.
 
-
 ##Questions and/or Comments?
 Send them to [ctwilson08@gmail.com](mailto://ctwilson08@gmail.com).

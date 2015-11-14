@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["weeks/weeks.client.module.js"],"sourcesContent":["angular.module('weeks', []);\n"],"file":"weeks/weeks.client.module.js","sourceRoot":"/source/"}

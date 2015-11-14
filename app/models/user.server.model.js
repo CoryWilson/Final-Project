@@ -1,41 +1,31 @@
 //File Name: ./app/models/user.server.model.js
+module.exports = function(sequelize, DataTypes){
+  var User = sequelize.define('User', {
+    id : {
+      type          : DataTypes.INTEGER,
+      primaryKey    : true,
+      autoIncrement : true
+    },
+    facebook_id : {
+      type: DataTypes.STRING
+    },
+    access_token : {
+      type: DataTypes.STRING
+    },
+    firstName : {
+      type: DataTypes.STRING
+    },
+    lastName : {
+      type: DataTypes.STRING
+    }
+  }, {
+    classMethods: {
+      associate: function(models) {
+        User.hasMany(models.Pick);
+        User.hasMany(models.Record);
+      }
+    }
+  });
 
-var mongoose = require('mongoose'),
-    bcrypt   = require('bcrypt-nodejs'),
-    Schema   = mongoose.Schema;
-
-var userSchema = new Schema({
-
-  local          : {
-    email        : String,
-    password     : String
-  },
-  facebook       : {
-    id           : String,
-    token        : String,
-    email        : String,
-    name         : String
-  },
-  twitter        : {
-    id           : String,
-    token        : String,
-    displayName  : String,
-    username     : String
-  },
-  username       : String,
-  avatar         : String,
-  commissioner   : {
-    type: Boolean,
-    default: false
-  }
-});
-
-userSchema.methods.generateHash = function(password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return User;
 };
-
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
-};
-
-module.exports = mongoose.model('User', userSchema);

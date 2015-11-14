@@ -1,1 +1,1 @@
-{"version":3,"names":[],"mappings":"","sources":["users/users.client.module.js"],"sourcesContent":["angular.module('users', []);\n"],"file":"users/users.client.module.js","sourceRoot":"/source/"}
+{"version":3,"names":[],"mappings":"","sources":["users/users.client.module.js"],"sourcesContent":["//File Name: ./dev/js/app/users/users.client.module.js\n\n//Declare users module\nangular.module('users', []);\n"],"file":"users/users.client.module.js","sourceRoot":"/source/"}

@@ -2,14 +2,36 @@
     <footer class="footer" role="contentinfo">
       <div class="footer-wrapper">
           <ul>
-            <li><a href="/">Home</a></li>
             <% if(!isAuthenticated) {%>
-              <li><a href="/register-login">Register or Login</a></li>
+              <li>
+                <a href="/#!/">
+                  <i class="icon ion-home"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="/auth/facebook">
+                  <span>Sign-In with <i class="icon ion-social-facebook"></i></span>
+                </a>
+              </li>
             <% } else { %>
-              <li><a href="/profile">Profile</a></li>
-              <li><a href="#!/showdown">Leagues</a></li>
-              <li><a href="#!/standings">Weeks</a></li>
-              <li><a href="/logout">Logout</a></li>
+              <li>
+                <a href="/#!/game">
+                  <i class="icon ion-trophy"></i>
+                  <span>Make Your Picks</span>
+                </a></li>
+              <li>
+                <a href="/#!/leaderboard">
+                  <i class="icon ion-ios-list"></i>
+                  <span>Leaderboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#!/profile">
+                  <i class="icon ion-person"></i>
+                  <span>Profile</span>
+                </a>
+              </li>
             <% } %>
           </ul>
 
@@ -32,24 +54,10 @@
     <script type="text/javascript" src="assets/js/app/users/users.client.module.js"></script>
     <script type="text/javascript" src="assets/js/app/users/services/authentication.client.service.js"></script>
 
-    <script type="text/javascript" src="assets/js/app/index/index.client.module.js"></script>
-    <script type="text/javascript" src="assets/js/app/index/controllers/index.client.controller.js"></script>
-    <script type="text/javascript" src="assets/js/app/index/services/index.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/index/routes/index.client.routes.js"></script>
-
-    <script type="text/javascript" src="assets/js/app/league/league.client.module.js"></script>
-    <script type="text/javascript" src="assets/js/app/league/controllers/league.client.controller.js"></script>
-    <script type="text/javascript" src="assets/js/app/league/services/league.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/league/services/api.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/league/services/users.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/league/routes/league.client.routes.js"></script>
-
-    <script type="text/javascript" src="assets/js/app/weeks/weeks.client.module.js"></script>
-    <script type="text/javascript" src="assets/js/app/weeks/controllers/weeks.client.controller.js"></script>
-    <script type="text/javascript" src="assets/js/app/weeks/services/weeks.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/weeks/services/soccer.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/weeks/services/nfl.client.service.js"></script>
-    <script type="text/javascript" src="assets/js/app/weeks/routes/weeks.client.routes.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/game.client.module.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/controllers/game.client.controller.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/services/game.client.service.js"></script>
+    <script type="text/javascript" src="assets/js/app/game/routes/game.client.routes.js"></script>
 
     <script type="text/javascript" src="assets/js/app/app.js"></script>
   </body>
