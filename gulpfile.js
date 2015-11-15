@@ -12,6 +12,7 @@ var gulp         = require('gulp'),
     notify       = require('gulp-notify'),
     rename       = require('gulp-rename'),
     reload       = browserSync.reload,
+    runSeq       = require('run-sequence'),
     sass         = require('gulp-sass'),
     source       = require('vinyl-source-stream'),
     sourcemaps   = require('gulp-sourcemaps'),
@@ -162,6 +163,10 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./app/*/*',reload);
   gulp.watch('./app.js',reload);
   gulp.watch('./public/*',reload);
+});
+
+gulp.task('heroku:production', function(){
+  runSeq('build');
 });
 
 //Build Task
