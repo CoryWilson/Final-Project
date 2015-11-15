@@ -44,29 +44,14 @@ gulp.task('bower', function(){
 });
 
 /* Scripts */
-var customOpts = {
-  entries: [
-    config.jsPath+'/main.js'
-  ],
-  debug: true
-};
-var opts = assign({}, watchify.args, customOpts);
-var b    = watchify(browserify(opts));
-
-gulp.task('scripts', ['clean'], bundle);
-b.on('update', bundle);
-b.on('log', gUtil.log);
-
-function bundle() {
-  return b.bundle()
-    .on('error', gUtil.log.bind(gUtil, 'Browserify Error'))
-    .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+gulp.task('scripts', ['clean'], function(){
+  gulp.src(config.jsPath+'main.js')
+    .pipe(sourcemaps.init())
       .pipe(uglify())
+      .pipe(rename('main.min.js'))
     .pipe(sourcemaps.write('../../../maps/js'))
     .pipe(gulp.dest('./public/assets/js'));
-}
+});
 
 gulp.task('script-watch', ['scripts'], reload);
 
@@ -180,7 +165,7 @@ gulp.task('browser-sync', ['nodemon'], function(){
 });
 
 //Build Task
-gulp.task('build',['images','bower','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
+gulp.task('build',['images','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
 
 //Default Task
 //Cleans public folder
