@@ -45,12 +45,12 @@ gulp.task('bower', function(){
 
 /* Scripts */
 gulp.task('scripts', ['clean'], function(){
-  gulp.src(config.jsPath+'main.js')
+  gulp.src(config.jsPath+'/main.js')
     .pipe(sourcemaps.init())
       .pipe(uglify())
       .pipe(rename('main.min.js'))
     .pipe(sourcemaps.write('../../../maps/js'))
-    .pipe(gulp.dest('./public/assets/js'));
+    .pipe(gulp.dest('./public/assets/js/'));
 });
 
 gulp.task('script-watch', ['scripts'], reload);
@@ -165,7 +165,7 @@ gulp.task('browser-sync', ['nodemon'], function(){
 });
 
 //Build Task
-gulp.task('build',['images','ng-html','styles-no-bs','scripts','ng-scripts']);
+gulp.task('build',['bower','images','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
 
 //Default Task
 //Cleans public folder
