@@ -165,7 +165,7 @@ gulp.task('browser-sync', ['nodemon'], function(){
 });
 
 //Build Task
-gulp.task('build',['images','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
+gulp.task('build',['images','ng-html','styles-no-bs','scripts','ng-scripts']);
 
 //Default Task
 //Cleans public folder
