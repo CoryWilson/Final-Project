@@ -1,7 +1,7 @@
 node_modules
 assets/fonts
 public
-bower_compennts
+bower_compenents
 .bowerrc
 config/env/*
 config/config.json
