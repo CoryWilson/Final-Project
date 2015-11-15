@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prestart" : "gulp build",
-    "start"    : "node app.js"
+    "start"    : "node app.js",
+    "postinstall" : "gulp build"
   },
   "dependencies": {
     "angular": "^1.4.7",
