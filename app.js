@@ -66,7 +66,7 @@ models.sequelize.sync().then(function () {
 });
 
 //run Cron Job
-require('./app/controllers/cronjob.server.controller')(CronJob,request,FB,models);
+require('./config/cronjob')(CronJob,request,FB,models);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
