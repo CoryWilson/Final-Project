@@ -1,18 +1,18 @@
 module.exports = function(CronJob,request,FB,models){
-  var job = new CronJob({
-    cronTime: '59 23 0 * * 1',
-    onTick: function(){
+  var job = new CronJob(
+    '59 23 00 * * 1', //runs at 11:59pm on Monday Night
+    function(){
       console.log('Cron Job Run');
       models.Pick
         .findAll({
           where : {
-            week : 12 //current week
+            week : 11 //current week
           }
         })
         .then(function(data){
           //make one api request
           request
-            .post({url:'https://profootballapi.com/schedule?api_key='+process.env.NFL_API_KEY+'&year=2015&week=12&season=REG'},
+            .post({url:'https://profootballapi.com/schedule?api_key='+process.env.NFL_API_KEY+'&year=2015&week=11&season=REG'},
               function(err, httpResponse, schedule){
             data.forEach(function(picks){ //looping through the picks
               var value = picks.value; //users pick value
@@ -66,10 +66,14 @@ module.exports = function(CronJob,request,FB,models){
               }
             });//end data.forEach
           });//end request
+        }).error(function(err){
+          console.log(err);
         });
     },
-    start: true,
-    timeZone: 'America/New_York'
-  });
-  job.start();
+    function(){
+      console.log('Cron Job End');
+    },
+    true,
+    'America/New_York'
+  );
 };
