@@ -23,8 +23,6 @@ module.exports = function(CronJob,request,FB,models){
               }
               var games = JSON.parse(schedule); //parse results
 
-              console.log(games);
-
               for (var i = 0; i < games.length; i++) { //loop through the games returned
                 if(games[i].id === game_id){ // check to see if the returned game from the schedule matches the game the user picked on
                   if(games[i].home_score > games[i].away_score && value === "home"){
