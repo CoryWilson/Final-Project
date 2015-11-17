@@ -5,12 +5,19 @@ Showdown Sports is the Final Project of [Cory Wilson](https://github.com/CoryWil
 The Application was developed as a sports pick 'em game that allows users to pick on multiple sports in a weekly showdown.
 
 ##Run the application locally.
-Follow these steps:
+###Follow these steps:
+
 `git clone https://github.com/CoryWilson/Final-Project.git`
 
 `cd into diretory`
 
 `npm install`
+
+* Will Require API Key from https://profootballapi.com/ stored as environmental variable NFL_API_KEY
+* Will require environmental variables from a Facebook Application:
+  * FB_CLIENT_ID
+  * FB_CLIENT_SECRET
+  * FB_CALLBACK_URL @ http://localhost:3000/auth/facebook/callback
 
 `npm start`
 
