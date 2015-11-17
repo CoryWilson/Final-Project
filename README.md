@@ -1,3 +1,5 @@
+<a href="https://codeclimate.com/github/CoryWilson/Final-Project"><img src="https://codeclimate.com/github/CoryWilson/Final-Project/badges/gpa.svg" /></a>
+
 #Welcome to Showdown Sports!
 
 Showdown Sports is the Final Project of [Cory Wilson](https://github.com/CoryWilson), a Student of the Web Design and Development Bachelors at Full Sail University. This project represents the culmination of three months worth of work.
