@@ -18,6 +18,8 @@ The Application was developed as a sports pick 'em game that allows users to pic
   * FB_CLIENT_ID
   * FB_CLIENT_SECRET
   * FB_CALLBACK_URL @ http://localhost:3000/auth/facebook/callback
+* Will require MYSQL DB connection stored as environmental variable DB_URL
+* Will require Express Session secrete stored as environmental variable EXPRESS_SECRET
 
 `npm start`
 
