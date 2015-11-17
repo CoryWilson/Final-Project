@@ -12,17 +12,43 @@ nav {
   color: $nav-font-color;
   border-right: $base-border;
   box-shadow: 2px 2px 4px darken($nav-background-color, 10%);
+
+  @include media($tablet){
+    @include span-columns(1 of 8, block-collapse);
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(stretch);
+  }
 }
+
 nav > a {
   @include flex(1);
   font-family: $bold-font-family;
   font-size: $small-heading-font-size;
-  line-height: 9em;
+  padding-top: 4em;
+  line-height: 1em;
   color: $nav-font-color;
   text-align: center;
+  i {
+    display: none;
+  }
   &:hover, {
     background: $action-color;
     color: $base-font-color;
+  }
+  @include media($desktop){
+    padding-top: 3em;
+    line-height: 1em;
+  }
+  @include media($tablet){
+    padding-top: 4em;
+    i {
+      display: block;
+    }
+    span {
+      display: none;
+    }
   }
 }
 
@@ -31,4 +57,12 @@ nav > a{
 }
 nav > a:first-of-type {
   border-top: none;
+}
+
+
+nav.open {
+
+}
+nav.close {
+
 }

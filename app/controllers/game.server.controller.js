@@ -1,7 +1,5 @@
 //File Name: ./app/controllers/game.server.controller.js
 var models        = require('../models'),
-    request       = require('request'),
-    CronJob       = require('cron').CronJob,
     FB            = require('fb');
 
 module.exports = function(){

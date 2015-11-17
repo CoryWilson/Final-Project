@@ -9,6 +9,7 @@ header {
   width: 100%;
   float: right;
   @include padding(0.5em 1em 0.5em 2em);
+
   .header__logo{
     @include order(0);
     @include align-self(center);
@@ -27,9 +28,6 @@ header {
 }
 
 
-
-
-
 //footer
 
 .footer {
@@ -45,20 +43,14 @@ header {
   background: $partials-background-color;
   padding: $base-spacing;
   width: 100%;
-  display: none;
   margin-bottom: 0;
-  border-top: 3px solid $black;
-
 
   @include media($medium-screen) {
     display: inline-block;
-    display: none;
   }
-
 
   .footer-wrapper {
     @include outer-container;
-    display: none;
     @include media($medium-screen) {
       display: block;
     }
@@ -111,7 +103,7 @@ header {
 
     &:focus,
     &:hover {
-      color: $yellow;
+      color: $action-color;
     }
   }
 

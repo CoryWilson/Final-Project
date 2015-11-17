@@ -14,7 +14,7 @@ var db        = {};
 //   dialict : process.env.DB_DIALECT
 // });
 
-var sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL,{});
+var sequelize = new Sequelize(process.env.DB_URL,{});
 
 fs
   .readdirSync(__dirname)

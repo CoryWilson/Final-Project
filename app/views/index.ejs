@@ -1,3 +1,42 @@
 <% include partials/head.ejs %>
-  <div class="angular-app" ng-view></div>
+  <% if(!isAuthenticated) {%>
+    <div class="hero"></div>
+    <div class="blocks">
+      <div class="blocks__block">
+        <div class="blocks__block--header">
+          <h3>Pick on NFL Games!</h3>
+        </div>
+        <div class="blocks__block--content">
+          <i class="icon ion-ios-americanfootball"></i>
+        </div>
+      </div>
+      <div class="blocks__block">
+        <div class="blocks__block--header">
+          <h3>Play Against Others!</h3>
+        </div>
+        <div class="blocks__block--content">
+          <i class="icon ion-ios-list"></i>
+        </div>
+      </div>
+      <div class="blocks__block">
+        <div class="blocks__block--header">
+          <h3>Play Against Facebook Friends!</h3>
+        </div>
+        <div class="blocks__block--content">
+          <i class="icon ion-ios-people"></i>
+        </div>
+      </div>
+      <div class="blocks__block">
+        <div class="blocks__block--header">
+          <h3>Win Big!</h3>
+        </div>
+        <div class="blocks__block--content">
+          <i class="icon ion-trophy"></i>
+        </div>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="angular-app" ng-view></div>
+  <% } %>
+
 <% include partials/footer.ejs %>

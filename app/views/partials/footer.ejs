@@ -1,47 +1,28 @@
+    <% if(!isAuthenticated) {%>
     <footer class="footer" role="contentinfo">
       <div class="footer-wrapper">
+        <ul>
+          <li>
+            <a href="/#!/">
+              <i class="icon ion-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="/auth/facebook">
+              <span>Sign-In with <i class="icon ion-social-facebook"></i></span>
+            </a>
+          </li>
+        </ul>
+        <div class="footer-secondary-links">
           <ul>
-            <% if(!isAuthenticated) {%>
-              <li>
-                <a href="/#!/">
-                  <i class="icon ion-home"></i>
-                  <span>Home</span>
-                </a>
-              </li>
-              <li>
-                <a href="/auth/facebook">
-                  <span>Sign-In with <i class="icon ion-social-facebook"></i></span>
-                </a>
-              </li>
-            <% } else { %>
-              <li>
-                <a href="/#!/game">
-                  <i class="icon ion-trophy"></i>
-                  <span>Make Your Picks</span>
-                </a></li>
-              <li>
-                <a href="/#!/leaderboard">
-                  <i class="icon ion-ios-list"></i>
-                  <span>Leaderboard</span>
-                </a>
-              </li>
-              <li>
-                <a href="/#!/profile">
-                  <i class="icon ion-person"></i>
-                  <span>Profile</span>
-                </a>
-              </li>
-            <% } %>
+            <li><a href="/"><span>Showdown Sports | &copy; Cory Wilson 2015</span>
+            </a></li>
           </ul>
-
-          <div class="footer-secondary-links">
-            <ul>
-              <li><a href="/"><span>Showdown Sports | &copy; Cory Wilson 2015</span>
-              </a></li>
-            </ul>
-          </div>
+        </div>
       </div>
     </footer>
+    <% } %>
 
     <script type="text/javascript" src="assets/vendor/jquery-2.1.4.min/index.js"></script>
     <script type="text/javascript" src="assets/js/main.min.js"></script>
