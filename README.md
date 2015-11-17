@@ -4,6 +4,9 @@ Showdown Sports is the Final Project of [Cory Wilson](https://github.com/CoryWil
 
 The Application was developed as a sports pick 'em game that allows users to pick on multiple sports in a weekly showdown.
 
+##View application online.
+[Showdown Sports](http://mysterious-bayou-8903.herokuapp.com/)
+
 ##Run the application locally.
 ###Follow these steps:
 
@@ -13,7 +16,7 @@ The Application was developed as a sports pick 'em game that allows users to pic
 
 `npm install`
 
-* Will Require API Key from https://profootballapi.com/ stored as environmental variable NFL_API_KEY
+* Will require API Key from https://profootballapi.com/ stored as environmental variable NFL_API_KEY
 * Will require environmental variables from a Facebook Application:
   * FB_CLIENT_ID
   * FB_CLIENT_SECRET
@@ -21,10 +24,7 @@ The Application was developed as a sports pick 'em game that allows users to pic
 * Will require MYSQL DB connection stored as environmental variable DB_URL
 * Will require Express Session secrete stored as environmental variable EXPRESS_SECRET
 
-`npm start`
-
-##View application online.
-[Showdown Sports](http://mysterious-bayou-8903.herokuapp.com/)
+`node app.js`
 
 ##Questions and/or Comments?
 Send them to [ctwilson08@gmail.com](mailto://ctwilson08@gmail.com).
