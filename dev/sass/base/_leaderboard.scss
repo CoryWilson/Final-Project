@@ -33,17 +33,25 @@
   border: none;
 }
 
+.player__picture,
 .header__name,
 .player__name,
 .header__points,
 .player__points {
   width: 100%;
   text-align: center;
+  @include align-self(center);
 }
-
 .header__name,
 .header__points {
   font-family: $bold-font-family;
   font-size: $small-heading-font-size;
-  background: $gray;
+}
+
+.player__picture {
+  @include flex-basis(10em);
+  padding: 1.5em 1em 1em 1em;
+  img {
+    border: $base-border;
+  }
 }

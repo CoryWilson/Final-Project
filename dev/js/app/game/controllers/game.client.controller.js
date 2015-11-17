@@ -10,6 +10,9 @@ angular.module('game')
         $scope.facebook = Authentication.Facebook.query({});//retrieves the user's facebook information: picture, friends, etc.
       };
 
+      $scope.getLeaderboard = function(){
+        $scope.leaderboard = Game.Leaderboard.query({});
+      };
 
       $scope.getNFLSchedule = function(){
         $scope.NFL = Game.NFL.query({}); //retrieves the current nfl games
@@ -22,7 +25,9 @@ angular.module('game')
           team    : game.home,
           value   : 'home'
         });
-        pick.$save();
+        pick.$save(pick, function(response){
+          console.log(pick);
+        });
       };
 
       $scope.pickAway = function(game){
@@ -32,11 +37,9 @@ angular.module('game')
           team    : game.away,
           value   : 'away'
         });
-        pick.$save();
-      };
-
-      $scope.getLeaderboard = function(){
-        $scope.leaderboard = Game.Leaderboard.query({});
+        pick.$save(pick, function(response){
+          console.log(pick);
+        });
       };
 
     }]);

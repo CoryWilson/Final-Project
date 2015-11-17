@@ -6,8 +6,11 @@
       <div class="header__points">Points</div>
     </div>
     <div class="leaderboard__player" ng-repeat="player in leaderboard">
-      <div class="player__name">{{player.User.firstName}} {{player.User.lastName}}</div>
-      <div class="player__points">{{player.points}}</div>
+      <div class="player__picture">
+        <img src="{{player.fb.picture.data.url}}" alt="{{player.fb.first_name}} {{player.fb.last_name}} Picture">
+      </div>
+      <div class="player__name">{{player.fb.first_name}} {{player.fb.last_name}}</div>
+      <div class="player__points">{{player.db.points}}</div>
     </div>
   </div>
 </section>

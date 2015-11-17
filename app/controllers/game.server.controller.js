@@ -112,6 +112,10 @@ module.exports = function(){
     FB.api(//get user's friends
       'me',
       {fields : [
+        'first_name',
+        'last_name',
+        'name',
+        'picture.width(500).height(500)',
         'friends{id,first_name,last_name,name,picture.width(500).height(500),favorite_teams}'
       ]},
       function (response) {
@@ -125,7 +129,6 @@ module.exports = function(){
               friendsArray.push(friends[i].id); //push facebook id's into friendsArray
             }
           }
-            console.log(friendsArray);
             models.Record.findAll({//find all the records of users who are facebook friends
               include : [{
                 model : models.User,
@@ -138,7 +141,18 @@ module.exports = function(){
               order : 'points DESC'
             })
             .then(function(list){
-              res.json(list);
+              var players = [];
+              list.forEach(function(data){
+                for (var i = 0; i < friends.length; i++) {
+                  if(response.id === data.User.facebook_id){
+                    players.push({db: data, fb: response});
+                  }
+                  if (friends[i].id === data.User.facebook_id){
+                    players.push({db: data, fb: friends[i]});
+                  }
+                }
+              });
+              res.json(players);
             });
         }
       });

@@ -29,10 +29,17 @@
 
 .home,
 .away {
-  background: $gray;
+  background: $game-background-color;
   &:hover {
     @include transition(all 0.2s ease-in-out);
     background: $action-color;
     cursor: pointer;
   }
+}
+
+.home {
+  border-right: $base-border;
+}
+.away {
+  border-left: $base-border;
 }

@@ -2,11 +2,9 @@
 module.exports = function(){
   var _renderIndex = function(req,res) {
     res.render('index', {
-    	title: 'Home',
-    	user: JSON.stringify(req.user)
+    	title: 'Home'
     });
   };
-
   return {
     renderIndex : _renderIndex
   };

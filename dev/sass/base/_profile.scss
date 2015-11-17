@@ -1,0 +1,18 @@
+.profile {
+  h1 {
+    text-align: center;
+  }
+}
+
+.profile__header {
+  img {
+    width: 200px;
+    border: $base-border;
+    display: block;
+    margin: 1em auto;
+  }
+}
+
+.profile__content {
+
+}
