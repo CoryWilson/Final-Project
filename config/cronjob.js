@@ -6,7 +6,7 @@ module.exports = function(CronJob,request,FB,models){
     function(){
       console.log('Cron Job Run');
       function checkWeek(week){
-        if(week.weekTest === true){
+        if(week.weekTest === true){ //find all picks where the week matches the current week
           models.Pick
             .findAll({
               where :{
@@ -25,12 +25,8 @@ module.exports = function(CronJob,request,FB,models){
 
                     for (var j = 0; j < games.length; j++) { //loop through api schedule
                       var apiGameId = Number(games[j].id);
-                      if(pickGameId === apiGameId){
-                        console.log('api game id:',apiGameId);
-                        console.log('pick game id:',pickGameId);
-                        console.log('pick user id:',userId);
-
-                        if(apiGameId.home_score > apiGameId.away_score && value === "home"){
+                      if(pickGameId === apiGameId){ //check to see if user pick game id matches that of the game in week's schedule
+                        if(apiGameId.home_score > apiGameId.away_score && value === "home"){ //did the user pick the home team, when the home team won?
 
                           models.Record
                             .findOne({
@@ -39,10 +35,10 @@ module.exports = function(CronJob,request,FB,models){
                               }
                             })
                             .then(function(record){
-                              record.increment('points', {by:1});
+                              record.increment('points', {by:1}); //increment record by 1
                             });
                         }
-                         else if(apiGameId.home_score < apiGameId.away_score && value === "away"){
+                         else if(apiGameId.home_score < apiGameId.away_score && value === "away"){ //did the user pick the away team, when the away team won?
 
                           models.Record
                             .findOne({
@@ -51,10 +47,11 @@ module.exports = function(CronJob,request,FB,models){
                               }
                             })
                             .then(function(record){
-                              record.increment('points', {by:1});
+                              record.increment('points', {by:1}); //increment record by 1
                             });
                         }
-                        else {
+                        else { //did the user pick incorrectly?
+
                           models.Record
                             .findOne({
                               where : {
@@ -62,7 +59,7 @@ module.exports = function(CronJob,request,FB,models){
                               }
                             })
                             .then(function(record){
-                              record.increment('points', {by:0});
+                              record.increment('points', {by:0}); //increment record by 0
                             });
                         }
                       }

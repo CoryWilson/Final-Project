@@ -5,4 +5,4 @@ bower_compenents
 config/env/*
 config/config.json
 .env
-./app/moment-test.js
+./config/test.js

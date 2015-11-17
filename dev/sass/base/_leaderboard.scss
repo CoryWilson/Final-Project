@@ -55,3 +55,8 @@
     border: $base-border;
   }
 }
+
+.player__name,
+.player__points {
+  font-size: $small-heading-font-size;
+}
