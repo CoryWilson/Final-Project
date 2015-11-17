@@ -35,21 +35,20 @@ $twitter-blue: #55ACEE;
 
 // Font Colors
 $base-font-color      : $black;
-$secondary-font-color : $white;
+$nav-font-color       : $white;
 $action-color         : $yellow;
 
 //Background Colors
-$base-background-color     : $gray-light;
+$base-background-color     : $white;
+$nav-background-color      : $gray-dark;
 $block-background-color    : $gray-dark;
-$partials-background-color : $white;
+$partials-background-color : $gray-dark;
 $content-background-color  : $white;
 
 // Border
 $base-border-color : $black;
 $base-border       : 3px solid $base-border-color;
-
-// Background Colors
-$base-background-color      : $white;
+$box-shadow-color  : $gray-dark;
 
 //Background Images
 $hero-bg-image : '../images/stock/football.jpg';

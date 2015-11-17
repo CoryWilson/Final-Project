@@ -94,37 +94,8 @@ a {
   }
 }
 
-.games {
-  max-width: 1200px;
-  width: 80%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.game {
-  background: $content-background-color;
-  border: $base-border;
-  margin-bottom: 1em;
-  text-align: center;
-  overflow: hidden;
-}
-.game__header {
-  padding: 1em 0;
-}
-.teams {
-  @include span-columns(8 of 16, block-collapse);
-  height: 200px;
-  padding: 3em 0;
-  font: $black-font-family;
-  border-top: $base-border;
-  &:hover {
-    @include transition(all 0.2s ease-in-out);
-    background: $action-color;
-    cursor: pointer;
-  }
-}
-.home {
-  background: $red;
-}
-.away {
-  background: $blue;
+.angular-app {
+  @include span-columns(12 of 16);
+  padding-left: 1em;
+  float: right;
 }

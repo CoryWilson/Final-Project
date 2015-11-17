@@ -1,10 +1,13 @@
-<section data-ng-controller="GameController" class="games" data-ng-init="getUser();getLeaderboard();">
+<section data-ng-controller="GameController" class="leaderboard" data-ng-init="getUser();getLeaderboard();">
   <h1>Leaderboard</h1>
-  <ul>
-    <li ng-repeat="friend in facebook.friends.data">
-      <img src="{{friend.picture.data.url}}" alt="" width="200px">
-      <span>{{friend.first_name}}</span> <span>{{friend.last_name}}</span>
-    </li>
-  </ul>
-  {{leaderboard}}
+  <div class="leaderboard__playerlist">
+    <div class="leaderboard__header">
+      <div class="header__name">Name</div>
+      <div class="header__points">Points</div>
+    </div>
+    <div class="leaderboard__player" ng-repeat="player in leaderboard">
+      <div class="player__name">{{player.User.firstName}} {{player.User.lastName}}</div>
+      <div class="player__points">{{player.points}}</div>
+    </div>
+  </div>
 </section>
