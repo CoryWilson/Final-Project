@@ -5,6 +5,9 @@
     margin-top: .7em;
     text-align: center;
   }
+  @include media($mobile){
+    width: 100%;
+  }
 }
 .game {
   background: $content-background-color;
@@ -16,6 +19,7 @@
   @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include align-content(center);
+
 }
 
 .game-info {

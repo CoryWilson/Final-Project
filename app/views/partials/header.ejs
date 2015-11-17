@@ -35,15 +35,18 @@
     </div>
   </header>
   <% if(isAuthenticated) {%>
-    <nav role="navigation" class="nav">
+    <nav role="navigation" class="nav" id="nav">
       <a href="/#!/game">
-        Weekly Picks
+        <i class="icon ion-trophy"></i>
+        <span>Weekly Picks</span>
       </a>
       <a href="/#!/leaderboard">
-        Friend Leaderboard
+        <i class="icon ion-ios-list"></i>
+        <span>Friend Leaderboard</span>
       </a>
       <a href="/#!/profile">
-        Your Profile
+        <i class="icon ion-person"></i>
+        <span>Your Profile</span>
       </a>
     </nav>
   <% } %>

@@ -32,7 +32,7 @@ a {
 }
 
 .hero {
-  height: 500px;
+  height: 800px;
   @include background(url($hero-bg-image), no-repeat bottom);
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -98,4 +98,12 @@ a {
   @include span-columns(12 of 16);
   padding-left: 1em;
   float: right;
+  @include media($tablet){
+    padding-left: 10em;
+    @include span-columns(7 of 8, block-collapse);
+  }
+  @include media($mobile){
+    padding-left: 4em;
+    @include span-columns(3 of 4, block-collapse);
+  }
 }
