@@ -1,13 +1,16 @@
 var express      = require('express'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
+    CronJob      = require('cron').CronJob,
     debug        = require('debug')('Final-Project:server'),
     favicon      = require('serve-favicon'),
+    FB           = require('fb'),
     http         = require('http'),
     models       = require('./app/models'),
     morgan       = require('morgan'),
     path         = require('path'),
     passport     = require('passport'),
+    request      = require('request'),
     flash        = require('connect-flash'),
     session      = require('express-session'),
     sequelize    = require('sequelize');
@@ -61,6 +64,9 @@ models.sequelize.sync().then(function () {
   server.on('error', onError);
   server.on('listening', onListening);
 });
+
+//run Cron Job
+require('./app/controllers/cronjob.server.controller')(CronJob,request,FB,models);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
