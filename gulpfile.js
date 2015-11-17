@@ -1,12 +1,8 @@
 var gulp         = require('gulp'),
-    assign       = require('lodash.assign'),
-    browserify   = require('browserify'),
     browserSync  = require('browser-sync').create(),
     bower        = require('gulp-bower'),
-    buffer       = require('vinyl-buffer'),
     childProcess = require('child_process'),
     del          = require('del'),
-    gUtil        = require('gulp-util'),
     minifyCss    = require('gulp-minify-css'),
     nodemon      = require('gulp-nodemon'),
     notify       = require('gulp-notify'),
@@ -14,10 +10,8 @@ var gulp         = require('gulp'),
     reload       = browserSync.reload,
     runSeq       = require('run-sequence'),
     sass         = require('gulp-sass'),
-    source       = require('vinyl-source-stream'),
     sourcemaps   = require('gulp-sourcemaps'),
-    uglify       = require('gulp-uglify'),
-    watchify     = require('watchify');
+    uglify       = require('gulp-uglify');
 
 var config = {
   sassPath        : './dev/sass',
