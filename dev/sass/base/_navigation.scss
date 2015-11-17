@@ -1,0 +1,34 @@
+nav {
+  @include span-columns(4 of 16);
+  @include display(flex);
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(stretch);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: $nav-background-color;
+  color: $nav-font-color;
+  border-right: $base-border;
+  box-shadow: 2px 2px 4px darken($nav-background-color, 10%);
+}
+nav > a {
+  @include flex(1);
+  font-family: $bold-font-family;
+  font-size: $small-heading-font-size;
+  line-height: 9em;
+  color: $nav-font-color;
+  text-align: center;
+  &:hover, {
+    background: $action-color;
+    color: $base-font-color;
+  }
+}
+
+nav > a{
+  border-top: 3px solid $nav-font-color;
+}
+nav > a:first-of-type {
+  border-top: none;
+}

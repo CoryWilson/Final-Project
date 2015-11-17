@@ -16,58 +16,34 @@
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
-  <header role="banner">
-    <div class="header__wrapper">
-      <div class="header__logo">
-        <a href="/#!/" class="header__logo--link">
-          <h1>Showdown Sports</h1>
+  <header>
+    <div class="header__logo">
+      <a href="/#!/" >
+      Showdown Sports
+      </a>
+    </div>
+    <div class="header__button">
+      <% if(!isAuthenticated) {%>
+        <a href="/auth/facebook">
+          Sign-In with <i class="icon ion-social-facebook"></i>
         </a>
-      </div>
-      <div class="header__nav--mobile">
-        <i class="icon ion-navicon"></i>
-      </div>
-      <nav role="navigation" class="header__nav">
-        <ul>
-          <% if(!isAuthenticated) {%>
-            <li>
-              <a href="/#!/">
-                <i class="icon ion-home"></i>
-                <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="/auth/facebook">
-
-                <span>Sign-In with <i class="icon ion-social-facebook"></i></span>
-              </a>
-            </li>
-          <% } else { %>
-            <li>
-              <a href="/#!/game">
-                <i class="icon ion-trophy"></i>
-                <span>Make Your Picks</span>
-              </a></li>
-            <li>
-              <a href="/#!/leaderboard">
-                <i class="icon ion-ios-list"></i>
-                <span>Leaderboard</span>
-              </a>
-            </li>
-            <li>
-              <a href="/#!/profile">
-                <i class="icon ion-person"></i>
-                <span>Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="/logout">
-                <i class="icon ion-log-out"></i>
-                <span>Logout</span>
-              </a>
-            </li>
-          <% } %>
-        </ul>
-      </nav>
+      <% } else { %>
+        <a href="/logout">
+          Logout <i class="icon ion-log-out"></i>
+        </a>
+      <% } %>
     </div>
   </header>
-  <div class="page-wrap">
+  <nav role="navigation" class="nav">
+    <% if(isAuthenticated) {%>
+        <a href="/#!/game">
+          Weekly Picks
+        </a>
+        <a href="/#!/leaderboard">
+          Friend Leaderboard
+        </a>
+        <a href="/#!/profile">
+          Your Profile
+        </a>
+    <% } %>
+  </nav>

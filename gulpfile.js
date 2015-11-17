@@ -12,6 +12,7 @@ var gulp         = require('gulp'),
     notify       = require('gulp-notify'),
     rename       = require('gulp-rename'),
     reload       = browserSync.reload,
+    runSeq       = require('run-sequence'),
     sass         = require('gulp-sass'),
     source       = require('vinyl-source-stream'),
     sourcemaps   = require('gulp-sourcemaps'),
@@ -44,29 +45,14 @@ gulp.task('bower', function(){
 });
 
 /* Scripts */
-var customOpts = {
-  entries: [
-    config.jsPath+'/main.js'
-  ],
-  debug: true
-};
-var opts = assign({}, watchify.args, customOpts);
-var b    = watchify(browserify(opts));
-
-gulp.task('scripts', ['clean'], bundle);
-b.on('update', bundle);
-b.on('log', gUtil.log);
-
-function bundle() {
-  return b.bundle()
-    .on('error', gUtil.log.bind(gUtil, 'Browserify Error'))
-    .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+gulp.task('scripts', ['clean'], function(){
+  gulp.src(config.jsPath+'/main.js')
+    .pipe(sourcemaps.init())
       .pipe(uglify())
+      .pipe(rename('main.min.js'))
     .pipe(sourcemaps.write('../../../maps/js'))
-    .pipe(gulp.dest('./public/assets/js'));
-}
+    .pipe(gulp.dest('./public/assets/js/'));
+});
 
 gulp.task('script-watch', ['scripts'], reload);
 
@@ -94,10 +80,10 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
 
     // nodemon our expressjs server
-    script: './bin/www',
+    script: 'app.js',
 
     // watch core server file(s) that require server restart on change
-    watch: ['./bin/www']
+    watch: ['app.js']
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -179,8 +165,12 @@ gulp.task('browser-sync', ['nodemon'], function(){
   gulp.watch('./public/*',reload);
 });
 
+gulp.task('heroku:production', function(){
+  runSeq('build');
+});
+
 //Build Task
-gulp.task('build',['images','bower','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
+gulp.task('build',['bower','images','fonts','ng-html','styles-no-bs','scripts','ng-scripts']);
 
 //Default Task
 //Cleans public folder

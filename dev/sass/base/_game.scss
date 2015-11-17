@@ -1,0 +1,45 @@
+//File Name: ./dev/sass/base/_game.scss
+.games {
+  // margin: 0 auto 0 1em;
+  h1 {
+    margin-top: .7em;
+    text-align: center;
+  }
+}
+.game {
+  background: $content-background-color;
+  border: $base-border;
+  box-shadow: 0 2px 4px darken($nav-background-color, 10%);
+  margin-bottom: 1em;
+  text-align: center;
+  @include display(flex);
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include align-content(center);
+}
+
+.game-info {
+  width: 100%;
+  padding : 2.5em 1em 1em 1em;
+  h2 {
+    line-height: 2.5em;
+  }
+
+}
+
+.home,
+.away {
+  background: $game-background-color;
+  &:hover {
+    @include transition(all 0.2s ease-in-out);
+    background: $action-color;
+    cursor: pointer;
+  }
+}
+
+.home {
+  border-right: $base-border;
+}
+.away {
+  border-left: $base-border;
+}

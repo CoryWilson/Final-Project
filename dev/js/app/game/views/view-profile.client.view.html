@@ -2,19 +2,13 @@
 
   <h1>Profile</h1>
 
-  <h2 ng-if="user">Welcome, {{user.firstName}} {{user.lastName}}</h2>
-
-  <p>{{user}}</p>
-
-  <h1>Facebook Stuff</h1>
-  <h2>Welcome {{facebook.first_name}} {{facebook.last_name}}</h2>
-  <img src="{{facebook.picture.data.url}}" alt="">
-  <p>{{facebook}}</p>
-
-  <ul>
-    <li ng-repeat="friend in facebook.friends.data">
-      {{friend}}
-    </li>
-  </ul>
+  <div class="profile__header">
+    <img src="{{facebook.picture.data.url}}" alt="{{facebook.name}} Profile Picture">
+    <h2>{{facebook.first_name}} {{facebook.last_name}}</h2>
+  </div>
+  <div class="profile__content">
+    <h3>Weekly Position</h3>
+    <span>Feature coming soon...</span>
+  </div>
 
 </section>

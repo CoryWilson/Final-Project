@@ -22,12 +22,15 @@ $small-spacing      : $base-spacing / 2;
 $base-z-index       : 0;
 
 //Color Pallet
-$blue: #14ABE3; //rgba(20, 171, 227, 100)
-$white: #F5F4F3; //rgba(245, 244, 243, 100)
-$black: #1B2021; //rgba(27, 32, 33, 100)
-$red: #F1231E; //rgba(241, 35, 30, 100)
-$yellow: #FFCC33; //rgba(255, 204, 51, 100)
-$gray-dark: #3C3C3C; //rgba(0, 0, 24, 100)
+$light-blue: #0451AA;
+$blue: #02326B;
+$dark-blue: #03142B;
+$green: #3B6058;
+$white: #FEFFFE;
+$black: #060D19;
+$red: #832232;
+$yellow: #FFCC33;
+$gray-dark: #303949;
 $gray: tint($gray-dark, 50%);
 $gray-light: tint($gray-dark, 75%);
 $facebook-blue: #3B5999;
@@ -35,21 +38,22 @@ $twitter-blue: #55ACEE;
 
 // Font Colors
 $base-font-color      : $black;
-$secondary-font-color : $white;
-$action-color         : $yellow;
+$nav-font-color       : $white;
+$action-color         : $light-blue;
 
 //Background Colors
-$base-background-color     : $gray-light;
+$base-background-color     : $white;
+$nav-background-color      : $blue;
 $block-background-color    : $gray-dark;
+$header-background-color   : $blue;
 $partials-background-color : $white;
 $content-background-color  : $white;
+$game-background-color     : shade($white, 20%);
 
 // Border
 $base-border-color : $black;
 $base-border       : 3px solid $base-border-color;
-
-// Background Colors
-$base-background-color      : $white;
+$box-shadow-color  : $gray-dark;
 
 //Background Images
 $hero-bg-image : '../images/stock/football.jpg';
