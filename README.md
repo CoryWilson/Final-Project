@@ -7,8 +7,11 @@ The Application was developed as a sports pick 'em game that allows users to pic
 ##Run the application locally.
 Follow these steps:
 `git clone https://github.com/CoryWilson/Final-Project.git`
+
 `cd into diretory`
+
 `npm install`
+
 `npm start`
 
 ##View application online.
