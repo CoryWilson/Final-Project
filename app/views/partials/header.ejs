@@ -34,16 +34,16 @@
       <% } %>
     </div>
   </header>
-  <nav role="navigation" class="nav">
-    <% if(isAuthenticated) {%>
-        <a href="/#!/game">
-          Weekly Picks
-        </a>
-        <a href="/#!/leaderboard">
-          Friend Leaderboard
-        </a>
-        <a href="/#!/profile">
-          Your Profile
-        </a>
-    <% } %>
-  </nav>
+  <% if(isAuthenticated) {%>
+    <nav role="navigation" class="nav">
+      <a href="/#!/game">
+        Weekly Picks
+      </a>
+      <a href="/#!/leaderboard">
+        Friend Leaderboard
+      </a>
+      <a href="/#!/profile">
+        Your Profile
+      </a>
+    </nav>
+  <% } %>

@@ -3,9 +3,9 @@ var usersController = require('../controllers/users.server.controller.js');
 
 module.exports = function(app,passport) {
   //Get User Info
-  app.post('/account', usersController.account);
+  app.post('/account', usersController.requiresAuth, usersController.account);
 
-  app.post('/facebook', usersController.facebook);
+  app.post('/facebook', usersController.requiresAuth, usersController.facebook);
 
   //Facebook Authenticate
   app.get('/auth/facebook',
