@@ -7,7 +7,7 @@ Showdown Sports is the Final Project of [Cory Wilson](https://github.com/CoryWil
 The Application was developed as a sports pick 'em game that allows users to pick on multiple sports in a weekly showdown.
 
 ##View application online.
-[Showdown Sports](http://mysterious-bayou-8903.herokuapp.com/)
+[Showdown Sports](http://45.55.51.247/)
 
 ##Run the application locally.
 ###Follow these steps:
