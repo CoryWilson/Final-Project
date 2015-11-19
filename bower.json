@@ -26,6 +26,8 @@
     "angular": "~1.4.7",
     "angular-route": "~1.4.7",
     "angular-resource": "~1.4.7",
-    "notie": "*"
+    "notie": "*",
+    "angular-moment": "~0.10.3",
+    "moment": "~2.10.6"
   }
 }

@@ -1,10 +1,10 @@
 //File Name: ./dev/js/app/game/controllers/game.client.controller.js
-
 //Controller for game module
 angular.module('game')
   .controller('GameController',
     ['$scope', '$routeParams', '$location', 'Game', 'Authentication', function($scope, $routeParams, $location, Game, Authentication){
 
+      $scope.moment = moment();
 
       $scope.getUser = function(){
         $scope.user = Authentication.User.query({}); //retrieves the user accoutn information
@@ -20,24 +20,31 @@ angular.module('game')
       };
 
       $scope.pickGame = function(value){
-        console.log(this.game);
-        console.log(value);
-        var team = '';
-        if(value === 'home'){
-          team = this.game.home;
-        } else if (value === 'away'){
-          team = this.game.away;
+
+        var currentTime = moment(); //get current time
+        var gameTime = moment.unix(this.game.unix); //get time of game start
+
+        if(moment(currentTime).isAfter(gameTime) === true){ //check if the game has already started
+          console.log('you can\'t pick after the game has started'); //don't allow user to make a pick if the game has started
+        } else {
+          var team = '';
+          if(value === 'home'){
+            team = this.game.home;
+          } else if (value === 'away'){
+            team = this.game.away;
+          }
+          var pick = new Game.Pick({
+            game_id : this.game.id,
+            week    : this.game.week,
+            unix    : this.game.unix,
+            team    : team,
+            value   : value
+          });
+          pick.$save(pick, function(response){
+            console.log(response);
+          });
+
         }
-        var pick = new Game.Pick({
-          game_id : this.game.id,
-          week    : this.game.week,
-          unix    : this.game.unix,
-          team    : team,
-          value   : value
-        });
-        pick.$save(pick, function(response){
-          console.log(response);
-        });
       };
 
     }]);
