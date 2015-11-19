@@ -1,7 +1,7 @@
 <section data-ng-controller="GameController" class="games" data-ng-init="getUser();getNFLSchedule();">
   <h1>NFL Week {{NFL[0].week}}</h1>
   <div ng-repeat="game in NFL" class="game">
-    <div ng-click="pickHome(game)" class="game-info home">
+    <div ng-click="pickGame('home')" ng-model="game" class="game-info home">
       <h2>{{game.home}}</h2>
     </div>
     <div class="game-info time">
@@ -9,7 +9,7 @@
       <h3>{{game.time}}</h3>
       <h3>{{game.home_score}} - {{game.away_score}}</h3>
     </div>
-    <div ng-click="pickAway(game)" class="game-info away">
+    <div ng-click="pickGame('away')" ng-model="game" class="game-info away">
       <h2>{{game.away}}</h2>
     </div>
   </div>
