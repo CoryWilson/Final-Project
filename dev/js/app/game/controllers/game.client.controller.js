@@ -31,8 +31,9 @@ angular.module('game')
         var pick = new Game.Pick({
           game_id : this.game.id,
           week    : this.game.week,
+          unix    : this.game.unix,
           team    : team,
-          value   : this.value
+          value   : value
         });
         pick.$save(pick, function(response){
           console.log(response);

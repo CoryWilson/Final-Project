@@ -22,6 +22,7 @@ module.exports = function(){
               var id          = game.id;
               var home        = game.home;
               var away        = game.away;
+              var unix        = game.time;
               var day         = moment.unix(game.time).format('ddd');
               var date        = moment.unix(game.time).format('MMM D');
               var time        = moment.unix(game.time).format('h:mm a');
@@ -30,10 +31,10 @@ module.exports = function(){
               var final       = game.final;
               var home_score  = game.home_score;
               var away_score  = game.away_score;
-              gameArray.push({id:id,home:home,away:away,day:day,date:date,time:time,week:week,season_type:season_type,final:final,home_score:home_score,away_score:away_score});
+              gameArray.push({id:id,home:home,away:away,unix:unix,day:day,date:date,time:time,week:week,season_type:season_type,final:final,home_score:home_score,away_score:away_score});
             }
             res.json(gameArray);
-            
+
           }
         );
       }

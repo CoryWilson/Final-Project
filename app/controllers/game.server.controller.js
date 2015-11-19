@@ -1,29 +1,37 @@
 //File Name: ./app/controllers/game.server.controller.js
 var models        = require('../models'),
+    moment        = require('moment'),
     FB            = require('fb');
 
 module.exports = function(){
 
   var _createPick = function(req,res){
-    models.Pick
-      .findOrCreate({ //check the pick table to see if the pick exists with these parameters and if it doesn't exist it will create that pick
-        where: {
-          game_id : req.body.game_id,
-          value   : req.body.value,
-          week    : req.body.week,
-          UserId  : req.user.id
-        }
-      })
-      .spread(function(user, pick){
-        if(pick === true){
-          console.log('Pick added.');
-        } else {
-          console.log('A pick already exists for this game.');
-        }
-      })
-      .error(function(err){
-        console.log('Error creating pick: ',err);
-      });
+    var currentTime = moment(); //get current time
+    var gameTime = moment.unix(req.body.unix); //get time of game start
+
+    if(moment(currentTime).isAfter(gameTime) === true){ //check if the game has already started
+      console.log('you can\'t pick after the game has started'); //don't allow user to make a pick if the game has started
+    } else {
+      models.Pick
+        .findOrCreate({ //check the pick table to see if the pick exists with these parameters and if it doesn't exist it will create that pick
+          where: {
+            game_id : req.body.game_id,
+            value   : req.body.value,
+            week    : req.body.week,
+            UserId  : req.user.id
+          }
+        })
+        .spread(function(user, pick){
+          if(pick === true){
+            console.log('Pick added.');
+          } else {
+            console.log('A pick already exists for this game.');
+          }
+        })
+        .error(function(err){
+          console.log('Error creating pick: ',err);
+        });
+    }
   };
 
   var _getFriendsRecord = function(req, res){
