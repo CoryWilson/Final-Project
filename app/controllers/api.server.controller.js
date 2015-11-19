@@ -33,6 +33,7 @@ module.exports = function(){
               gameArray.push({id:id,home:home,away:away,day:day,date:date,time:time,week:week,season_type:season_type,final:final,home_score:home_score,away_score:away_score});
             }
             res.json(gameArray);
+            
           }
         );
       }
