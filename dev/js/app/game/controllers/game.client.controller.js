@@ -26,6 +26,7 @@ angular.module('game')
 
         if(moment(currentTime).isAfter(gameTime) === true){ //check if the game has already started
           console.log('you can\'t pick after the game has started'); //don't allow user to make a pick if the game has started
+          //possibly use notie here
         } else {
           var team = '';
           if(value === 'home'){
