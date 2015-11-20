@@ -37,6 +37,10 @@ nav > a {
     background: $action-color;
     color: $base-font-color;
   }
+  &:focus {
+    background: shade($nav-background-color, 20%);
+    color: shade($nav-font-color, 20%);
+  }
   @include media($desktop){
     padding-top: 3em;
     line-height: 1em;

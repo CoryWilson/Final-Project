@@ -80,7 +80,7 @@ module.exports = function(){
                   }
                 }
               });
-              res.json(players);
+              res.jsonp(players);
             });
         }
       });

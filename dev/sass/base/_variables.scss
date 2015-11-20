@@ -39,16 +39,19 @@ $twitter-blue: #55ACEE;
 // Font Colors
 $base-font-color      : $black;
 $nav-font-color       : $white;
+
+//Colors
 $action-color         : $light-blue;
+$pick-color           : $green;
 
 //Background Colors
 $base-background-color     : $white;
 $nav-background-color      : $blue;
 $block-background-color    : $gray-dark;
 $header-background-color   : $blue;
-$partials-background-color : $white;
+$partials-background-color : shade($white, 5%);
 $content-background-color  : $white;
-$game-background-color     : shade($white, 20%);
+$game-background-color     : shade($white, 10%);
 
 // Border
 $base-border-color : $black;

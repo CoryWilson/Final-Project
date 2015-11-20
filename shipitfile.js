@@ -5,7 +5,7 @@ module.exports = function(shipit) {
       workspace : '/tmp/Final-Project',
       deployTo  : '/var/opt',
       repositoryUrl: 'https://github.com/CoryWilson/Final-Project.git',
-      ignores: ['.git','node_modules'],
+      ignores: ['.git','node_modules','maps'],
       keepReleases: 2,
       deleteOnRollback: false,
       key: '~/.ssh/config',

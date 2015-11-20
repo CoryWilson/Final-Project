@@ -19,8 +19,8 @@
   @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include align-content(center);
-
 }
+
 
 .game-info {
   width: 100%;
@@ -28,7 +28,17 @@
   h2 {
     line-height: 2.5em;
   }
-
+  i {
+    display: none;
+  }
+}
+.home.clicked,
+.away.clicked {
+  background: $pick-color;
+  i {
+    display: block;
+    font-size: 2em;
+  }
 }
 
 .home,

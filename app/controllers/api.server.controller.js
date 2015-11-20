@@ -17,6 +17,7 @@ module.exports = function(){
          .post({url:url},
            function(err, httpResponse, body){
             var data = JSON.parse(body);
+            console.log(data);
             for (var j = 0; j < data.length; j++) {
               var game        = data[j];
               var id          = game.id;
@@ -33,8 +34,7 @@ module.exports = function(){
               var away_score  = game.away_score;
               gameArray.push({id:id,home:home,away:away,unix:unix,day:day,date:date,time:time,week:week,season_type:season_type,final:final,home_score:home_score,away_score:away_score});
             }
-            res.json(gameArray);
-
+            res.jsonp(gameArray);
           }
         );
       }
@@ -84,7 +84,7 @@ module.exports = function(){
           if(err){
             return console.log(err);
           }
-          res.send(body);
+          res.jsonp(body);
         }
     );
   };
